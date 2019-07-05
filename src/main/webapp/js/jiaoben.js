@@ -193,6 +193,8 @@ $(function () {
             $this.removeClass('light-do');
         });
         $(this).addClass("light-do");
+        var use_id = $(this).attr("data-id");
+        $("#"+use_id).show();
     });
 
     this.getScriptList = function () {
@@ -203,12 +205,22 @@ $(function () {
             success:function(datas){
                 if(datas.code == 200){
                     var html = "";
+                    var cao = "";
                     var result = datas.data.scriptList;
                     for(var i= 0;i<datas.data.scriptList.length;i++){
                         html += "<li>\n" +
-                            "<span class='script-do'>"+result[i].scriptName+"</span>\n" +
-                            "</li>"
+                            "<span class='script-do' data-id="+result[i].suid+">"+result[i].scriptName+"</span>\n" +
+                            "</li>";
+                        var scriptDetails = result[i].scriptDetails;
+                        for (var j = 0; j < scriptDetails.length; j++) {
+                            cao += "<div class='script-use' id = " + scriptDetails[j].suid + "  data-id=" + scriptDetails[j].suid + ">\n" +
+                                "                <span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n" +
+                                "            </div>"
+                        }
                     }
+
+                    $(".script").append(html);
+                    $(".cao-zuo").append(cao);
 
                 }else{
                     alert("服务器异常");
@@ -216,6 +228,201 @@ $(function () {
             }
         })
     };
+
+    $(this).delegate('.script-zi','click',function(){
+        var suid = $(this).attr("data-id");
+        $.ajax({
+            url:'/script/getScript?suid='+suid,
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    $(".do-zhi").attr("data-id",datas.data.suid);
+                    $(".do-ting").attr("data-id",datas.data.suid);
+
+                    if(suid == "ComSmileGifmakerRaises"){
+                        $("#sou_"+datas.data.directMessagesType).click();
+                        if(datas.data.isGiveLike == 1){
+                            $("#dianzan").attr("checked",true);
+                        }
+                        if(datas.data.isComment == 1){
+                            $("#pinglun").attr("checked",true);
+                        }
+                        if(datas.data.isFocus == 1){
+                            $("#guanzhuping").attr("checked",true);
+                        }
+                        $("#shicnt").val(datas.data.focusNum);
+                        if(datas.data.isFocusAuthor == 1){
+                            $("#guanzuozhe").attr("checked",true);
+                        }
+                        $("#meichang").val(datas.data.watchTimeInterval);
+                        $("#jiange").val(datas.data.watchTime);
+                        $("#allkan").val(datas.data.watchNum);
+                        $("#nge").val(datas.data.numStart);
+                        $("#pinghuashu").val(datas.data.commentStr);
+                        $("#test").show();
+                        $("#log_window").show();
+                        $(".yang-hao").show();
+                    }else if(suid == "ComSmileGifmakerPrivateMsg"){
+                        $("#sizong").val(datas.data.watchNum);
+                        $("#xindien").val(datas.data.numStart);
+                        $("#xinmeitiao").val(datas.data.directMessagesNum);
+                        $("#si_"+datas.data.isDirectMessagesOnAuthor).click();
+                        $("#sixinhuashu").val(datas.data.directMessages);
+                        $('#simg').attr('src',datas.data.directMessagesImage);
+                        $(".si-xin").show();
+                        $("#test").show();
+                        $("#log_window").show();
+                    }
+
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
+    $(this).delegate('.do-zhi','click',function(){
+        var suid = $(this).attr("data-id");
+        if(suid == "ComSmileGifmakerRaises"){
+            var directMessagesType = $('.tongcheng input[type="radio"]:checked').val();
+            if($("#dianzan").is(':checked') == true){
+                var isGiveLike = 1;
+            }else{
+                var isGiveLike = 0;
+            }
+            if($("#pinglun").is(':checked') == true){
+                var isComment = 1;
+            }else{
+                var isComment = 0;
+            }
+            if($("#guanzhuping").is(':checked') == true){
+                var isFocus = 1;
+            }else{
+                var isFocus = 0;
+            }
+            var focusNum = $("#shicnt").val();
+
+            if($("#guanzuozhe").is(':checked') == true){
+                var isFocusAuthor = 1;
+            }else{
+                var isFocusAuthor = 0;
+            }
+            var watchTimeInterval = $("#meichang").val();
+            var watchTime= $("#jiange").val();
+            var watchNum = $("#allkan").val();
+            var numStart = $("#nge").val();
+            var commentStr = $("#pinghuashu").val();
+            var directMessages = "";
+            var feedingTime = 0;
+            var isDirectMessages = 0;
+            var isDirectMessagesOnAuthor = 0;
+            var directMessagesNum = 0;
+            var directMessagesImage = "";
+        }else if(suid == "ComSmileGifmakerPrivateMsg"){
+            var watchNum = $("#sizong").val();
+            var numStart = $("#xindien").val();
+            var directMessagesNum = $("#xinmeitiao").val();
+            var isDirectMessagesOnAuthor = $('.sixinzi input[type="radio"]:checked').val();
+            var isDirectMessages = 0;
+            var directMessages = $("#sixinhuashu").val();
+            var directMessagesImage = $('#simg').attr('src');
+            var isFocus = 0;
+            var isFocusAuthor = 0;
+            var focusNum = 0;
+            var watchTime = 0;
+            var isComment = 0;
+            var isGiveLike = 0;
+            var commentStr = "";
+            var feedingTime = 0;
+            var watchTimeInterval = 0;
+            var directMessagesType = 0;
+        };
+        var data = {
+            "suid":suid,
+            "isFocus":isFocus,
+            "isFocusAuthor":isFocusAuthor,
+            "watchNum":watchNum,
+            "numStart":numStart,
+            "focusNum":focusNum,
+            "watchTime":watchTime,
+            "isComment":isComment,
+            "isGiveLike":isGiveLike,
+            "commentStr":commentStr,
+            "directMessages":directMessages,
+            "feedingTime":feedingTime,
+            "watchTimeMan":0,
+            "watchTimeMin":0,
+            "isDirectMessages":isDirectMessages,
+            "watchTimeInterval":watchTimeInterval,
+            "directMessagesNum":directMessagesNum,
+            "directMessagesImage":directMessagesImage,
+            "isOnlyDirectMessages":0,
+            "individuationString":0,
+            "individuationInt":0,
+            "individuationVar1":0,
+            "individuationVar2":0
+        };
+        $.ajax({
+            url:'/script/saveScriptSetting',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    this.doExecute(suid);
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
+    this.doExecute = function (suid) {
+        var data = {
+            "scope":-1,
+            "suid":suid,
+            "uuid":id
+        };
+        $.ajax({
+            url:'/script/run',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                   alert("执行成功！");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    };
+
+    $(this).delegate('.test','click',function(){
+        $(this).hide();
+        $('.log_window').hide();
+    });
+
+    $(this).delegate('.do-ting','click',function(){
+        var data = {
+            "scope":-1,
+            "uuid":id
+        };
+        $.ajax({
+            url:'/script/stop',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("操作成功！");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
 
     this.socket = function (id) {
         var ws = new WebSocket("ws://localhost:8080//socket/device/log/"+id);

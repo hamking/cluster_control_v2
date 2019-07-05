@@ -42,22 +42,41 @@
         <div class="phone">
             <img src="img/phone.png">
             <span class="she-bei">手机名</span>
-            <span>iphone xs</span>
+            <span>null</span>
         </div>
         <div class="group">
             <span class="she-type">组名</span>
-            <span>组1-抖音刷评论组</span>
+            <span>组1</span>
         </div>
         <div class="xinghao">
             <span class="she-type">设备型号</span>
-            <span>组1-抖音刷评论组</span>
+            <span>null</span>
         </div>
         <div class="cao-zuo">
             <ul class="script">
+                <!--<li>-->
+                    <!--<span class='script-do' data-id="ComSmileGifmakerPrivateMsg">抖音</span>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<span class='script-do'>抖音</span>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<span class='script-do'>抖音</span>-->
+                <!--</li>-->
+                <!--<li>-->
+                    <!--<span class='script-do'>抖音</span>-->
+                <!--</li>-->
             </ul>
-            <div class="script-use">
-
-            </div>
+            <!--<div class="script-use" id="ComSmileGifmakerPrivateMsg" style="display: none;">-->
+                <!--<span class="script-zi">常规操作</span>-->
+                <!--<span>|</span>-->
+                <!--<span class="script-zi">常规操作</span>-->
+            <!--</div>-->
+            <!--<div class="script-use" style="display: none;">-->
+                <!--<span class="script-zi">常规操作</span>-->
+                <!--<span>|</span>-->
+                <!--<span class="script-zi">常规操作</span>-->
+            <!--</div>-->
         </div>
         <div class="kong-fan">
             <div class="left-kong clearfix">
@@ -127,12 +146,143 @@
         </div>
         <div class="log-jian">
             <p class="title-jian">日志监视</p>
-            <p class="log-cont">1.独立的日志系统更方便查询统计,但对于性能问题,是选择独立的日志数据库还是记录文件,需要根据业务情况调查2.用户的每一个操作自然是需要记录的.3.日志中非常有必要记录User-Agent, IP, Language,因为这些冗余信息,总有发挥自己作用的时候.4.我不知道这个问题和第一个有没有区别,log4j很好,但log4j可以选择存储数据库或者文件,如果是我,我会选择文件,放在独立的分区或者硬件上,不会影响访问速度.</p>
-            <p class="log-cont">作者：saharabear</p>
-            <p class="log-cont">链接：https://www.zhihu.com/question/20278104/answer/14589326</p>
-            <p class="log-cont">来源：知乎</p>
-            <p class="log-cont">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+            <p class="log-cont"></p>
         </div>
+    </div>
+</div>
+<div id="test"></div>
+<div id="log_window">
+    <div class="title-meng">脚本详细操作</div>
+    <div class="yang-hao">
+        <div class="small-title">养号：</div>
+        <div class="info tongcheng">
+            <input type="radio" value="4" name="page" id="sou_4" />
+            <label for="sou_4">同城搜索</label>
+            <input type="radio" value="0" name="page" id="sou_0" checked="checked" />
+            <label for="sou_0">热门搜索</label>
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan" id="dianzan">
+            <label for="dianzan">点赞</label>
+            <input type="checkbox" value="1" name="zan" id="pinglun">
+            <label for="pinglun">评论</label>
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan" id="guanzhuping">
+            <label for="guanzhuping">关注评论者</label>
+            <span>每个视频关注总量：</span>
+            <input type="text" name="spaceCnt" id="shicnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan" id="guanzuozhe">
+            <label for="guanzuozhe">关注作者</label>
+        </div>
+        <div class="info">
+            <span>每个视频浏览时长（单位秒）：</span>
+            <input type="text" name="spaceCnt" id="meichang" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>浏览视频间隔时长（单位秒）：</span>
+            <input type="text" name="spaceCnt" id="jiange" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>观看总量：</span>
+            <input type="text" name="spaceCnt" id="allkan" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>从第n个视频开始：</span>
+            <input type="text" name="spaceCnt" id="nge" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>评论话术：</span>
+            <textarea type="text" name="spaceCnt" id="pinghuashu" class="spaceCnt" data-type="space_cnt" />
+            </textarea>
+        </div>
+    </div>
+
+    <div class="si-xin">
+        <div class="small-title">私信：</div>
+        <div class="info">
+            <span>观看总量：</span>
+            <input type="text" name="spaceCnt" id="sizong" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>从第n个视频开始：</span>
+            <input type="text" name="spaceCnt" id="xindien" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>每个视频私信条数：</span>
+            <input type="text" name="spaceCnt" id="xinmeitiao" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info sixinzi">
+            <input type="radio" value="0" name="page" id="si_0" />
+            <label for="si_0">私信评论者</label>
+            <input type="radio" value="1" name="page" id="si_1" checked="checked" />
+            <label for="si_1">私信作者</label>
+        </div>
+        <div class="info">
+            <span>私信话术：</span>
+            <textarea type="text" name="spaceCnt" id="sixinhuashu" class="spaceCnt" data-type="space_cnt" />
+            </textarea>
+        </div>
+        <div class="info">
+            <span>私信图片：</span>
+            <img id="simg" src="img/icon2.png">
+        </div>
+    </div>
+    <div class="" style="display: none">
+        <div class="info">
+            <span>多少个：</span>
+            <input type="text" name="spaceCnt" id="spaceCnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>搜索字段：</span>
+            <input type="text" name="spaceCnt" id="spaceCnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">关注</label>
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">私信</label>
+        </div>
+        <div class="info">
+            <span>多少个：</span>
+            <input type="text" name="spaceCnt" id="spaceCnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>搜索字段：</span>
+            <input type="text" name="spaceCnt" id="spaceCnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">关注</label>
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">私信</label>
+        </div>
+        <div class="info">
+            <span>多少个：</span>
+            <input type="text" name="spaceCnt" id="spaceCnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <span>搜索字段：</span>
+            <input type="text" name="spaceCnt" id="spaceCnt" class="spaceCnt" data-type="space_cnt" />
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">关注</label>
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">私信</label>
+        </div>
+        <div class="info">
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">关注</label>
+            <input type="checkbox" value="1" name="zan">
+            <label for="page_2">私信</label>
+        </div>
+    </div>
+    <div class="do-zi">
+        <span class="do-zhi" data-id="">执行脚本</span>
+        <span class="do-ting" data-id="">停止脚本</span>
     </div>
 </div>
 <script src="js/common.js" type="text/javascript"></script>

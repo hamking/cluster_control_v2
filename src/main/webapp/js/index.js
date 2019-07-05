@@ -1,5 +1,8 @@
 // 所有页面公共js
 $(function(){
+
+    var she_arr = [];
+
     this.getPhone = function(){
         $.ajax({
             url:'/device/getDeviceDetails',
@@ -7,9 +10,9 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    $("#xu-cnt").val(datas.data.authorization);
-                    $("#zai-cnt").val(datas.data.online);
-                    $("#li-cnt").val(datas.data.offline);
+                    $("#xu-cnt").text(datas.data.authorization);
+                    $("#zai-cnt").text(datas.data.online);
+                    $("#li-cnt").text(datas.data.offline);
                 }else{
                     alert("服务器异常")
                 }
@@ -245,6 +248,7 @@ $(function(){
                         var state_name = "";
                         var yuan_type = "";
                         for(var i = 0;i<result.length;i++){
+                            she_arr.push(result[i].id);
                             if(result[i].state == 0){
                                 class_type = "hui";
                                 state_name = "未上线";
@@ -262,12 +266,12 @@ $(function(){
                                 "                    <span class='left-nick'>"+result[i].nickname+"</span>\n" +
                                 "                    <span class='left-group'>组1</span>\n" +
                                 "                    <span>"+state_name+"</span>\n" +
-                                "                    <span class='left-she'>小米1</span>\n" +
+                                "                    <span class='left-she'>null</span>\n" +
                                 "                </li>";
 
                             html_list += "<div class='mobile clearfix' data-id="+result[i].id+" data-xing="+result[i].id+">\n" +
                                 "                <div class='ri-zhi'>\n" +
-                                "                    <p>第一版日志</p>\n" +
+                                "                    <p>未监控</p>\n" +
                                 "                </div>\n" +
                                 "                <div class='she-name' style='margin: 10px;'>\n" +
                                 "                    <span class='white'>设备名称</span>\n" +
@@ -275,7 +279,7 @@ $(function(){
                                 "                </div>\n" +
                                 "                <div class='group-all' style='margin: 10px;'>\n" +
                                 "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
-                                "                    <span class='white she-group'>组1-抖音刷评论组</span>\n" +
+                                "                    <span class='white she-group'>组1</span>\n" +
                                 "                </div>\n" +
                                 "                <div class="+yuan_type+"></div>\n" +
                                 "            </div>"
@@ -291,17 +295,11 @@ $(function(){
         })
     };
 
+
+
     $(this).delegate('.mobile','click',function(){
         var name = $(this).children(".she-name").children(".she-nick").text();
         var group = $(this).children(".group-all").children(".she-group").text();
-        var xing = $(this).attr("data-xing");
-        var id = $(this).attr("data-id");
-        window.location.href = "jiaoben.html?id="+id+"&name="+name+"&group="+group+"&xing="+xing;
-    });
-
-    $(this).delegate('.list-use','click',function(){
-        var name = $(this).children(".left-nick").text();
-        var group = $(this).children(".left-group").text();
         var xing = $(this).attr("data-xing");
         var id = $(this).attr("data-id");
         window.location.href = "jiaoben.html?id="+id+"&name="+name+"&group="+group+"&xing="+xing;
@@ -313,7 +311,53 @@ $(function(){
             ws.onmessage = function(evt) {
                 //此处先做一个打印
                 console.log( "打印信息: " + evt.data);
-                $('.log-jian').append();
+                if(arr.indexOf(evt.data.id) == -1){
+                    var xu_cnt = $("#xu-cnt").text();
+                    var zai_cnt = $("#zai-cnt").text();
+                    var li_cnt = $("#li-cnt").text();
+                    if(evt.data.state == 0){
+                        class_type = "hui";
+                        state_name = "未上线";
+                        yuan_type = "yuanhui";
+                        $("#xu-cnt").text(xu_cnt+1);
+                        $("#li-cnt").text(li_cnt+1);
+                    }else if(evt.data.state == 2){
+                        class_type = "hui";
+                        state_name = "未知";
+                        yuan_type = "yuanhui";
+                        $("#xu-cnt").text(xu_cnt+1);
+                        $("#li-cnt").text(li_cnt+1);
+                    }else{
+                        class_type = "green";
+                        state_name = "已上线";
+                        yuan_type = "yuan";
+                        $("#xu-cnt").text(zai_cnt+1);
+                        $("#zai-cnt").text();
+                    }
+                    html_list = "<div class='mobile clearfix' data-id="+evt.data.id+" data-xing="+evt.data.id+">\n" +
+                        "                <div class='ri-zhi'>\n" +
+                        "                    <p>第一版日志</p>\n" +
+                        "                </div>\n" +
+                        "                <div class='she-name' style='margin: 10px;'>\n" +
+                        "                    <span class='white'>设备名称</span>\n" +
+                        "                    <span class='white she-nick'>"+evt.data.nickname+"</span>\n" +
+                        "                </div>\n" +
+                        "                <div class='group-all' style='margin: 10px;'>\n" +
+                        "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
+                        "                    <span class='white she-group'>组1-抖音刷评论组</span>\n" +
+                        "                </div>\n" +
+                        "                <div class="+yuan_type+"></div>\n" +
+                        "            </div>";
+
+                    html = "<li class="+class_type+ " list-use"+" data-id="+evt.data.id+" data-xing="+evt.data.id+">\n" +
+                        "                    <span class='left-nick'>"+evt.data.nickname+"</span>\n" +
+                        "                    <span class='left-group'>组1</span>\n" +
+                        "                    <span>"+state_name+"</span>\n" +
+                        "                    <span class='left-she'>小米1</span>\n" +
+                        "                </li>";
+
+                    $('.log-jian').append();
+                }
             };
         }
     };
