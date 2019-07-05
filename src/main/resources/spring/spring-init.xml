@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--工具类交给spring管理-->
+    <bean class="com.zciteam.util.Directory" init-method="init"/>
+
+    <!--脚本初始化信息管理-->
+    <bean class="com.script.init.ScriptInit" init-method="init"/>
+</beans>

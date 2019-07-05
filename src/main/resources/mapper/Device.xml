@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zciteam.dao.DeviceDao">
+
+    <select id="findAllDevice" resultType="Device">
+        SELECT *
+        FROM device
+    </select>
+
+    <update id="initDevice">
+        UPDATE device
+        SET state=0
+    </update>
+
+    <select id="findDevice" resultType="Device">
+        SELECT *
+        FROM device
+        WHERE uuid=#{uuid}
+    </select>
+
+    <select id="findAllGroupId" resultType="Device">
+        SELECT groupID
+        FROM device
+    </select>
+
+    <select id="findDeviceByGroupId" resultType="Device">
+        SELECT *
+        FROM device
+        WHERE groupID=#{groupId}
+    </select>
+
+    <update id="renameNickName">
+        UPDATE device
+        SET nickname=#{nickname}
+        WHERE uuid=#{uuid}
+    </update>
+
+    <update id="renameGroupId">
+        UPDATE device
+        SET groupID=#{groupId}
+        WHERE uuid=#{uuid}
+    </update>
+
+    <update id="updateRunningState">
+        UPDATE device
+        SET isRun=#{isRun}
+        WHERE uuid=#{uuid}
+    </update>
+
+    <update id="updateDeviceState">
+       UPDATE device
+       SET state=#{state}
+       WHERE uuid=#{uuid}
+    </update>
+
+    <update id="updataIndividuationString">
+       UPDATE device
+       SET individuationString=#{individuationString}
+       WHERE uuid=#{uuid}
+    </update>
+
+    <update id="updataIndividuationInt">
+       UPDATE device
+       SET individuationInt=#{individuationInt}
+       WHERE uuid=#{uuid}
+    </update>
+
+    <update id="updataIndividuationVar1">
+       UPDATE device
+       SET individuationVar1=#{individuationVar1}
+       WHERE uuid=#{uuid}
+    </update>
+
+    <update id="updataIndividuationVar2">
+       UPDATE device
+       SET individuationVar2=#{individuationVar2}
+       WHERE uuid=#{uuid}
+    </update>
+
+    <insert id="intertDevice">
+        INSERT INTO device(nickname, uuid, state)
+        SELECT #{nickname},#{uuid},#{state}
+        FROM DUAL
+        WHERE NOT EXISTS (SELECT uuid FROM device WHERE uuid = #{uuid});
+    </insert>
+
+    <select id="online" resultType="Device">
+        SELECT *
+        FROM device
+        WHERE state=1
+    </select>
+
+    <select id="function1" resultType="String">
+        SELECT function1
+        FROM device
+        WHERE uuid=#{uuid}
+    </select>
+
+    <update id="updateFunction1">
+        UPDATE device
+        SET function1=#{function1}
+        WHERE uuid=#{uuid}
+    </update>
+
+    <select id="offline" resultType="Device">
+        SELECT *
+        FROM device
+        WHERE state=0
+    </select>
+</mapper>

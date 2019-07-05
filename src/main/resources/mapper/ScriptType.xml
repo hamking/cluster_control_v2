@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zciteam.dao.ScriptTypeDao">
+
+    <select id="findAllScriptType" resultType="ScriptType">
+        SELECT *
+        FROM script_type
+    </select>
+
+    <insert id="intertScriptType">
+     INSERT INTO script_type(scriptName, type)
+        SELECT #{scriptName}, #{type}
+        FROM DUAL
+        WHERE NOT EXISTS (SELECT type FROM script_type WHERE type = #{type});
+    </insert>
+</mapper>

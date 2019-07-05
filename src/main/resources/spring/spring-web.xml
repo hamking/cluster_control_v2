@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:websocket="http://www.springframework.org/schema/websocket"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket.xsd">
+
+    <!--配置springMVC-->
+    <!--1 开启springMVC注解模式-->
+    <!--简化配置:
+         1) 自动注册DefaultANNotationHandlerMapping,DefaultANNotationHandlerAdapter
+         2) 默认提供了一系列功能: 数据绑定, 数字和日期的format @NumberFormat, @DataTimeFormat, xml, json 默认读写支持-->
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.ResourceHttpMessageConverter" >
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" >
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>multipart/form-data;charset=UTF-8</value>
+                        <value>text/html;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <!--2 servlet-mapping 映射路径: "/"-->
+    <!--静态资源配置 默认servlet配置
+         1): 加入默认资源的处理 : js, gif, png
+         2): 允许使用"/"做整体映射-->
+    <mvc:default-servlet-handler/>
+
+    <!--4 扫描web相关的bean-->
+    <context:component-scan base-package="com.zciteam.web"/>
+
+    <!--配置webSocket-->
+    <bean id="webSocketDevice" class="com.zciteam.web.WebSocketDevice"/>
+    <bean id="webSocketDeviceListStart" class="com.zciteam.web.WebSocketDeviceListStart"/>
+    <bean id="webSocketDeviceLog" class="com.zciteam.web.WebSocketDeviceLog"/>
+    <websocket:handlers>
+        <websocket:mapping path="/socket/device/uuid/{uuid}" handler="webSocketDevice"/>
+        <websocket:mapping path="/socket/device/log/{uuid}" handler="webSocketDeviceLog"/>
+        <websocket:mapping path="/socket/device/list" handler="webSocketDeviceListStart"/>
+    </websocket:handlers>
+
+    <!--处理上传文件-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+</beans>

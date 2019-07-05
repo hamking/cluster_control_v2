@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zciteam.dao.ScriptDao">
+
+    <select id="findAllScript" resultType="Script">
+       SELECT *
+       FROM script
+    </select>
+
+    <select id="findScript" resultType="Script">
+       SELECT *
+       FROM script
+       WHERE suid=#{suid}
+    </select>
+
+    <select id="findScriptForType" resultType="Script">
+        SELECT *
+        FROM script
+        WHERE type=#{type}
+    </select>
+
+    <delete id="deleteScript">
+     DELETE FROM script
+     WHERE suid=#{suid}
+    </delete>
+
+    <update id="updateScript">
+     UPDATE script SET
+       isGiveLike=#{isGiveLike},
+        isComment=#{isComment},
+         isFocusAuthor=#{isFocusAuthor},
+          isFocus=#{isFocus},
+           isDirectMessages=#{isDirectMessages},
+            directMessagesNum=#{directMessagesNum},
+             directMessagesType=#{directMessagesType},
+              directMessages=#{directMessages},
+               commentStr=#{commentStr},
+                watchTimeMan=#{watchTimeMan},
+                 watchTimeMin=#{watchTimeMin},
+                  feedingTime=#{feedingTime},
+                    watchTimeInterval=#{watchTimeInterval},
+                     focusNum=#{focusNum},
+                      watchTime=#{watchTime},
+                       directMessagesImage=#{directMessagesImage},
+                        isOnlyDirectMessages=#{isOnlyDirectMessages},
+                         watchNum=#{watchNum},
+                          numStart=#{numStart},
+                           isDirectMessagesOnAuthor=#{isDirectMessagesOnAuthor},
+                            packageName=#{packageName}
+                            WHERE suid=#{suid}
+    </update>
+
+    <insert id="intertScript">
+     INSERT INTO script(scriptName, type, packageName, suid)
+        SELECT #{scriptName}, #{type}, #{packageName}, #{suid}
+        FROM DUAL
+        WHERE NOT EXISTS (SELECT suid FROM script WHERE suid = #{suid});
+    </insert>
+</mapper>
