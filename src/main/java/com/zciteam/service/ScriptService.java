@@ -1,5 +1,6 @@
 package com.zciteam.service;
 
+import com.zciteam.bean.Script;
 import com.zciteam.dto.ScriptResult;
 
 public interface ScriptService {
@@ -9,6 +10,12 @@ public interface ScriptService {
      * @return List
      */
     ScriptResult getScriptResult();
+
+    /**
+     * 获取脚本
+     * @return List
+     */
+    Script getScriptDetails(String suid);
 
     /**
      * 保存脚本设置

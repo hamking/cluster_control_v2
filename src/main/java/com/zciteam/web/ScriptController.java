@@ -1,11 +1,13 @@
 package com.zciteam.web;
 
+import com.zciteam.bean.Script;
 import com.zciteam.dto.Result;
 import com.zciteam.dto.ScriptResult;
 import com.zciteam.enums.CodeEnum;
 import com.zciteam.service.impl.DeviceServiceImpl;
 import com.zciteam.service.impl.ScriptServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,6 +47,24 @@ public class ScriptController {
         }catch(RuntimeException e){
             return new Result<>(null, CodeEnum.CODE_400,e.getMessage());
         }
+        return new Result<>(null, CodeEnum.CODE_400);
+    }
+
+    /**
+     * 获取脚本
+     * @return Result
+     */
+    @RequestMapping(value = "/getScript", method = RequestMethod.GET)
+    @ResponseBody
+    public Result getScript(HttpServletRequest request){
+
+        String suid = request.getParameter("suid");
+
+        Script script = scriptService.getScriptDetails(suid);
+        if (script != null){
+            return new Result<>(script, CodeEnum.CODE_200);
+        }
+
         return new Result<>(null, CodeEnum.CODE_400);
     }
 

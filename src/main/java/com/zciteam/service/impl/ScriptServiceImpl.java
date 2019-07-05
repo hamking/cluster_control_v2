@@ -63,6 +63,15 @@ public class ScriptServiceImpl implements ScriptService {
     }
 
     @Override
+    public Script getScriptDetails(String suid) {
+        if (scriptDao.findScript (suid) != null) {
+            return scriptDao.findScript (suid);
+        }else{
+            return null;
+        }
+    }
+
+    @Override
     public int saveScriptSetting(String suid, int isFocus, int watchNum, int numStart, int focusNum, int watchTime, int isComment, int isGiveLike, String commentStr, int feedingTime, int watchTimeMan, int watchTimeMin, int isFocusAuthor, String directMessages, int isDirectMessages, int watchTimeInterval, int directMessagesNum, int directMessagesType, String directMessagesImage, int isOnlyDirectMessages, int isDirectMessagesOnAuthor) {
         int col = scriptDao.updateScript(
                 suid,
