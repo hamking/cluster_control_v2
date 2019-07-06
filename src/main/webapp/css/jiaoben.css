@@ -181,6 +181,13 @@ body{
     color: #E0AB37 !important;
 }
 
+.yang-hao,.si-xin{
+    display: none;
+}
+.script-zi,.do-zhi.do-ting{
+    cursor: pointer;
+}
+
 .script-use{
     display: inline-block;
     height: 480px;

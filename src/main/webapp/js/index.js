@@ -262,14 +262,14 @@ $(function(){
                                 state_name = "已上线";
                                 yuan_type = "yuan";
                             }
-                            html += "<li class="+class_type+ " list-use"+" data-id="+result[i].id+" data-xing="+result[i].id+">\n" +
+                            html += "<li class="+class_type+ " list-use"+" data-id="+result[i].uuid+" data-xing="+result[i].id+">\n" +
                                 "                    <span class='left-nick'>"+result[i].nickname+"</span>\n" +
-                                "                    <span class='left-group'>组1</span>\n" +
+                                "                    <span class='left-group'>"+result[i].groupId+"</span>\n" +
                                 "                    <span>"+state_name+"</span>\n" +
                                 "                    <span class='left-she'>null</span>\n" +
                                 "                </li>";
 
-                            html_list += "<div class='mobile clearfix' data-id="+result[i].id+" data-xing="+result[i].id+">\n" +
+                            html_list += "<div class='mobile clearfix' data-id="+result[i].uuid+" data-xing="+result[i].id+">\n" +
                                 "                <div class='ri-zhi'>\n" +
                                 "                    <p>未监控</p>\n" +
                                 "                </div>\n" +
@@ -279,7 +279,7 @@ $(function(){
                                 "                </div>\n" +
                                 "                <div class='group-all' style='margin: 10px;'>\n" +
                                 "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
-                                "                    <span class='white she-group'>组1</span>\n" +
+                                "                    <span class='white she-group'>"+result[i].groupId+"</span>\n" +
                                 "                </div>\n" +
                                 "                <div class="+yuan_type+"></div>\n" +
                                 "            </div>"
@@ -288,6 +288,7 @@ $(function(){
                     }
                     $(".she-bei").append(html);
                     $(".content-box").append(html_list);
+
                 }else{
                     alert("服务器异常")
                 }
@@ -303,7 +304,7 @@ $(function(){
         var xing = $(this).attr("data-xing");
         var id = $(this).attr("data-id");
         window.location.href = "jiaoben.html?id="+id+"&name="+name+"&group="+group+"&xing="+xing;
-});
+    });
 
     this.socket = function () {
         var ws = new WebSocket("ws://localhost:8080//socket/device/list");
@@ -334,9 +335,66 @@ $(function(){
                         $("#xu-cnt").text(zai_cnt+1);
                         $("#zai-cnt").text();
                     }
+                    html_list = "<div class='mobile clearfix' data-id="+evt.data.uuid+" data-xing="+evt.data.id+">\n" +
+                        "                <div class='ri-zhi'>\n" +
+                        "                    <p>第一版日志</p>\n" +
+                        "                </div>\n" +
+                        "                <div class='she-name' style='margin: 10px;'>\n" +
+                        "                    <span class='white'>设备名称</span>\n" +
+                        "                    <span class='white she-nick'>"+evt.data.nickname+"</span>\n" +
+                        "                </div>\n" +
+                        "                <div class='group-all' style='margin: 10px;'>\n" +
+                        "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
+                        "                    <span class='white she-group'>"+evt.data.groupId+"</span>\n" +
+                        "                </div>\n" +
+                        "                <div class="+yuan_type+"></div>\n" +
+                        "            </div>";
+
+                    html = "<li class="+class_type+ " list-use"+" data-id="+evt.data.uuid+" data-xing="+evt.data.id+">\n" +
+                        "                    <span class='left-nick'>"+evt.data.nickname+"</span>\n" +
+                        "                    <span class='left-group'>"+evt.data.groupId+"</span>\n" +
+                        "                    <span>"+state_name+"</span>\n" +
+                        "                    <span class='left-she'>小米1</span>\n" +
+                        "                </li>";
+
+                    $('.log-jian').append();
+                }
+            };
+        }
+    };
+
+    function socket_add(id) {
+        var ws = new WebSocket("ws://localhost:8080//socket/device/log/"+id);
+        if (ws.readyState == WebSocket.OPEN) {
+            ws.onmessage = function(evt) {
+                //此处先做一个打印
+                console.log( "打印信息: " + evt.data);
+                if(arr.indexOf(evt.data.id) == -1){
+                    var xu_cnt = $("#xu-cnt").text();
+                    var zai_cnt = $("#zai-cnt").text();
+                    var li_cnt = $("#li-cnt").text();
+                    if(evt.data.state == 0){
+                        class_type = "hui";
+                        state_name = "未上线";
+                        yuan_type = "yuanhui";
+                        $("#xu-cnt").text(xu_cnt+1);
+                        $("#li-cnt").text(li_cnt+1);
+                    }else if(evt.data.state == 2){
+                        class_type = "hui";
+                        state_name = "未知";
+                        yuan_type = "yuanhui";
+                        $("#xu-cnt").text(xu_cnt+1);
+                        $("#li-cnt").text(li_cnt+1);
+                    }else{
+                        class_type = "green";
+                        state_name = "已上线";
+                        yuan_type = "yuan";
+                        $("#xu-cnt").text(zai_cnt+1);
+                        $("#zai-cnt").text();
+                    }
                     html_list = "<div class='mobile clearfix' data-id="+evt.data.id+" data-xing="+evt.data.id+">\n" +
                         "                <div class='ri-zhi'>\n" +
-                        "                    <p></p>\n" +
+                        "                    <p>第一版日志</p>\n" +
                         "                </div>\n" +
                         "                <div class='she-name' style='margin: 10px;'>\n" +
                         "                    <span class='white'>设备名称</span>\n" +

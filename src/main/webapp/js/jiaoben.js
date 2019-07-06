@@ -1,5 +1,12 @@
 $(function () {
     var id = getQueryString("id");
+    var name = getQueryString("name");
+    var group = getQueryString("group");
+    var xing = getQueryString("xing");
+
+    $("#name-shou").text(name);
+    $("#group-shou").text(group);
+    $("#xing-shou").text(xing);
 
     //主页
     $(this).delegate('#home','click',function(){
@@ -191,6 +198,8 @@ $(function () {
         $('.script-do').each(function(){
             var $this = $(this);
             $this.removeClass('light-do');
+            var use_da = $this.attr("data-id");
+            $("#"+use_da).hide();
         });
         $(this).addClass("light-do");
         var use_id = $(this).attr("data-id");
@@ -332,7 +341,7 @@ $(function () {
             var isDirectMessagesOnAuthor = $('.sixinzi input[type="radio"]:checked').val();
             var isDirectMessages = 0;
             var directMessages = $("#sixinhuashu").val();
-            var directMessagesImage = "";
+            var directMessagesImage = $('#simg').attr('src');
             var isFocus = 0;
             var isFocusAuthor = 0;
             var focusNum = 0;
@@ -378,15 +387,17 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    this.doExecute(suid);
+                    doExecute(suid);
                 }else{
-                    alert("服务器异常");
+                    alert("执行失败!");
                 }
+            },error:function () {
+                alert("服务器异常");
             }
         })
     });
 
-    this.doExecute = function (suid) {
+    function doExecute(suid) {
         var data = {
             "scope":-1,
             "suid":suid,
@@ -399,17 +410,21 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("执行成功！");
+                    alert("正在执行！");
+                    $("#test").hide();
+                    $('#log_window').hide();
                 }else{
-                    alert("服务器异常");
+                    alert("执行失败!");
                 }
+            },error:function () {
+                alert("服务器异常");
             }
         })
     };
 
-    $(this).delegate('.test','click',function(){
+    $(this).delegate('#test','click',function(){
         $(this).hide();
-        $('.log_window').hide();
+        $('#log_window').hide();
     });
 
     $(this).delegate('.do-ting','click',function(){
@@ -424,10 +439,14 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功！");
+                    alert("停止成功！");
+                    $("#test").hide();
+                    $('#log_window').hide();
                 }else{
-                    alert("服务器异常");
+                    alert("停止失败！");
                 }
+            },error:function () {
+                alert("服务器异常");
             }
         })
     });
