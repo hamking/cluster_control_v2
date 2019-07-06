@@ -207,16 +207,20 @@ $(function () {
                     var html = "";
                     var cao = "";
                     var result = datas.data.scriptList;
-                    for(var i= 0;i<datas.data.scriptList.length;i++){
+                    for(var i= 0;i<datas.data.scriptList.length;i++) {
                         html += "<li>\n" +
-                            "<span class='script-do' data-id="+result[i].suid+">"+result[i].scriptName+"</span>\n" +
+                            "<span class='script-do' data-id=" + result[i].scriptName + ">" + result[i].scriptName + "</span>\n" +
                             "</li>";
                         var scriptDetails = result[i].scriptDetails;
-                        for (var j = 0; j < scriptDetails.length; j++) {
-                            cao += "<div class='script-use' id = " + scriptDetails[j].suid + "  data-id=" + scriptDetails[j].suid + ">\n" +
-                                "                <span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n" +
-                                "            </div>"
+                        cao += "<div class='script-use' id = " + result[i].scriptName + "  data-id=" + result[i].scriptName + " style='display: none;'>";
+                        for (var j = 0; j < scriptDetails.length; j++){
+                            if (j ==0){
+                                cao +=  "<span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n";
+                            }else{
+                                cao +=  "<span>|</span><span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n"
+                            }
                         }
+                        cao +=  "</div>";
                     }
 
                     $(".script").append(html);
@@ -225,6 +229,8 @@ $(function () {
                 }else{
                     alert("服务器异常");
                 }
+            }, error : function() {
+                alert("数据异常！");
             }
         })
     };
@@ -326,7 +332,7 @@ $(function () {
             var isDirectMessagesOnAuthor = $('.sixinzi input[type="radio"]:checked').val();
             var isDirectMessages = 0;
             var directMessages = $("#sixinhuashu").val();
-            var directMessagesImage = $('#simg').attr('src');
+            var directMessagesImage = "";
             var isFocus = 0;
             var isFocusAuthor = 0;
             var focusNum = 0;
@@ -357,8 +363,10 @@ $(function () {
             "watchTimeInterval":watchTimeInterval,
             "directMessagesNum":directMessagesNum,
             "directMessagesImage":directMessagesImage,
+            "directMessagesType":directMessagesType,
+            "isDirectMessagesOnAuthor":isDirectMessagesOnAuthor,
             "isOnlyDirectMessages":0,
-            "individuationString":0,
+            "individuationString":"",
             "individuationInt":0,
             "individuationVar1":0,
             "individuationVar2":0
@@ -391,7 +399,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                   alert("执行成功！");
+                    alert("执行成功！");
                 }else{
                     alert("服务器异常");
                 }

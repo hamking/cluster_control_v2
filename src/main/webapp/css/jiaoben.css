@@ -184,16 +184,18 @@ body{
 .script-use{
     display: inline-block;
     height: 480px;
+    width: 850px;
     color: white;
     font-size: 18px;
     margin-left: 40px;
 }
 .script-zi{
     display: inline-block;
-    width: 100px;
+    min-width: 105px;
     text-align: center;
     height: 60px;
     line-height: 60px;
+    padding: 0 10px;
 }
 
 #test {

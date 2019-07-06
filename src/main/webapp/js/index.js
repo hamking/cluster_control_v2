@@ -303,7 +303,7 @@ $(function(){
         var xing = $(this).attr("data-xing");
         var id = $(this).attr("data-id");
         window.location.href = "jiaoben.html?id="+id+"&name="+name+"&group="+group+"&xing="+xing;
-    });
+});
 
     this.socket = function () {
         var ws = new WebSocket("ws://localhost:8080//socket/device/list");
@@ -336,7 +336,7 @@ $(function(){
                     }
                     html_list = "<div class='mobile clearfix' data-id="+evt.data.id+" data-xing="+evt.data.id+">\n" +
                         "                <div class='ri-zhi'>\n" +
-                        "                    <p>第一版日志</p>\n" +
+                        "                    <p></p>\n" +
                         "                </div>\n" +
                         "                <div class='she-name' style='margin: 10px;'>\n" +
                         "                    <span class='white'>设备名称</span>\n" +
