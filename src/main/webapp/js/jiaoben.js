@@ -239,9 +239,9 @@ $(function () {
                     alert("服务器异常");
                 }
             }, error : function() {
-                alert("数据异常！");
-            }
-        })
+           alert("数据异常！");
+               }
+    })
     };
 
     $(this).delegate('.script-zi','click',function(){
@@ -410,9 +410,10 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("正在执行！");
+                   alert("正在执行！");
                     $("#test").hide();
                     $('#log_window').hide();
+                    $(".show-type").hide();
                 }else{
                     alert("执行失败!");
                 }
@@ -425,6 +426,7 @@ $(function () {
     $(this).delegate('#test','click',function(){
         $(this).hide();
         $('#log_window').hide();
+        $(".show-type").hide();
     });
 
     $(this).delegate('.do-ting','click',function(){
@@ -442,6 +444,7 @@ $(function () {
                     alert("停止成功！");
                     $("#test").hide();
                     $('#log_window').hide();
+                    $(".show-type").hide();
                 }else{
                     alert("停止失败！");
                 }

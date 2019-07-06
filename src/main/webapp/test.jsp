@@ -87,7 +87,7 @@
     var btn = document.getElementById("btn");
     var message = document.getElementById("message");
     var show = document.getElementById("show");
-    var ws = new WebSocket("ws://<%=request.getLocalAddr()%>:<%=request.getLocalPort()%>/zciteam/socket/device/log/1243w213");
+    var ws = new WebSocket("ws://<%=request.getLocalAddr()%>:<%=request.getLocalPort()%>/socket/device/list");
     ws.onmessage = function (evt) {
         var node = document.createElement("div");
         node.innerHTML = "<h5>" + evt.data + "</h5>";
