@@ -119,6 +119,7 @@ public class ScriptController {
                 return new Result<> (null, CodeEnum.CODE_200);
             }
         }catch(RuntimeException e){
+            System.out.println(e.getMessage());
             return new Result<>(null, CodeEnum.CODE_400,e.getMessage());
         }
         return new Result<>(null, CodeEnum.CODE_400);

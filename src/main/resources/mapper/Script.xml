@@ -49,8 +49,7 @@
                         isOnlyDirectMessages=#{isOnlyDirectMessages},
                          watchNum=#{watchNum},
                           numStart=#{numStart},
-                           isDirectMessagesOnAuthor=#{isDirectMessagesOnAuthor},
-                            packageName=#{packageName}
+                           isDirectMessagesOnAuthor=#{isDirectMessagesOnAuthor}
                             WHERE suid=#{suid}
     </update>
 

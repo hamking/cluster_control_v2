@@ -55,25 +55,25 @@
        WHERE uuid=#{uuid}
     </update>
 
-    <update id="updataIndividuationString">
+    <update id="updateIndividuationString">
        UPDATE device
        SET individuationString=#{individuationString}
        WHERE uuid=#{uuid}
     </update>
 
-    <update id="updataIndividuationInt">
+    <update id="updateIndividuationInt">
        UPDATE device
        SET individuationInt=#{individuationInt}
        WHERE uuid=#{uuid}
     </update>
 
-    <update id="updataIndividuationVar1">
+    <update id="updateIndividuationVar1">
        UPDATE device
        SET individuationVar1=#{individuationVar1}
        WHERE uuid=#{uuid}
     </update>
 
-    <update id="updataIndividuationVar2">
+    <update id="updateIndividuationVar2">
        UPDATE device
        SET individuationVar2=#{individuationVar2}
        WHERE uuid=#{uuid}
