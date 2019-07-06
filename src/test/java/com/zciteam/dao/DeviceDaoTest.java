@@ -34,9 +34,9 @@ public class DeviceDaoTest {
 //    Device findDevice(String uuid);
     @Test
     public void findDevice(){
-        String uuid = "88MFDM626D3L";
+        String uuid = "351BBIHHCJNW";
         Device device = deviceDao.findDevice(uuid);
-        System.out.println(device);
+        System.out.println(device.toString());
     }
 
     /**
