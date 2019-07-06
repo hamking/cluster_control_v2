@@ -27,6 +27,7 @@ public class ToolsServiceImpl implements ToolsService {
             new Thread (new Runnable () {
                 @Override
                 public void run() {
+                    new Auto(device.getUuid()).mkdir("/data/local/tmp/local/tmp/");
                     new Auto(device.getUuid()).pushFile("/opt/LvmamaXmlKit.jar","/data/local/tmp/LvmamaXmlKit.jar");
                     new Auto(device.getUuid()).install("/opt/ADBKeyboard.apk");
                 }

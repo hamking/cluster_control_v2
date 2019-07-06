@@ -284,7 +284,7 @@ $(function(){
                                 "                <div class="+yuan_type+" id='ashe_'"+result[i].uuid+"></div>\n" +
                                 "            </div>";
 
-                            socket_add(result[i].uuid);
+                            // socket_add(result[i].uuid);
                            // socket_log(result[i].uuid);
                         }
 
@@ -426,7 +426,7 @@ $(function(){
     this.init = function(){
         this.getPhone();
         this.getDeviceList();
-        this.socket();
+        // this.socket();
     };
 
     this.init();

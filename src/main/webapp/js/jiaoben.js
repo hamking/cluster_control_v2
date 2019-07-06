@@ -467,7 +467,7 @@ $(function () {
 
     this.init = function(){
         this.getScriptList();
-        this.socket(id);
+        // this.socket(id);
 
     };
 
