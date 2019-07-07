@@ -135,20 +135,20 @@ public class Device {
     @Override
     public String toString() {
         return "{" +
-                "'id':" + id +
-                ", 'groupId':" + groupId +
-                ", 'nickname':'" + nickname + '\'' +
-                ", 'uuid':'" + uuid + '\'' +
-                ", 'additional':'" + additional + '\'' +
-                ", 'additionalType':" + additionalType +
-                ", 'isRun':" + isRun +
-                ", 'state':" + state +
-                ", 'additionalVariable':" + additionalVariable +
-                ", 'individuationString':'" + individuationString + '\'' +
-                ", 'individuationInt':" + individuationInt +
-                ", 'individuationVar1':" + individuationVar1 +
-                ", 'individuationVar2':" + individuationVar2 +
-                ", 'function1':'" + function1 + '\'' +
+                "\"id\":" + id +
+                ", \"groupId\":" + groupId +
+                ", \"nickname\":\"" + nickname + "\"" +
+                ", \"uuid\":\"" + uuid + "\"" +
+                ", \"additional\":\"" + additional + "\"" +
+                ", \"additionalType\":" + additionalType +
+                ", \"isRun\":" + isRun +
+                ", \"state\":" + state +
+                ", \"additionalVariable\":" + additionalVariable +
+                ", \"individuationString\":\"" + individuationString + "\"" +
+                ", \"individuationInt\":" + individuationInt +
+                ", \"individuationVar1\":" + individuationVar1 +
+                ", \"individuationVar2\":" + individuationVar2 +
+                ", \"function1\":\"" + function1 + "\"" +
                 '}';
     }
 }

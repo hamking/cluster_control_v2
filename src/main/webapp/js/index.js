@@ -284,8 +284,8 @@ $(function(){
                                 "                <div class="+yuan_type+" id='ashe_'"+result[i].uuid+"></div>\n" +
                                 "            </div>";
 
-                            // socket_add(result[i].uuid);
-                           // socket_log(result[i].uuid);
+                            socket_add(result[i].uuid);
+                            // socket_log(result[i].uuid);
                         }
 
                     }
@@ -311,13 +311,15 @@ $(function(){
 
     this.socket = function () {
         var ws = new WebSocket("ws://localhost:8080//socket/device/list");
-        if (ws.readyState == WebSocket.OPEN) {
+        // if (ws.readyState == WebSocket.OPEN) {
             ws.onmessage = function(evt) {
                 //此处先做一个打印
-                if (typeof evt.data === String) {
+                console.log("打印信息: " + evt.data);
+
+                // if (typeof evt.data === String) {
                 console.log("打印信息: " + evt.data);
                 var result = JSON.parse(evt.data);
-                if (arr.indexOf(result.uuid) == -1) {
+                if (she_arr.indexOf(result.uuid) == -1) {
                     var xu_cnt = $("#xu-cnt").text();
                     var zai_cnt = $("#zai-cnt").text();
                     var li_cnt = $("#li-cnt").text();
@@ -367,8 +369,8 @@ $(function(){
                     $(".content-box").append(html_list);
                     socket_add(result[i].uuid);
                 }
-            }
-            };
+            // }
+            // };
         }
     };
 
@@ -426,7 +428,7 @@ $(function(){
     this.init = function(){
         this.getPhone();
         this.getDeviceList();
-        // this.socket();
+        this.socket();
     };
 
     this.init();
