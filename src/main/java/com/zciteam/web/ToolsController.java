@@ -5,11 +5,16 @@ import com.zciteam.enums.CodeEnum;
 import com.zciteam.service.impl.ToolsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/tools")
@@ -40,6 +45,25 @@ public class ToolsController {
             }
         }catch(RuntimeException e){
             return new Result<>(null, CodeEnum.CODE_400,e.getMessage());
+        }
+    }
+
+    /**
+     * 返回服务器的ip及端口
+     * @return Result
+     */
+    @RequestMapping(value = "/getAddrPort", method = RequestMethod.GET)
+    @ResponseBody
+    public Result getAddrPort(HttpServletRequest request){
+
+        try{
+            Map<String, String> map = new HashMap<>();
+            map.put("addr",request.getLocalAddr());
+            map.put("port", String.valueOf(request.getLocalPort()));
+
+            return new Result(map, CodeEnum.CODE_200);
+        }catch (RuntimeException e){
+            return new Result(null, CodeEnum.CODE_400);
         }
     }
 }
