@@ -30,6 +30,12 @@ public class ToolsServiceImpl implements ToolsService {
                     new Auto(device.getUuid()).mkdir("/data/local/tmp/local/tmp/");
                     new Auto(device.getUuid()).pushFile("/opt/LvmamaXmlKit.jar","/data/local/tmp/LvmamaXmlKit.jar");
                     new Auto(device.getUuid()).install("/opt/ADBKeyboard.apk");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace ();
+                    }
+                    new Auto(device.getUuid()).install("/opt/googleKeyboard.apk");
                 }
             }).start ();
         });

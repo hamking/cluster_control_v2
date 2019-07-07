@@ -7,6 +7,7 @@ import com.android.ddmlib.ShellCommandUnresponsiveException;
 import com.android.ddmlib.TimeoutException;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
+import com.zciteam.enums.KeyboardEnum;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
@@ -28,6 +29,7 @@ public class ComUgcAwemeSendVideo {
         this.script = script;
         this.device = device;
         auto = new Auto(uuid,script.getPackageName());
+        auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
 
 
         log.push(uuid,"抖音_发视频");

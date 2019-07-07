@@ -5,6 +5,7 @@ import com.adb.auto.Bound;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
+import com.zciteam.enums.KeyboardEnum;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
@@ -26,6 +27,8 @@ public class ComUgcAwemeRaises {
         this.uuid = uuid;
         this.script = script;
         auto = new Auto(uuid,script.getPackageName());
+        auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
+
 
         log.push(uuid,"抖音_养号");
         auto.wait(15000);

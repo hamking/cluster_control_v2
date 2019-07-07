@@ -402,7 +402,7 @@ public class Auto {
             case SYSTEM_KEYBOARD:
 
                 try {
-                    Execute.shell(deviceUUID,"ime set com.sohu.inputmethod.sogou/.SogouIME");
+                    Execute.shell(deviceUUID,"ime set com.google.android.inputmethod.pinyin/.PinyinIME");
                 } catch (IOException | InterruptedException ignored) {
                 }
                 break;

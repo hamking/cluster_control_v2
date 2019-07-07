@@ -3,6 +3,7 @@ package com.script;
 import com.adb.auto.Auto;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
+import com.zciteam.enums.KeyboardEnum;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
@@ -24,6 +25,8 @@ public class ComSmileGifmakerSendVideo {
         this.script = script;
         this.device = device;
         auto = new Auto(uuid,script.getPackageName());
+        auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
+
 
         log.push(uuid,"快手_发视频");
 
