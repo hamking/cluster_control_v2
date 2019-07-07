@@ -45,7 +45,7 @@ public class DeviceDaoTest {
 //    int findAllGroupId();
     @Test
     public void findAllGroupId(){
-        List<Integer> strings = deviceDao.findAllGroupId();
+        List<String> strings = deviceDao.findAllGroupId();
         System.out.println(strings);
     }
 
@@ -65,7 +65,7 @@ public class DeviceDaoTest {
 //    int renameGroupId(@Param("groupId") String groupId, @Param("uuid") String uuid);
     @Test
     public void renameGroupId(){
-        int num = deviceDao.renameGroupId("88MFDM626D3L",0);
+        int num = deviceDao.renameGroupId("88MFDM626D3L","");
         System.out.println(num);
     }
 
@@ -101,7 +101,7 @@ public class DeviceDaoTest {
 
     @Test
     public void findDeviceByGroupId(){
-        List<Device> devices = deviceDao.findDeviceByGroupId(1);
+        List<Device> devices = deviceDao.findDeviceByGroupId("");
         System.out.println(devices.size());
     }
 }

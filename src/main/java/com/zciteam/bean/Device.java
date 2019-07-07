@@ -2,7 +2,7 @@ package com.zciteam.bean;
 
 public class Device {
     private int id;
-    private int groupId;
+    private String groupId;
     private String nickname;
     private String uuid;
     private String additional;
@@ -28,11 +28,11 @@ public class Device {
         this.id = id;
     }
 
-    public int getGroupId() {
+    public String getGroupId() {
         return groupId;
     }
 
-    public void setGroupId(int groupId) {
+    public void setGroupId(String groupId) {
         this.groupId = groupId;
     }
 
@@ -136,7 +136,7 @@ public class Device {
     public String toString() {
         return "{" +
                 "\"id\":" + id +
-                ", \"groupId\":" + groupId +
+                ", \"groupId\":\"" + groupId + "\"" +
                 ", \"nickname\":\"" + nickname + "\"" +
                 ", \"uuid\":\"" + uuid + "\"" +
                 ", \"additional\":\"" + additional + "\"" +

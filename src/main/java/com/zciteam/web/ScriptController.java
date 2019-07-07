@@ -140,7 +140,7 @@ public class ScriptController {
         try{
             String suid = request.getParameter("suid");
             String uuid = request.getParameter("uuid");
-            int scope = Integer.parseInt(request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             int col = scriptService.run(scope, suid, uuid);
             if (col>0) {
                 return new Result<> (null, CodeEnum.CODE_200);
@@ -165,7 +165,7 @@ public class ScriptController {
 
         try{
             String uuid = request.getParameter("uuid");
-            int scope = Integer.parseInt(request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             int col = scriptService.stop(scope, uuid);
             if (col>0) {
                 return new Result<> (null, CodeEnum.CODE_200);

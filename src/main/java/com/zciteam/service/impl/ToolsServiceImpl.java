@@ -21,7 +21,7 @@ public class ToolsServiceImpl implements ToolsService {
     }
 
     @Override
-    public int getInitPhone(int scope, String uuid) {
+    public int getInitPhone(String scope, String uuid) {
         List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
         devices.forEach (device -> {
             new Thread (new Runnable () {

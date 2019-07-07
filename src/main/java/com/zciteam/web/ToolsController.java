@@ -30,7 +30,7 @@ public class ToolsController {
     @ResponseBody
     public Result getScriptList(HttpServletRequest request){
         try{
-            int scope = Integer.parseInt(request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             String uuid = request.getParameter("uuid");
             int i = toolsService.getInitPhone(scope, uuid);
             if (i>0){

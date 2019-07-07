@@ -36,7 +36,7 @@ public class ConventionController {
     @ResponseBody
     public Result home(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt(request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             String uuid = request.getParameter("uuid");
             int col = conventionService.home(scope,uuid);
             if (col>0){
@@ -59,7 +59,7 @@ public class ConventionController {
     @ResponseBody
     public Result back(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             String uuid = request.getParameter("uuid");
             int col = conventionService.back(scope,uuid);
             if (col>0){
@@ -82,7 +82,7 @@ public class ConventionController {
     @ResponseBody
     public Result killProgress(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             String uuid = request.getParameter("uuid");
             int col = conventionService.killProgress(scope,uuid);
             if (col>0){
@@ -106,7 +106,7 @@ public class ConventionController {
     @ResponseBody
     public Result lock(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             int state = Integer.parseInt (request.getParameter("state"));
             String uuid = request.getParameter("uuid");
             int col = conventionService.lock(scope, DeviceControlEnum.stateOf(state),uuid);
@@ -130,7 +130,7 @@ public class ConventionController {
     @ResponseBody
     public Result volume(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             int state = Integer.parseInt (request.getParameter("state"));
             String uuid = request.getParameter("uuid");
             int col = conventionService.volume(scope,DeviceControlEnum.stateOf(state),uuid);
@@ -153,7 +153,7 @@ public class ConventionController {
     @ResponseBody
     public Result reboot(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             String uuid = request.getParameter("uuid");
             int col = conventionService.reboot(scope,uuid);
             if (col>0){
@@ -177,7 +177,7 @@ public class ConventionController {
     @ResponseBody
     public Result switchKeyboard(HttpServletRequest request) {
         try{
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             int keyboardEnum = Integer.parseInt (request.getParameter("keyboardEnum"));
             String uuid = request.getParameter("uuid");
             int col = conventionService.switchKeyboard(scope,KeyboardEnum.stateOf(keyboardEnum),uuid);
@@ -204,7 +204,7 @@ public class ConventionController {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)(request);
             MultipartFile file = multiRequest.getFile("files");
             String uuid = request.getParameter("uuid");
-            int scope = Integer.parseInt (request.getParameter("scope"));
+            String scope = request.getParameter("scope");
             int col = 0;
             if (file!=null && file.getContentType().contains("application/vnd.android.package-archive")){
                 col = conventionService.installApp(scope,uuid,file);
@@ -236,7 +236,7 @@ public class ConventionController {
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)(request);
             List<MultipartFile> files = multiRequest.getFiles("files");
             String uuid = request.getParameter("uuid");
-            int scope = Integer.parseInt(request.getParameter("scope"));
+            String scope = request.getParameter("scope");
 
             for (MultipartFile file : files) {
                 if (file.getContentType().contains("video")){

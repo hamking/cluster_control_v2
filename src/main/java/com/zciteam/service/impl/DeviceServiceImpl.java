@@ -28,14 +28,14 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public int deviceLog(String uuid) {
-        deviceDao.findDeviceByGroupId(0);
+        deviceDao.findDeviceByGroupId(uuid);
         return 0;
     }
 
     @Override
-    public List<Integer> grourdList() {
+    public List<String> grourdList() {
 
-        List<Integer> list = deviceDao.findAllGroupId();
+        List<String> list = deviceDao.findAllGroupId();
         if (list != null){
             return list;
         }
@@ -62,14 +62,14 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public int groudRename(String uuid, int groudId) {
+    public int groudRename(String uuid, String groudId) {
 
         int result = deviceDao.renameGroupId(uuid,groudId);
         return result;
     }
 
     @Override
-    public int addGroud(String uuid, int groudId) {
+    public int addGroud(String uuid, String groudId) {
 
         int result = deviceDao.renameGroupId(uuid,groudId);
         return result;

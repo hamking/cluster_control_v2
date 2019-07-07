@@ -101,7 +101,7 @@ public class ScriptServiceImpl implements ScriptService {
     //脚本线程map
     private Map<String, Thread> threadMap = new HashMap<>();
     @Override
-    public int run(int scope, String suid, String uuid) {
+    public int run(String scope, String suid, String uuid) {
 
         //获取设备 scope
         List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
@@ -141,7 +141,7 @@ public class ScriptServiceImpl implements ScriptService {
     }
 
     @Override
-    public int stop(int scope, String uuid) {
+    public int stop(String scope, String uuid) {
 
         //获取设备 scope
         List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);

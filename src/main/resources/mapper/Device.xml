@@ -20,7 +20,7 @@
         WHERE uuid=#{uuid}
     </select>
 
-    <select id="findAllGroupId" resultType="Device">
+    <select id="findAllGroupId" resultType="String">
         SELECT groupID
         FROM device
     </select>

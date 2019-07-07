@@ -25,14 +25,14 @@ public interface DeviceDao {
     /**
      * 查找全部组id
      */
-    List<Integer> findAllGroupId();
+    List<String> findAllGroupId();
 
     /**
      * 通过组id查找所有设备
      * @param groupId groupId
      * @return List
      */
-    List<Device> findDeviceByGroupId(@Param("groupId") int groupId);
+    List<Device> findDeviceByGroupId(@Param("groupId") String groupId);
 
     /**
      * 上线设备
@@ -58,7 +58,7 @@ public interface DeviceDao {
      * @param groupId groupId
      * @param uuid uuid
      */
-    int renameGroupId(@Param("uuid") String uuid, @Param("groupId") int groupId);
+    int renameGroupId(@Param("uuid") String uuid, @Param("groupId") String groupId);
 
     /**
      * 更新给设备是否在运行

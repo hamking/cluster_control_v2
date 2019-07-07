@@ -18,7 +18,7 @@ public interface DeviceService {
      * 获取全部分组
      * @return int
      */
-    List<Integer> grourdList();
+    List<String> grourdList();
 
     /**
      * 获取设备列表
@@ -37,14 +37,14 @@ public interface DeviceService {
      * @param uuid uuid
      * @return int
      */
-    int groudRename(String uuid, int groudId);
+    int groudRename(String uuid, String groudId);
 
     /**
      * 新建组
      * @param uuid uuid
      * @return int
      */
-    int addGroud(String uuid, int groudId);
+    int addGroud(String uuid, String groudId);
 
     /**
      * 重命名设备昵称

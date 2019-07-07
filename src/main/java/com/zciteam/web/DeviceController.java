@@ -46,7 +46,7 @@ public class DeviceController {
     public Result getGroudList(HttpServletRequest request){
 
         try{
-            List<Integer>list = deviceService.grourdList();
+            List<String>list = deviceService.grourdList();
             if (list != null){
                 return new Result<>(new DeviceResult<>(list),CodeEnum.CODE_200);
             }
@@ -102,7 +102,7 @@ public class DeviceController {
 
         try{
             String uuid = request.getParameter("uuid");
-            int groupId = Integer.parseInt(request.getParameter("groupId"));
+            String groupId = request.getParameter("groupId");
             int col = deviceService.groudRename(uuid, groupId);
             if (col>0){
                 return new Result<>(null, CodeEnum.CODE_200);
@@ -123,7 +123,7 @@ public class DeviceController {
 
         try{
             String uuid = request.getParameter("uuid");
-            int groupId = Integer.parseInt(request.getParameter("groupId"));
+            String groupId = request.getParameter("groupId");
             int col = deviceService.groudRename(uuid, groupId);
             if (col>0){
                 return new Result<>(null, CodeEnum.CODE_200);

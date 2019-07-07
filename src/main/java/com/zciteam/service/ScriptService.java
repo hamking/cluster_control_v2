@@ -51,14 +51,13 @@ public interface ScriptService {
      * @param uuid 设备uuid
      * @return int
      */
-    int run(int scope, String suid, String uuid);
+    int run(String scope, String suid, String uuid);
 
     /**
      * 停止脚本
      * @param scope -2全部 -1当前 其他组id
-     * @param suid 脚本id
      * @param uuid 设备uuid
      * @return int
      */
-    int stop(int scope, String uuid);
+    int stop(String scope, String uuid);
 }

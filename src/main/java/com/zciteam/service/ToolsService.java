@@ -8,5 +8,5 @@ public interface ToolsService {
      * @param uuid uuid
      * @return int
      */
-    int getInitPhone(int scope, String uuid);
+    int getInitPhone(String scope, String uuid);
 }

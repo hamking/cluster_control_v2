@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ScopeDevice {
 
-    public static List<Device> getDevice(int scope, String uuid, DeviceDao deviceDao){
+    public static List<Device> getDevice(String scope, String uuid, DeviceDao deviceDao){
         List<Device> devices;
         switch (ScopeEnum.stateOf(scope)){
             case ALL_DEVICE:
