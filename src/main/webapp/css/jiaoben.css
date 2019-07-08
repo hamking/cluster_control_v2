@@ -181,7 +181,7 @@ body{
     color: #E0AB37 !important;
 }
 
-.yang-hao,.si-xin{
+.yang-hao,.si-xin,.dou-hao,.dou-xin{
     display: none;
 }
 .script-zi,.do-zhi.do-ting{
@@ -372,4 +372,17 @@ body{
     margin-left: -585px;
     padding: 15px 0px;
     border-top: 1px solid #e0e0e0;
+}
+
+
+
+#fileMedia,#fileRuan{
+    display: block;
+    position: relative;
+    top: -85px;
+    right: 0;
+    width: 65px;
+    height: 85px;
+    cursor: pointer;
+    opacity: 0;
 }

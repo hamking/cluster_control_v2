@@ -150,26 +150,7 @@ $(function () {
             }
         })
     });
-    //安装软件
-    $(this).delegate('#do-ruan','click',function(){
-        var data = {
-            'scope': -2,
-            'uuid': id
-        };
-        $.ajax({
-            url:'/convention/installApp',
-            type:'post',
-            data:data,
-            dataType:'json',
-            success:function(datas){
-                if(datas.code == 200){
-                    alert("操作成功");
-                }else{
-                    alert("服务器异常");
-                }
-            }
-        })
-    });
+
     //音量加/减/静音
     $(this).delegate('.volume','click',function(){
         var state = $(this).attr("data-volume");
@@ -288,8 +269,36 @@ $(function () {
                         $(".si-xin").show();
                         $("#test").show();
                         $("#log_window").show();
+                    }else if(suid == "ComUgcAwemeRaises"){
+                        if(datas.data.isGiveLike == 1){
+                            $("#dou-zan").attr("checked",true);
+                        }
+                        if(datas.data.isComment == 1){
+                            $("#dou-lun").attr("checked",true);
+                        }
+                        if(datas.data.isFocus == 1){
+                            $("#dou-zhuping").attr("checked",true);
+                        }
+                        $("#shi-cnt").val(datas.data.focusNum);
+                        if(datas.data.isFocusAuthor == 1){
+                            $("#guan-zuo").attr("checked",true);
+                        }
+                        $("#mei-chang").val(datas.data.watchTimeInterval);
+                        $("#jian-ge").val(datas.data.watchTime);
+                        $("#all-kan").val(datas.data.watchNum);
+                        $("#n-ge").val(datas.data.numStart);
+                        $("#ping-hua").val(datas.data.commentStr);
+                        $("#test").show();
+                        $("#log_window").show();
+                        $(".dou-hao").show();
+                    }else if(suid == "ComUgcAwemePrivateMsg"){
+                        $("#guan_"+datas.data.directMessagesType).click();
+                        $("#xin-hua").val(datas.data.directMessages);
+                        $('#si-mg').attr('src',datas.data.directMessagesImage);
+                        $(".dou-xin").show();
+                        $("#test").show();
+                        $("#log_window").show();
                     }
-
                 }else{
                     alert("服务器异常");
                 }
@@ -342,6 +351,59 @@ $(function () {
             var isDirectMessages = 0;
             var directMessages = $("#sixinhuashu").val();
             var directMessagesImage = $('#simg').attr('src');
+            var isFocus = 0;
+            var isFocusAuthor = 0;
+            var focusNum = 0;
+            var watchTime = 0;
+            var isComment = 0;
+            var isGiveLike = 0;
+            var commentStr = "";
+            var feedingTime = 0;
+            var watchTimeInterval = 0;
+            var directMessagesType = 0;
+        }else if(suid == "ComUgcAwemeRaises"){
+            var directMessagesType = 0;
+            if($("#dou-zan").is(':checked') == true){
+                var isGiveLike = 1;
+            }else{
+                var isGiveLike = 0;
+            }
+            if($("#dou-lun").is(':checked') == true){
+                var isComment = 1;
+            }else{
+                var isComment = 0;
+            }
+            if($("#dou-zhuping").is(':checked') == true){
+                var isFocus = 1;
+            }else{
+                var isFocus = 0;
+            }
+            var focusNum = $("#shi-cnt").val();
+
+            if($("#guan-zuo").is(':checked') == true){
+                var isFocusAuthor = 1;
+            }else{
+                var isFocusAuthor = 0;
+            }
+            var watchTimeInterval = $("#mei-chang").val();
+            var watchTime= $("#jian-ge").val();
+            var watchNum = $("#all-kan").val();
+            var numStart = $("#n-ge").val();
+            var commentStr = $("#ping-hua").val();
+            var directMessages = "";
+            var feedingTime = 0;
+            var isDirectMessages = 0;
+            var isDirectMessagesOnAuthor = 0;
+            var directMessagesNum = 0;
+            var directMessagesImage = "";
+        }else if(suid == "ComUgcAwemePrivateMsg"){
+            var watchNum = 0;
+            var numStart = 0
+            var directMessagesNum = 0;
+            var isDirectMessagesOnAuthor = $('.guan-zi input[type="radio"]:checked').val();
+            var isDirectMessages = 0;
+            var directMessages = $("#xin-hua").val();
+            var directMessagesImage = $('#si-mg').attr('src');
             var isFocus = 0;
             var isFocusAuthor = 0;
             var focusNum = 0;

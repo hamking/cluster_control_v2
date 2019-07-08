@@ -162,26 +162,7 @@ $(function(){
             }
         })
     });
-    //安装软件
-    $(this).delegate('#do-ruan','click',function(){
-        var data = {
-            'scope': -2,
-            'uuid': ""
-        };
-        $.ajax({
-            url:'/convention/installApp',
-            type:'post',
-            data:data,
-            dataType:'json',
-            success:function(datas){
-                if(datas.code == 200){
-                    alert("操作成功");
-                }else{
-                    alert("服务器异常");
-                }
-            }
-        })
-    });
+
     //音量加/减/静音
     $(this).delegate('.volume','click',function(){
         var state = $(this).attr("data-volume");
@@ -299,7 +280,139 @@ $(function(){
         })
     };
 
+    $(this).delegate('.left-nick','click',function () {
+        var left_click = $(this);
+        var nick_old = left_click.text();
+        var html = "<div class='nick-show'>" +
+            "<p>重名手机</p>" +
+            "<input type='text' name='nick-name' value="+nick_old+" id='nick-chang' class='spaceCnt'>" +
+            "<span class='rename'>确定</span></div>";
+        left_click.after(html);
+    });
 
+    $(this).delegate('.left-group','click',function () {
+        var left_click = $(this);
+        var html = "<div class='group-cont'>\n" +
+            "                    <div class='qie-bug'><span class='new-add'>选择组</span><span class='xiu-zu'>修改组</span></div>\n" +
+            "                    <input style='display: none;' type='text' name='group-name' value='' placeholder='请输入组名' style='margin-bottom: 15px' id='add-group' class='spaceCnt'>\n";
+        $.ajax({
+            url:'/device/getGroudList',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    html += "<select class='get-group'>";
+                    for (var i = 0; i<datas.data.deviceList.length; i++){
+                        html += "<option value="+datas.data.deviceList[i]+">"+datas.data.deviceList[i]+"</option>"
+                    }
+                    html +="</select><div class='button-group'><span class='group-add'>新增组</span><span class='group-xiu' style='display: none;'>修改组</span></div>\n" +
+                        "                </div>";
+                    left_click.after(html);
+                }else{
+                    alert("获取新增组数据失败");
+                    html +="<div class='button-group'><span class='group-add'>新增组</span><span class='group-xiu' style='display: none;'>修改组</span></div>\n" +
+                        "                </div>";
+                    left_click.after(html);
+                }
+            },error:function(){
+                html += "<select class='get-group'>";
+                for (var i = 0; i<4; i++){
+                    html += "<option value='抖音组'>抖音组</option>"
+                }
+                html +="</select><div class='button-group'><span class='group-add'>新增组</span><span class='group-xiu' style='display: none;'>修改组</span></div>\n" +
+                    "                </div>";
+                left_click.after(html);
+            }
+        });
+
+    });
+
+    $(this).delegate('.new-add','click',function (){
+        $(".group-xiu").hide();
+        $("#add-group").hide();
+        $(".get-group").show();
+        $(".group-add").show();
+
+    });
+
+    $(this).delegate('.xiu-zu','click',function (){
+        $(".group-add").hide();
+        $(".get-group").hide();
+        $("#add-group").show();
+        $(".group-xiu").show();
+    });
+
+    $(this).delegate('.group-add','click',function () {
+        var uuid = $(this).parent().parent().parent().attr("data-id");
+        var group = $(".get-group option:selected").text();
+        var data = {
+            "uuid":uuid,
+            "groupId":group
+        };
+        $.ajax({
+            url:'/device/addGroud',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("新建组成功！");
+                    $(".group-cont").remove();
+                    window.location.reload();
+                }else{
+                    alert("服务器异常")
+                }
+            }
+        })
+    });
+
+    $(this).delegate('.group-xiu','click',function () {
+        var uuid = $(this).parent().parent().parent().attr("data-id");
+        var group = $("#add-group").val();
+        var data = {
+            "uuid":uuid,
+            "groupId":group
+        };
+        $.ajax({
+            url:'/device/groudRename',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("重命名成功！");
+                    $(".group-cont").remove();
+                    window.location.reload();
+                }else{
+                    alert("服务器异常")
+                }
+            }
+        })
+    });
+
+    $(this).delegate('.rename','click',function () {
+        var uuid = $(this).parent().parent().attr("data-id");
+        var nick = $("#nick-chang").val();
+        var data = {
+            "uuid":uuid,
+            "nickName":nick
+        };
+        $.ajax({
+            url:'/device/nickNameRename',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("重命名成功！");
+                    $(".nick-show").remove();
+                    window.location.reload();
+                }else{
+                    alert("服务器异常")
+                }
+            }
+        })
+    });
 
     $(this).delegate('.mobile','click',function(){
         var name = $(this).children(".she-name").children(".she-nick").text();
@@ -379,7 +492,7 @@ $(function(){
         if (ws.readyState == WebSocket.OPEN) {
             ws.onmessage = function(evt) {
                 //此处先做一个打印
-                if (typeof evt.data === String) {
+                //if (typeof evt.data === String) {
                     console.log( "打印信息: " + evt.data);
                     var result = JSON.parse(evt.data);
                     var zai_cnt = $("#zai-cnt").text();
@@ -421,7 +534,7 @@ $(function(){
                     $("#agroup_"+result.uuid).text(result.groupId);
 
                 };
-            };
+            //};
         }
     };
 
