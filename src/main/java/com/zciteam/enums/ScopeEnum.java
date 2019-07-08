@@ -23,7 +23,7 @@ public enum ScopeEnum {
 
     public static ScopeEnum stateOf(String index){
         for(ScopeEnum scopeEnum: values ()){
-            if (scopeEnum.getState() == index){
+            if (scopeEnum.getState().equals(index)){
                 return scopeEnum;
             }
         }
