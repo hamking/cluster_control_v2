@@ -11,7 +11,7 @@ $(function () {
     //主页
     $(this).delegate('#home','click',function(){
         var data = {
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -31,7 +31,7 @@ $(function () {
     //返回
     $(this).delegate('#return','click',function(){
         var data = {
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -52,7 +52,7 @@ $(function () {
     $(this).delegate('#open','click',function(){
         var data = {
             'state':0,
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -72,7 +72,7 @@ $(function () {
     //停止运行
     $(this).delegate('#zanting','click',function(){
         var data = {
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -92,7 +92,7 @@ $(function () {
     //清空进程
     $(this).delegate('#delete','click',function(){
         var data = {
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -113,7 +113,7 @@ $(function () {
     $(this).delegate('#off','click',function(){
         var data = {
             'state':1,
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -133,7 +133,7 @@ $(function () {
     //重启设备
     $(this).delegate('#restart','click',function(){
         var data = {
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -156,7 +156,7 @@ $(function () {
         var state = $(this).attr("data-volume");
         var data = {
             'state':state,
-            'scope': -2,
+            'scope': "-2",
             'uuid': id
         };
         $.ajax({
@@ -461,7 +461,7 @@ $(function () {
 
     function doExecute(suid) {
         var data = {
-            "scope":-1,
+            'scope': "-2",
             "suid":suid,
             "uuid":id
         };
@@ -493,7 +493,7 @@ $(function () {
 
     $(this).delegate('.do-ting','click',function(){
         var data = {
-            "scope":-1,
+            'scope': "-2",
             "uuid":id
         };
         $.ajax({
