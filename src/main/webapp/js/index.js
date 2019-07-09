@@ -547,11 +547,11 @@ $(function(){
                 if(datas.code == 200){
                     ip = datas.data.addr;
                     port = datas.data.port;
+                    socket();
+                    getDeviceList();
                 }else{
                     alert("获取IP失败！");
                 }
-                setTimeout(socket(),500);
-                setTimeout(getDeviceList(),500);
             },error:function () {
                 alert("服务器异常");
             }
