@@ -429,8 +429,6 @@ $(function(){
         ws.onmessage = function(evt) {
             //此处先做一个打印
             console.log("打印信息: " + evt.data);
-
-            console.log("打印信息: " + evt.data);
             var result = JSON.parse(evt.data);
             if (she_arr.indexOf(result.uuid) == -1) {
                 var xu_cnt = $("#xu-cnt").text();

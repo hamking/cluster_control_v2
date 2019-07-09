@@ -1123,7 +1123,7 @@
     <column id="283" parent="279" name="groupID">
       <Position>2</Position>
       <DataType>char(100)|0s</DataType>
-      <DefaultExpression>&apos;&apos;</DefaultExpression>
+      <DefaultExpression>&apos;默认分组&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="284" parent="279" name="uuid">

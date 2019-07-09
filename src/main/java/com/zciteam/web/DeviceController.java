@@ -44,7 +44,7 @@ public class DeviceController {
     @RequestMapping(value = "/getGroudList",method = RequestMethod.GET)
     @ResponseBody
     public Result getGroudList(HttpServletRequest request){
-
+//TODO 组名去重      多台设备时 日志输出
         try{
             List<String>list = deviceService.grourdList();
             if (list != null){

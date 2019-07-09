@@ -8,6 +8,7 @@ import com.zciteam.service.other.DeviceMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -36,8 +37,14 @@ public class DeviceServiceImpl implements DeviceService {
     public List<String> grourdList() {
 
         List<String> list = deviceDao.findAllGroupId();
+        List<String> results = new ArrayList<>();
         if (list != null){
-            return list;
+            list.forEach (l->{
+                if (!results.contains(l)){
+                    results.add(l);
+                }
+            });
+            return results;
         }
         return null;
     }
