@@ -4,6 +4,9 @@ $(function () {
     var group = getQueryString("group");
     var xing = getQueryString("xing");
 
+    var ip = "";
+    var port = "";
+
     $("#name-shou").text(name);
     $("#group-shou").text(group);
     $("#xing-shou").text(xing);
@@ -516,21 +519,51 @@ $(function () {
         })
     });
 
-    this.socket = function (id) {
-        var ws = new WebSocket("ws://localhost:8080//socket/device/log/"+id);
-        if (ws.readyState == WebSocket.OPEN) {
-            ws.onmessage = function(evt) {
-                //此处先做一个打印
-                console.log( "打印信息: " + evt.data);
-                $('.log-jian').append();
-            };
-        }
+    $(this).delegate('.dang-she','click',function () {
+        $(this).removeClass("qie-hui");
+        $(this).addClass("qie-se");
+        $(".kong-she").removeClass("qie-se");
+        $(".kong-she").addClass("qie-hui");
+    });
+
+    $(this).delegate('.kong-she','click',function () {
+        $(this).removeClass("qie-hui");
+        $(this).addClass("qie-se");
+        $(".dang-she").removeClass("qie-se");
+        $(".dang-she").addClass("qie-hui");
+    });
+
+    function socket(id) {
+        var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/"+id);
+        ws.onmessage = function(evt) {
+            //此处先做一个打印
+            console.log( "打印信息: " + evt.data);
+            $('.log-cont').append(evt.data + "<br>");
+        };
+    };
+
+    this.getIp = function () {
+        $.ajax({
+            url:'/tools/getAddrPort',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    ip = datas.data.addr;
+                    port = datas.data.port;
+                }else{
+                    alert("获取IP失败！");
+                }
+                socket(id);
+            },error:function () {
+                alert("服务器异常");
+            }
+        })
     };
 
     this.init = function(){
+        this.getIp();
         this.getScriptList();
-        this.socket(id);
-
     };
 
     this.init();

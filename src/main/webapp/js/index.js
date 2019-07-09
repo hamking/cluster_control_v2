@@ -2,6 +2,8 @@
 $(function(){
 
     var she_arr = [];
+    var ip = "";
+    var port = "";
 
     this.getPhone = function(){
         $.ajax({
@@ -209,7 +211,7 @@ $(function(){
 
 
 
-    this.getDeviceList = function () {
+    function getDeviceList () {
         $.ajax({
             url:'/device/getDeviceList',
             type:'get',
@@ -422,126 +424,145 @@ $(function(){
         window.location.href = "jiaoben.html?id="+id+"&name="+name+"&group="+group+"&xing="+xing;
     });
 
-    this.socket = function () {
-        var ws = new WebSocket("ws://localhost:8080//socket/device/list");
-        // if (ws.readyState == WebSocket.OPEN) {
-            ws.onmessage = function(evt) {
-                //此处先做一个打印
-                console.log("打印信息: " + evt.data);
+    function socket () {
+        var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/list");
+        ws.onmessage = function(evt) {
+            //此处先做一个打印
+            console.log("打印信息: " + evt.data);
 
-                // if (typeof evt.data === String) {
-                console.log("打印信息: " + evt.data);
-                var result = JSON.parse(evt.data);
-                if (she_arr.indexOf(result.uuid) == -1) {
-                    var xu_cnt = $("#xu-cnt").text();
-                    var zai_cnt = $("#zai-cnt").text();
-                    var li_cnt = $("#li-cnt").text();
-                    if (result.state == 0) {
-                        class_type = "hui";
-                        state_name = "未上线";
-                        yuan_type = "yuanhui";
-                        $("#xu-cnt").text(xu_cnt + 1);
-                        $("#li-cnt").text(li_cnt + 1);
-                    } else if (result.state == 2) {
-                        class_type = "hui";
-                        state_name = "未知";
-                        yuan_type = "yuanhui";
-                        $("#xu-cnt").text(xu_cnt + 1);
-                        $("#li-cnt").text(li_cnt + 1);
-                    } else {
-                        class_type = "green";
-                        state_name = "已上线";
-                        yuan_type = "yuan";
-                        $("#xu-cnt").text(xu_cnt+1);
-                        $("#zai-cnt").text(zai_cnt+1);
-                    }
-
-                    var html = "<li class=" + class_type + " list-use" + " data-id=" + result.uuid + " data-xing=" + result.id + " id='clas_'" + result.uuid + ">\n" +
-                        "                    <span class='left-nick' id='nick_'" + result.uuid + ">" + result.nickname + "</span>\n" +
-                        "                    <span class='left-group' id='group_'" + result.uuid + ">" + result.groupId + "</span>\n" +
-                        "                    <span id='state_'" + result.uuid + ">" + state_name + "</span>\n" +
-                        "                    <span class='left-she' id='she_'" + result.uuid + ">" + result.id + "</span>\n" +
-                        "                </li>";
-
-                    var html_list = "<div class='mobile clearfix' data-id=" + result.uuid + " data-xing=" + result.id + ">\n" +
-                        "                <div class='ri-zhi'>\n" +
-                        "                    <p>未监控</p>\n" +
-                        "                </div>\n" +
-                        "                <div class='she-name' style='margin: 10px;'>\n" +
-                        "                    <span class='white'>设备名称</span>\n" +
-                        "                    <span class='white she-nick' id='anick_'" + result.uuid + ">" + result.nickname + "</span>\n" +
-                        "                </div>\n" +
-                        "                <div class='group-all' style='margin: 10px;'>\n" +
-                        "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
-                        "                    <span class='white she-group' id='agroup_'" + result.uuid + ">" + result.groupId + "</span>\n" +
-                        "                </div>\n" +
-                        "                <div class=" + yuan_type + " id='ashe_'" + result.uuid + "></div>\n" +
-                        "            </div>";
-
-                    $(".she-bei").append(html);
-                    $(".content-box").append(html_list);
-                    socket_add(result[i].uuid);
+            console.log("打印信息: " + evt.data);
+            var result = JSON.parse(evt.data);
+            if (she_arr.indexOf(result.uuid) == -1) {
+                var xu_cnt = $("#xu-cnt").text();
+                var zai_cnt = $("#zai-cnt").text();
+                var li_cnt = $("#li-cnt").text();
+                if (result.state == 0) {
+                    class_type = "hui";
+                    state_name = "未上线";
+                    yuan_type = "yuanhui";
+                    $("#xu-cnt").text(xu_cnt + 1);
+                    $("#li-cnt").text(li_cnt + 1);
+                } else if (result.state == 2) {
+                    class_type = "hui";
+                    state_name = "未知";
+                    yuan_type = "yuanhui";
+                    $("#xu-cnt").text(xu_cnt + 1);
+                    $("#li-cnt").text(li_cnt + 1);
+                } else {
+                    class_type = "green";
+                    state_name = "已上线";
+                    yuan_type = "yuan";
+                    $("#xu-cnt").text(xu_cnt+1);
+                    $("#zai-cnt").text(zai_cnt+1);
                 }
-            // }
-            // };
-        }
+
+                var html = "<li class=" + class_type + " list-use" + " data-id=" + result.uuid + " data-xing=" + result.id + " id='clas_'" + result.uuid + ">\n" +
+                    "                    <span class='left-nick' id='nick_'" + result.uuid + ">" + result.nickname + "</span>\n" +
+                    "                    <span class='left-group' id='group_'" + result.uuid + ">" + result.groupId + "</span>\n" +
+                    "                    <span id='state_'" + result.uuid + ">" + state_name + "</span>\n" +
+                    "                    <span class='left-she' id='she_'" + result.uuid + ">" + result.id + "</span>\n" +
+                    "                </li>";
+
+                var html_list = "<div class='mobile clearfix' data-id=" + result.uuid + " data-xing=" + result.id + ">\n" +
+                    "                <div class='ri-zhi'>\n" +
+                    "                    <p>未监控</p>\n" +
+                    "                </div>\n" +
+                    "                <div class='she-name' style='margin: 10px;'>\n" +
+                    "                    <span class='white'>设备名称</span>\n" +
+                    "                    <span class='white she-nick' id='anick_'" + result.uuid + ">" + result.nickname + "</span>\n" +
+                    "                </div>\n" +
+                    "                <div class='group-all' style='margin: 10px;'>\n" +
+                    "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
+                    "                    <span class='white she-group' id='agroup_'" + result.uuid + ">" + result.groupId + "</span>\n" +
+                    "                </div>\n" +
+                    "                <div class=" + yuan_type + " id='ashe_'" + result.uuid + "></div>\n" +
+                    "            </div>";
+
+                $(".she-bei").append(html);
+                $(".content-box").append(html_list);
+                socket_add(result[i].uuid);
+            }
+        };
     };
 
     function socket_add(id) {
-        var ws = new WebSocket("ws://localhost:8080//socket/device/log/"+id);
-        if (ws.readyState == WebSocket.OPEN) {
-            ws.onmessage = function(evt) {
-                //此处先做一个打印
-                //if (typeof evt.data === String) {
-                    console.log( "打印信息: " + evt.data);
-                    var result = JSON.parse(evt.data);
-                    var zai_cnt = $("#zai-cnt").text();
-                    var li_cnt = $("#li-cnt").text();
-                    if(result.state == 0){
-                        $("#clas_"+result.uuid).removeClass();
-                        $("#clas_"+result.uuid).addClass("hui");
-                        $("#clas_"+result.uuid).addClass("list-use");
-                        $("#ashe_"+result.uuid).removeClass();
-                        $("#ashe_"+result.uuid).addClass("yuanhui");
-                        $("#state_"+result.uuid).text("未上线");
-                        $("#li-cnt").text(li_cnt+1);
-                        $("#zai-cnt").text(zai_cnt-1);
-                    }else if(result.state == 2){
-                        $("#clas_"+result.uuid).removeClass();
-                        $("#clas_"+result.uuid).addClass("hui");
-                        $("#clas_"+result.uuid).addClass("list-use");
-                        $("#ashe_"+result.uuid).removeClass();
-                        $("#ashe_"+result.uuid).addClass("yuanhui");
-                        $("#state_"+result.uuid).text("未知");
-                        $("#zai-cnt").text(zai_cnt-1);
-                        $("#li-cnt").text(li_cnt+1);
-                    }else{
-                        $("#clas_"+result.uuid).removeClass();
-                        $("#clas_"+result.uuid).addClass("green");
-                        $("#clas_"+result.uuid).addClass("list-use");
-                        $("#ashe_"+result.uuid).removeClass();
-                        $("#ashe_"+result.uuid).addClass("yuan");
-                        $("#state_"+result.uuid).text("未知");
-                        $("#li-cnt").text(li_cnt-1);
-                        $("#zai-cnt").text(zai_cnt+1);
-                    }
+        var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/uuid/"+id);
+        ws.onmessage = function(evt) {
+            console.log( "打印信息: " + evt.data);
+            var result = JSON.parse(evt.data);
+            var zai_cnt = $("#zai-cnt").text();
+            var li_cnt = $("#li-cnt").text();
+            if(result.state == 0){
+                $("#clas_"+result.uuid).removeClass();
+                $("#clas_"+result.uuid).addClass("hui");
+                $("#clas_"+result.uuid).addClass("list-use");
+                $("#ashe_"+result.uuid).removeClass();
+                $("#ashe_"+result.uuid).addClass("yuanhui");
+                $("#state_"+result.uuid).text("未上线");
+                $("#li-cnt").text(li_cnt+1);
+                $("#zai-cnt").text(zai_cnt-1);
+            }else if(result.state == 2){
+                $("#clas_"+result.uuid).removeClass();
+                $("#clas_"+result.uuid).addClass("hui");
+                $("#clas_"+result.uuid).addClass("list-use");
+                $("#ashe_"+result.uuid).removeClass();
+                $("#ashe_"+result.uuid).addClass("yuanhui");
+                $("#state_"+result.uuid).text("未知");
+                $("#zai-cnt").text(zai_cnt-1);
+                $("#li-cnt").text(li_cnt+1);
+            }else{
+                $("#clas_"+result.uuid).removeClass();
+                $("#clas_"+result.uuid).addClass("green");
+                $("#clas_"+result.uuid).addClass("list-use");
+                $("#ashe_"+result.uuid).removeClass();
+                $("#ashe_"+result.uuid).addClass("yuan");
+                $("#state_"+result.uuid).text("已上线");
+                $("#li-cnt").text(li_cnt-1);
+                $("#zai-cnt").text(zai_cnt+1);
+            }
 
-                    $("#nick_"+result.uuid).text(result.nickname);
-                    $("#group_"+result.uuid).text(result.groupId);
-                    $("#she_"+result.uuid).text(result.id);
+            $("#nick_"+result.uuid).text(result.nickname);
+            $("#group_"+result.uuid).text(result.groupId);
+            $("#she_"+result.uuid).text(result.id);
 
-                    $("#anick_"+result.uuid).text(result.nickname);
-                    $("#agroup_"+result.uuid).text(result.groupId);
+            $("#anick_"+result.uuid).text(result.nickname);
+            $("#agroup_"+result.uuid).text(result.groupId);
 
-                };
-            //};
-        }
+        };
+    };
+
+    // function socket_log(id) {
+    //     var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/"+id);
+    //     ws.onmessage = function(evt) {
+    //         //此处先做一个打印
+    //         console.log( "打印信息: " + evt.data);
+    //         $('.ri-zhi').append(evt.data + "<br>");
+    //     };
+    // };
+
+    this.getIp = function () {
+        $.ajax({
+            url:'/tools/getAddrPort',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    ip = datas.data.addr;
+                    port = datas.data.port;
+                }else{
+                    alert("获取IP失败！");
+                }
+                setTimeout(socket(),500);
+                setTimeout(getDeviceList(),500);
+            },error:function () {
+                alert("服务器异常");
+            }
+        })
     };
 
     this.init = function(){
+        this.getIp();
         this.getPhone();
-        this.getDeviceList();
-        this.socket();
     };
 
     this.init();

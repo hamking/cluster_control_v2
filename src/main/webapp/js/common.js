@@ -1,4 +1,8 @@
 $(function () {
+
+    var ip = "";
+    var port = "";
+
     // 链接跳转高亮
     $('.nav-a').each(function(){
         var $this = $(this);
@@ -15,7 +19,8 @@ $(function () {
         $(".gongju-style").show();
     }).mouseout(function() {
         $(".gongju-style").hide();
-    })
+    });
+
 });
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");

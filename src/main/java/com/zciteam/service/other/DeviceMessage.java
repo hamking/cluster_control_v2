@@ -30,6 +30,7 @@ public class DeviceMessage implements Observer {
         this.webSocketDevice = webSocketDevice;
     }
 
+
     @Autowired
     public void setDeviceDao(DeviceDao deviceDao) {
         this.deviceDao = deviceDao;

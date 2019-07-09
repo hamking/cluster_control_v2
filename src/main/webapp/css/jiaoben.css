@@ -105,15 +105,24 @@ body{
 }
 .dang-she{
     line-height: 55px;
-    color: #E0AB37;
-    font-size: 20px;
+    cursor: pointer;
 }
 .kong-she{
     line-height: 55px;
     float: right;
+    cursor: pointer;
+}
+
+.qie-se{
+    color: #E0AB37;
+    font-size: 20px;
+}
+
+.qie-hui{
     color: #666666;
     font-size: 14px;
 }
+
 .shu-kong{
     display: inline-block;
     width: 1px;
@@ -385,4 +394,13 @@ body{
     height: 85px;
     cursor: pointer;
     opacity: 0;
+}
+
+.group-cont{
+    padding: 10px;
+    background-color: #151515;
+    position: absolute;
+    width: 280px;
+    margin-top: 6px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
 }

@@ -13,10 +13,6 @@ public class WebSocketDeviceLog extends TextWebSocketHandler {
 
     private static Map<String, WebSocketSession> deviceLogMap = new HashMap<>();
 
-    public static Map<String, WebSocketSession> getDeviceLogMap() {
-        return deviceLogMap;
-    }
-
     // 建立连接时候触发
     @Override
     public void afterConnectionEstablished(WebSocketSession session)  {
@@ -59,7 +55,7 @@ public class WebSocketDeviceLog extends TextWebSocketHandler {
     public void push(String uuid, String msg){
         TextMessage message = new TextMessage(msg);
         try {
-            WebSocketSession session = getDeviceLogMap().get(uuid);
+            WebSocketSession session = deviceLogMap.get(uuid);
             if (session != null && session.isOpen()) {
                 session.sendMessage (message);
             }

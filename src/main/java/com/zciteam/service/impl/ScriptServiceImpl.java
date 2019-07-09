@@ -123,7 +123,7 @@ public class ScriptServiceImpl implements ScriptService {
                             Method[] methods = c.getMethods();
                             for (Method method : methods) {
                                 if (method.getName().equals("script")){
-                                    method.invoke(o,uuid,script,device);
+                                    method.invoke(o,device.getUuid(),script,device);
                                 }
                             }
                         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
