@@ -427,7 +427,10 @@ $(function(){
     function socket () {
         var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/list");
         ws.onmessage = function(evt) {
-            //此处先做一个打印
+            if (ws.readyState != WebSocket.OPEN) {
+                return;
+            }
+                //此处先做一个打印
             console.log("打印信息: " + evt.data);
             var result = JSON.parse(evt.data);
             if (she_arr.indexOf(result.uuid) == -1) {
@@ -486,6 +489,9 @@ $(function(){
     function socket_add(id) {
         var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/uuid/"+id);
         ws.onmessage = function(evt) {
+            if (ws.readyState != WebSocket.OPEN) {
+                return;
+            }
             console.log( "打印信息: " + evt.data);
             var result = JSON.parse(evt.data);
             var zai_cnt = $("#zai-cnt").text();

@@ -536,6 +536,9 @@ $(function () {
     function socket(id) {
         var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/"+id);
         ws.onmessage = function(evt) {
+            if (ws.readyState != WebSocket.OPEN) {
+                return;
+            }
             //此处先做一个打印
             console.log( "打印信息: " + evt.data);
             $('.log-cont').append(evt.data + "<br>");
