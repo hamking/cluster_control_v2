@@ -7,6 +7,8 @@ $(function () {
     var ip = "";
     var port = "";
 
+    var scope = "-2";
+
     $("#name-shou").text(name);
     $("#group-shou").text(group);
     $("#xing-shou").text(xing);
@@ -14,7 +16,7 @@ $(function () {
     //主页
     $(this).delegate('#home','click',function(){
         var data = {
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -34,7 +36,7 @@ $(function () {
     //返回
     $(this).delegate('#return','click',function(){
         var data = {
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -55,7 +57,7 @@ $(function () {
     $(this).delegate('#open','click',function(){
         var data = {
             'state':0,
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -75,7 +77,7 @@ $(function () {
     //停止运行
     $(this).delegate('#zanting','click',function(){
         var data = {
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -95,7 +97,7 @@ $(function () {
     //清空进程
     $(this).delegate('#delete','click',function(){
         var data = {
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -116,7 +118,7 @@ $(function () {
     $(this).delegate('#off','click',function(){
         var data = {
             'state':1,
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -136,7 +138,7 @@ $(function () {
     //重启设备
     $(this).delegate('#restart','click',function(){
         var data = {
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -159,7 +161,7 @@ $(function () {
         var state = $(this).attr("data-volume");
         var data = {
             'state':state,
-            'scope': "-2",
+            'scope': scope,
             'uuid': id
         };
         $.ajax({
@@ -464,7 +466,7 @@ $(function () {
 
     function doExecute(suid) {
         var data = {
-            'scope': "-2",
+            'scope': scope,
             "suid":suid,
             "uuid":id
         };
@@ -496,7 +498,7 @@ $(function () {
 
     $(this).delegate('.do-ting','click',function(){
         var data = {
-            'scope': "-2",
+            'scope': scope,
             "uuid":id
         };
         $.ajax({
@@ -524,6 +526,8 @@ $(function () {
         $(this).addClass("qie-se");
         $(".kong-she").removeClass("qie-se");
         $(".kong-she").addClass("qie-hui");
+        $(".group-cont").hide();
+        scope = "-2";
     });
 
     $(this).delegate('.kong-she','click',function () {
@@ -531,6 +535,24 @@ $(function () {
         $(this).addClass("qie-se");
         $(".dang-she").removeClass("qie-se");
         $(".dang-she").addClass("qie-hui");
+        var html = "";
+        $.ajax({
+            url:'/device/getGroudList',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    html += "<option value='"+datas.data.deviceList[i]+"'>"+datas.data.deviceList[i]+"</option>"
+                $("#select-group").append(html);
+                    $(".group-cont").show();
+                }else{
+                    alert("获取分组失败！");
+                }
+            },error:function () {
+                alert("服务器异常");
+            }
+        })
+        scope = "-2";
     });
 
     function socket(id) {
@@ -563,8 +585,26 @@ $(function () {
             }
         })
     };
+    this.creatDom = function(){
+        this.seleObj = $('#select-group');
+    };
+
+    this.createEvent = function(){
+        var self = this;
+        self.seleObj.change(function(){
+            var type = $("#select-group").find("option:selected").text();
+            $(".kong-she").text(type);
+            if(type == "当前设备"){
+                scope = "-1";
+            }else{
+                scope = '"'+type+'"';
+            }
+        });
+    };
 
     this.init = function(){
+        this.creatDom();
+        this.createEvent();
         this.getIp();
         this.getScriptList();
     };

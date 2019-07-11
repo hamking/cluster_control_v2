@@ -102,6 +102,7 @@ body{
     border-radius: 30px;
     padding: 0 30px;
     display: inline-block;
+    position: relative;
 }
 .dang-she{
     line-height: 55px;
@@ -397,10 +398,25 @@ body{
 }
 
 .group-cont{
-    padding: 10px;
     background-color: #151515;
     position: absolute;
-    width: 280px;
-    margin-top: 6px;
+    right: 0;
+    width: 135px;
+    margin-top: 2px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.get-group{
+    display: block;
+    /* margin-bottom: 15px; */
+    outline: none;
+    /* border: 1px solid #cdcdcd; */
+    border-radius: 3px;
+    padding: 8px 20px;
+    font-size: 16px;
+    color: #666;
+    cursor: pointer;
+    margin-left: 10px;
 }

@@ -268,7 +268,7 @@ $(function(){
                                 "            </div>";
 
                             socket_add(result[i].uuid);
-                            // socket_log(result[i].uuid);
+                            socket_log(result[i].uuid);
                         }
 
                     }
@@ -482,6 +482,7 @@ $(function(){
                 $(".she-bei").append(html);
                 $(".content-box").append(html_list);
                 socket_add(result[i].uuid);
+                socket_log(result[i].uuid);
             }
         };
     };
@@ -534,15 +535,18 @@ $(function(){
 
         };
     };
-
-    // function socket_log(id) {
-    //     var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/"+id);
-    //     ws.onmessage = function(evt) {
-    //         //此处先做一个打印
-    //         console.log( "打印信息: " + evt.data);
-    //         $('.ri-zhi').append(evt.data + "<br>");
-    //     };
-    // };
+    function socket_log(id) {
+        var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/"+id);
+        ws.onmessage = function(evt) {
+            if (ws.readyState != WebSocket.OPEN) {
+                return;
+            }
+            console.log( "打印信息: " + evt.data);
+            var result = JSON.parse(evt.data);
+            var html = "<p>"+result+"</p>";
+            $(".ri-zhi").append(html);
+        };
+    };
 
     this.getIp = function () {
         $.ajax({

@@ -151,6 +151,7 @@ body{
     height: 120px;
     color: #D75054;
     font-size: 12px;
+    overflow: auto;
 }
 .mobile span{
     font-size: 14px;
