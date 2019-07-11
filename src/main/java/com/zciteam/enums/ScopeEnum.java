@@ -22,10 +22,14 @@ public enum ScopeEnum {
     }
 
     public static ScopeEnum stateOf(String index){
-        for(ScopeEnum scopeEnum: values ()){
-            if (scopeEnum.getState().equals(index)){
-                return scopeEnum;
+        try{
+            for(ScopeEnum scopeEnum: values ()){
+                if (scopeEnum.getState().equals(index)){
+                    return scopeEnum;
+                }
             }
+        }catch (Exception e){
+            return GROUP_DEVICE;
         }
         return GROUP_DEVICE;
     }

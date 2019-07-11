@@ -535,6 +535,7 @@ $(function () {
         $(this).addClass("qie-se");
         $(".dang-she").removeClass("qie-se");
         $(".dang-she").addClass("qie-hui");
+        $("#select-group").removeAttr();
         var html = "";
         $.ajax({
             url:'/device/getGroudList',
@@ -542,8 +543,10 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    html += "<option value='"+datas.data.deviceList[i]+"'>"+datas.data.deviceList[i]+"</option>"
-                $("#select-group").append(html);
+                    for (var i = 0; i < datas.data.deviceList.length; i++) {
+                        html += "<option value="+datas.data.deviceList[i]+">"+datas.data.deviceList[i]+"</option>";
+                    }
+                    $("#select-group").append(html);
                     $(".group-cont").show();
                 }else{
                     alert("获取分组失败！");
@@ -597,7 +600,7 @@ $(function () {
             if(type == "当前设备"){
                 scope = "-1";
             }else{
-                scope = '"'+type+'"';
+                scope = type;
             }
         });
     };
