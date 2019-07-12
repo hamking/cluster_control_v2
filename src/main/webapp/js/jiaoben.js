@@ -7,7 +7,7 @@ $(function () {
     var ip = "";
     var port = "";
 
-    var scope = "-2";
+    var scope = "-1";
 
     $("#name-shou").text(name);
     $("#group-shou").text(group);
@@ -564,9 +564,10 @@ $(function () {
             if (ws.readyState != WebSocket.OPEN) {
                 return;
             }
+            console.log(evt.data);
+            var result = JSON.parse(evt.data);
             //此处先做一个打印
-            console.log( "打印信息: " + evt.data);
-            $('.log-cont').append(evt.data + "<br>");
+            $('.log-cont').append(result.msg + "<br>");
         };
     };
 
@@ -590,6 +591,9 @@ $(function () {
     };
     this.creatDom = function(){
         this.seleObj = $('#select-group');
+        // $(this).delegate('.dang-she qie-se','click',function(){
+        //     scope = "-1";
+        // });
     };
 
     this.createEvent = function(){
@@ -597,8 +601,10 @@ $(function () {
         self.seleObj.change(function(){
             var type = $("#select-group").find("option:selected").text();
             $(".kong-she").text(type);
-            if(type == "当前设备"){
+            if(type == "当前设备") {
                 scope = "-1";
+            }else if (type == "全部设备"){
+                scope = "-2";
             }else{
                 scope = type;
             }

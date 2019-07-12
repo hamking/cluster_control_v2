@@ -542,9 +542,14 @@ $(function(){
                 return;
             }
             console.log( "打印信息: " + evt.data);
+            console.log($(".mobile clearfix").data());
+            console.log($(".mobile clearfix").data("id"));
+            console.log($(".mobile clearfix").data("data-id"));
             var result = JSON.parse(evt.data);
-            var html = "<p>"+result+"</p>";
-            $(".ri-zhi").append(html);
+            if ($(".mobile clearfix").data("id") == result.uuid) {
+                var html = "<p>"+result.msg+"</p>";
+                $(".ri-zhi").append(html);
+            }
         };
     };
 
