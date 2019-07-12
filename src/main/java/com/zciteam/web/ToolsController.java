@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/tools")
@@ -55,7 +57,15 @@ public class ToolsController {
 
         try{
             Map<String, String> map = new HashMap<>();
-            map.put("addr",request.getLocalAddr());
+            String str = request.getLocalAddr();
+            String pattern = "((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})(\\.((2(5[0-5]|[0-4]\\d))|[0-1]?\\d{1,2})){3}";
+            Pattern r = Pattern.compile(pattern);
+            Matcher m = r.matcher(str);
+            String addr = "";
+            while(m.find()) {
+                addr = m.group(0);
+            }
+            map.put("addr", addr);
             map.put("port", String.valueOf(request.getLocalPort()));
 
             return new Result(map, CodeEnum.CODE_200);
