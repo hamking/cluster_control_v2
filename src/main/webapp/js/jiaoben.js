@@ -564,7 +564,6 @@ $(function () {
             if (ws.readyState != WebSocket.OPEN) {
                 return;
             }
-            console.log(evt.data);
             var result = JSON.parse(evt.data);
             //此处先做一个打印
             $('.log-cont').append(result.msg + "<br>");

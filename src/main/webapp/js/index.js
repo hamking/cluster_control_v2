@@ -430,8 +430,6 @@ $(function(){
             if (ws.readyState != WebSocket.OPEN) {
                 return;
             }
-                //此处先做一个打印
-            console.log("打印信息: " + evt.data);
             var result = JSON.parse(evt.data);
             if (she_arr.indexOf(result.uuid) == -1) {
                 getPhone();
@@ -486,7 +484,6 @@ $(function(){
             if (ws.readyState != WebSocket.OPEN) {
                 return;
             }
-            console.log( "打印信息: " + evt.data);
             getPhone();
             var result = JSON.parse(evt.data);
             var zai_cnt = $("#zai-cnt").text();
@@ -529,7 +526,6 @@ $(function(){
             if (ws.readyState != WebSocket.OPEN) {
                 return;
             }
-            console.log( "打印信息: " + evt.data);
 
             var result = JSON.parse(evt.data);
             var html = "<p>"+result.msg+"</p>";
