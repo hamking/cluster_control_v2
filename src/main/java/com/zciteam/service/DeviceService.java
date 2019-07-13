@@ -57,4 +57,11 @@ public interface DeviceService {
      * 保存设备的个性化字段
      */
     int saveIndividuation(String uuid, String individuationString, int individuationInt, int individuationVar1, int individuationVar2);
+
+    /**
+     * 删除设备
+     * @param uuid uuid
+     * @return int
+     */
+    int delDevice(String uuid);
 }

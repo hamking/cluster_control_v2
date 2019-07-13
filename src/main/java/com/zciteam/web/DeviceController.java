@@ -153,4 +153,23 @@ public class DeviceController {
         }
         return new Result<> (null, CodeEnum.CODE_400);
     }
+
+    /**
+     * 删除设备
+     * @param request request
+     */
+    @RequestMapping(value = "/delDevice",method = RequestMethod.POST)
+    @ResponseBody
+    public Result delDevice(HttpServletRequest request){
+        try{
+            String uuid = request.getParameter("uuid");
+            int col = deviceService.delDevice(uuid);
+            if (col>0){
+                return new Result<>(null, CodeEnum.CODE_200);
+            }
+        }catch (RuntimeException e){
+            return new Result<> (null, CodeEnum.CODE_503, e.getMessage());
+        }
+        return new Result<> (null, CodeEnum.CODE_400);
+    }
 }

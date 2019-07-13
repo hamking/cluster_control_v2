@@ -248,7 +248,13 @@ body{
     display: inline-block;
     color: #D75054;
     font-size: 16px;
-    margin-left: 190px !important;
+    margin-left: 170px !important;
+}
+.del-device{
+    display: inline-block;
+    color: #8a8b88;
+    font-size: 16px;
+    margin-right: 10px !important;
 }
 #nick-chang,#add-group{
     outline: none;

@@ -54,6 +54,13 @@ public interface DeviceDao {
     int renameNickName(@Param("uuid") String uuid, @Param("nickname") String nickname);
 
     /**
+     * 删除设备
+     * @param uuid uuid
+     * @return int
+     */
+    int delDevice(@Param("uuid") String uuid);
+
+    /**
      * 重命名组昵称
      * @param groupId groupId
      * @param uuid uuid

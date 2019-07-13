@@ -20,6 +20,12 @@
         WHERE uuid=#{uuid}
     </select>
 
+    <delete id="delDevice">
+        DELETE
+        FROM device
+        WHERE uuid=#{uuid}
+    </delete>
+
     <select id="findAllGroupId" resultType="String">
         SELECT groupID
         FROM device

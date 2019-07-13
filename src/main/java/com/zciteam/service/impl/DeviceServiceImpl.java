@@ -89,6 +89,12 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    public int delDevice(String uuid) {
+        int result = deviceDao.delDevice(uuid);
+        return result;
+    }
+
+    @Override
     public int saveIndividuation(String uuid, String individuationString, int individuationInt, int individuationVar1, int individuationVar2) {
         int result = deviceDao.updateIndividuationInt(uuid , individuationInt);
         deviceDao.updateIndividuationString(uuid , individuationString);

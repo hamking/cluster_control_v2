@@ -288,7 +288,8 @@ $(function(){
         var html = "<div class='nick-show'>" +
             "<p>重名手机</p>" +
             "<input type='text' name='nick-name' value="+nick_old+" id='nick-chang' class='spaceCnt'>" +
-            "<span class='rename'>确定</span></div>";
+            "<span class='rename'>确定</span>"+
+            "<span class='del-device'>删除</span></div>";
         left_click.after(html);
     });
 
@@ -401,6 +402,28 @@ $(function(){
         };
         $.ajax({
             url:'/device/nickNameRename',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("重命名成功！");
+                    $(".nick-show").remove();
+                    window.location.reload();
+                }else{
+                    alert("服务器异常")
+                }
+            }
+        })
+    });
+
+    $(this).delegate('.del-device','click',function () {
+        var uuid = $(this).parent().parent().attr("data-id");
+        var data = {
+            "uuid":uuid,
+        };
+        $.ajax({
+            url:'/device/delDevice',
             type:'post',
             data:data,
             dataType:'json',
