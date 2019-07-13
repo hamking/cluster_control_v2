@@ -35,7 +35,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -55,7 +55,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -76,7 +76,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -96,7 +96,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -116,7 +116,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -137,7 +137,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -157,7 +157,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -180,7 +180,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -201,7 +201,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -552,7 +552,7 @@ $(function(){
 
             var result = JSON.parse(evt.data);
             var html = "<p>"+result.msg+"</p>";
-            $("#anick_"+result.uuid).parent().prev().append(html);
+            $("#anick_"+result.uuid).parent().prev().prepend(html);
         };
     };
 

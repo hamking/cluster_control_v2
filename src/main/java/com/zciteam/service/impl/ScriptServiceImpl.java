@@ -10,6 +10,7 @@ import com.zciteam.dto.ScriptDetails;
 import com.zciteam.dto.ScriptResult;
 import com.zciteam.service.ScriptService;
 import com.zciteam.util.ScopeDevice;
+import com.zciteam.web.WebSocketDeviceLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -156,6 +157,7 @@ public class ScriptServiceImpl implements ScriptService {
                         if (k.equals(device.getUuid())){
                             v.stop();
                             threadMap.remove(k);
+                            new WebSocketDeviceLog ().push(device.getUuid(),"停止脚本");
                         }
                     });
                 }

@@ -26,7 +26,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -46,7 +46,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -67,7 +67,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -87,7 +87,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -107,7 +107,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -128,7 +128,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -148,7 +148,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -171,7 +171,7 @@ $(function () {
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("操作成功");
+                    // alert("操作成功");
                 }else{
                     alert("服务器异常");
                 }
@@ -566,7 +566,7 @@ $(function () {
             }
             var result = JSON.parse(evt.data);
             //此处先做一个打印
-            $('.log-cont').append(result.msg + "<br>");
+            $('.log-cont').prepend(result.msg + "<br>");
         };
     };
 

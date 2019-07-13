@@ -10,6 +10,7 @@ import com.zciteam.service.ConventionService;
 import com.zciteam.util.Directory;
 import com.zciteam.enums.DirectoryEnum;
 import com.zciteam.util.ScopeDevice;
+import com.zciteam.web.WebSocketDeviceLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -36,6 +37,7 @@ public class ConventionServiceImpl implements ConventionService {
                 @Override
                 public void run() {
                     new Auto(device.getUuid()).home();
+                    new WebSocketDeviceLog().push(device.getUuid(),"主页操作");
                 }
             }).start();
         });
@@ -50,6 +52,7 @@ public class ConventionServiceImpl implements ConventionService {
                 @Override
                 public void run() {
                     new Auto(device.getUuid()).back();
+                    new WebSocketDeviceLog().push(device.getUuid(),"返回操作");
                 }
             }).start();
         });
@@ -87,6 +90,7 @@ public class ConventionServiceImpl implements ConventionService {
 //                    list.add("com.android.dialer");
                     list.forEach(l->{
                         new Auto(device.getUuid()).kill(l);
+                        new WebSocketDeviceLog().push(device.getUuid(),"清空进程: "+l);
                     });
                 }
             }).start();
@@ -104,9 +108,11 @@ public class ConventionServiceImpl implements ConventionService {
                     switch (controlEnum){
                         case LOCK:
                             new Auto(device.getUuid()).lock();
+                            new WebSocketDeviceLog().push(device.getUuid(),"锁屏幕");
                             break;
                         case UNLOCK:
                             new Auto(device.getUuid()).unLock();
+                            new WebSocketDeviceLog().push(device.getUuid(),"解锁");
                     }
                 }
             }).start();
@@ -124,11 +130,14 @@ public class ConventionServiceImpl implements ConventionService {
                     switch (controlEnum){
                         case VOLUMEUP:
                             new Auto(device.getUuid()).volumeUp();
+                            new WebSocketDeviceLog().push(device.getUuid(),"音量加");
                             break;
                         case VOLUMEDOWN:
                             new Auto(device.getUuid()).volumeDown();
+                            new WebSocketDeviceLog().push(device.getUuid(),"音量减");
                         case MUTE:
                             new Auto(device.getUuid()).volumeMute();
+                            new WebSocketDeviceLog().push(device.getUuid(),"静音");
                     }
                 }
             }).start();
@@ -144,6 +153,7 @@ public class ConventionServiceImpl implements ConventionService {
                 @Override
                 public void run() {
                     new Auto(device.getUuid()).reboot();
+                    new WebSocketDeviceLog().push(device.getUuid(),"设备重启...设备断开");
                 }
             }).start();
         });
@@ -158,6 +168,7 @@ public class ConventionServiceImpl implements ConventionService {
                 @Override
                 public void run() {
                     new Auto(device.getUuid()).switchKeyboardforSystem(keyboardEnum);
+                    new WebSocketDeviceLog().push(device.getUuid(),"切换键盘");
                 }
             }).start();
         });
@@ -176,7 +187,9 @@ public class ConventionServiceImpl implements ConventionService {
                 new Thread (new Runnable () {
                     @Override
                     public void run() {
+                        new WebSocketDeviceLog().push(device.getUuid(),"安装软件请稍后...");
                         new Auto(device.getUuid()).install(filePath);
+                        new WebSocketDeviceLog().push(device.getUuid(),"安装成功");
                     }
                 }).start ();
             });
@@ -196,6 +209,7 @@ public class ConventionServiceImpl implements ConventionService {
                 new Thread (new Runnable () {
                     @Override
                     public void run() {
+                        new WebSocketDeviceLog().push(device.getUuid(),"导入视频");
                         new Auto(device.getUuid()).rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
                         new Auto(device.getUuid()).mkdir(DeviceDirEnum.VIDEO.getStartInfo());
                         new Auto(device.getUuid()).pushFile(filePath, DeviceDirEnum.VIDEO.getStartInfo());
@@ -222,6 +236,7 @@ public class ConventionServiceImpl implements ConventionService {
                 new Thread (new Runnable () {
                     @Override
                     public void run() {
+                        new WebSocketDeviceLog().push(device.getUuid(),"导入图片");
                         new Auto(device.getUuid()).rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
                         new Auto(device.getUuid()).pushFile(filePath, DeviceDirEnum.IMAGE.getStartInfo());
                         new Auto(device.getUuid()).refreshPhotoAlbum();
@@ -244,6 +259,7 @@ public class ConventionServiceImpl implements ConventionService {
                 new Thread (new Runnable () {
                     @Override
                     public void run() {
+                        new WebSocketDeviceLog().push(device.getUuid(),"导入助手");
                         new Auto(device.getUuid()).mkdir(DeviceDirEnum.JAR_UI.getStartInfo());
                         new Auto(device.getUuid()).pushFile(filePath, DeviceDirEnum.JAR_HELPER.getStartInfo() + "LvmamaXmlKit.jar");
                     }
