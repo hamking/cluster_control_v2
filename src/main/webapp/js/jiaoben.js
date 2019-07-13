@@ -527,7 +527,7 @@ $(function () {
         $(".kong-she").removeClass("qie-se");
         $(".kong-she").addClass("qie-hui");
         $(".group-cont").hide();
-        scope = "-2";
+        scope = "-1";
     });
 
     $(this).delegate('.kong-she','click',function () {
@@ -591,9 +591,6 @@ $(function () {
     };
     this.creatDom = function(){
         this.seleObj = $('#select-group');
-        // $(this).delegate('.dang-she qie-se','click',function(){
-        //     scope = "-1";
-        // });
     };
 
     this.createEvent = function(){

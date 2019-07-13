@@ -5,7 +5,7 @@ $(function(){
     var ip = "";
     var port = "";
 
-    this.getPhone = function(){
+    function getPhone(){
         $.ajax({
             url:'/device/getDeviceDetails',
             type:'get',
@@ -245,11 +245,11 @@ $(function(){
                                 state_name = "已上线";
                                 yuan_type = "yuan";
                             }
-                            html += "<li class="+class_type+ " list-use"+" data-id="+result[i].uuid+" data-xing="+result[i].id+" id='clas_'" + result[i].uuid + ">\n" +
-                                "                    <span class='left-nick' id='nick_'"+result[i].uuid+">"+result[i].nickname+"</span>\n" +
-                                "                    <span class='left-group' id='group_'"+result[i].uuid+">"+result[i].groupId+"</span>\n" +
-                                "                    <span id='state_'"+result[i].uuid+">"+state_name+"</span>\n" +
-                                "                    <span class='left-she' id='she_'"+result[i].uuid+">"+result[i].id+"</span>\n" +
+                            html += "<li class="+class_type+ " list-use"+" data-id="+result[i].uuid+" data-xing="+result[i].id+" id=clas_" + result[i].uuid + ">\n" +
+                                "                    <span class='left-nick' id=nick_"+result[i].uuid+">"+result[i].nickname+"</span>\n" +
+                                "                    <span class='left-group' id=group_"+result[i].uuid+">"+result[i].groupId+"</span>\n" +
+                                "                    <span id=state_"+result[i].uuid+">"+state_name+"</span>\n" +
+                                "                    <span class='left-she' id=she_"+result[i].uuid+">"+result[i].id+"</span>\n" +
                                 "                </li>";
 
                             html_list += "<div class='mobile clearfix' data-id="+result[i].uuid+" data-xing="+result[i].id+">\n" +
@@ -258,13 +258,13 @@ $(function(){
                                 "                </div>\n" +
                                 "                <div class='she-name' style='margin: 10px;'>\n" +
                                 "                    <span class='white'>设备名称</span>\n" +
-                                "                    <span class='white she-nick' id='anick_'"+result[i].uuid+">"+result[i].nickname+"</span>\n" +
+                                "                    <span class='white she-nick' id=anick_"+result[i].uuid+">"+result[i].nickname+"</span>\n" +
                                 "                </div>\n" +
                                 "                <div class='group-all' style='margin: 10px;'>\n" +
                                 "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
-                                "                    <span class='white she-group' id='agroup_'"+result[i].uuid+">"+result[i].groupId+"</span>\n" +
+                                "                    <span class='white she-group' id=agroup_"+result[i].uuid+">"+result[i].groupId+"</span>\n" +
                                 "                </div>\n" +
-                                "                <div class="+yuan_type+" id='ashe_'"+result[i].uuid+"></div>\n" +
+                                "                <div class="+yuan_type+" id=ashe_"+result[i].uuid+"></div>\n" +
                                 "            </div>";
 
                             socket_add(result[i].uuid);
@@ -434,34 +434,26 @@ $(function(){
             console.log("打印信息: " + evt.data);
             var result = JSON.parse(evt.data);
             if (she_arr.indexOf(result.uuid) == -1) {
-                var xu_cnt = $("#xu-cnt").text();
-                var zai_cnt = $("#zai-cnt").text();
-                var li_cnt = $("#li-cnt").text();
+                getPhone();
                 if (result.state == 0) {
                     class_type = "hui";
                     state_name = "未上线";
                     yuan_type = "yuanhui";
-                    $("#xu-cnt").text(xu_cnt + 1);
-                    $("#li-cnt").text(li_cnt + 1);
                 } else if (result.state == 2) {
                     class_type = "hui";
                     state_name = "未知";
                     yuan_type = "yuanhui";
-                    $("#xu-cnt").text(xu_cnt + 1);
-                    $("#li-cnt").text(li_cnt + 1);
                 } else {
                     class_type = "green";
                     state_name = "已上线";
                     yuan_type = "yuan";
-                    $("#xu-cnt").text(xu_cnt+1);
-                    $("#zai-cnt").text(zai_cnt+1);
                 }
 
-                var html = "<li class=" + class_type + " list-use" + " data-id=" + result.uuid + " data-xing=" + result.id + " id='clas_'" + result.uuid + ">\n" +
-                    "                    <span class='left-nick' id='nick_'" + result.uuid + ">" + result.nickname + "</span>\n" +
-                    "                    <span class='left-group' id='group_'" + result.uuid + ">" + result.groupId + "</span>\n" +
-                    "                    <span id='state_'" + result.uuid + ">" + state_name + "</span>\n" +
-                    "                    <span class='left-she' id='she_'" + result.uuid + ">" + result.id + "</span>\n" +
+                var html = "<li class=" + class_type + " list-use" + " data-id=" + result.uuid + " data-xing=" + result.id + " id=clas_" + result.uuid + ">\n" +
+                    "                    <span class='left-nick' id=nick_" + result.uuid + ">" + result.nickname + "</span>\n" +
+                    "                    <span class='left-group' id=group_" + result.uuid + ">" + result.groupId + "</span>\n" +
+                    "                    <span id=state_" + result.uuid + ">" + state_name + "</span>\n" +
+                    "                    <span class='left-she' id=she_" + result.uuid + ">" + result.id + "</span>\n" +
                     "                </li>";
 
                 var html_list = "<div class='mobile clearfix' data-id=" + result.uuid + " data-xing=" + result.id + ">\n" +
@@ -470,19 +462,20 @@ $(function(){
                     "                </div>\n" +
                     "                <div class='she-name' style='margin: 10px;'>\n" +
                     "                    <span class='white'>设备名称</span>\n" +
-                    "                    <span class='white she-nick' id='anick_'" + result.uuid + ">" + result.nickname + "</span>\n" +
+                    "                    <span class='white she-nick' id=anick_" + result.uuid + ">" + result.nickname + "</span>\n" +
                     "                </div>\n" +
                     "                <div class='group-all' style='margin: 10px;'>\n" +
                     "                    <span class='white'>组&nbsp;&nbsp;&nbsp;&nbsp;名</span>\n" +
-                    "                    <span class='white she-group' id='agroup_'" + result.uuid + ">" + result.groupId + "</span>\n" +
+                    "                    <span class='white she-group' id=agroup_" + result.uuid + ">" + result.groupId + "</span>\n" +
                     "                </div>\n" +
-                    "                <div class=" + yuan_type + " id='ashe_'" + result.uuid + "></div>\n" +
+                    "                <div class=" + yuan_type + " id=ashe_" + result.uuid + "></div>\n" +
                     "            </div>";
 
                 $(".she-bei").append(html);
                 $(".content-box").append(html_list);
-                socket_add(result[i].uuid);
-                socket_log(result[i].uuid);
+                socket_add(result.uuid);
+                socket_log(result.uuid);
+                she_arr.push(result.uuid);
             }
         };
     };
@@ -494,6 +487,7 @@ $(function(){
                 return;
             }
             console.log( "打印信息: " + evt.data);
+            getPhone();
             var result = JSON.parse(evt.data);
             var zai_cnt = $("#zai-cnt").text();
             var li_cnt = $("#li-cnt").text();
@@ -504,8 +498,6 @@ $(function(){
                 $("#ashe_"+result.uuid).removeClass();
                 $("#ashe_"+result.uuid).addClass("yuanhui");
                 $("#state_"+result.uuid).text("未上线");
-                $("#li-cnt").text(li_cnt+1);
-                $("#zai-cnt").text(zai_cnt-1);
             }else if(result.state == 2){
                 $("#clas_"+result.uuid).removeClass();
                 $("#clas_"+result.uuid).addClass("hui");
@@ -513,8 +505,6 @@ $(function(){
                 $("#ashe_"+result.uuid).removeClass();
                 $("#ashe_"+result.uuid).addClass("yuanhui");
                 $("#state_"+result.uuid).text("未知");
-                $("#zai-cnt").text(zai_cnt-1);
-                $("#li-cnt").text(li_cnt+1);
             }else{
                 $("#clas_"+result.uuid).removeClass();
                 $("#clas_"+result.uuid).addClass("green");
@@ -522,8 +512,6 @@ $(function(){
                 $("#ashe_"+result.uuid).removeClass();
                 $("#ashe_"+result.uuid).addClass("yuan");
                 $("#state_"+result.uuid).text("已上线");
-                $("#li-cnt").text(li_cnt-1);
-                $("#zai-cnt").text(zai_cnt+1);
             }
 
             $("#nick_"+result.uuid).text(result.nickname);
@@ -542,14 +530,10 @@ $(function(){
                 return;
             }
             console.log( "打印信息: " + evt.data);
-            console.log($(".mobile clearfix").data());
-            console.log($(".mobile clearfix").data("id"));
-            console.log($(".mobile clearfix").data("data-id"));
+
             var result = JSON.parse(evt.data);
-            if ($(".mobile clearfix").data("id") == result.uuid) {
-                var html = "<p>"+result.msg+"</p>";
-                $(".ri-zhi").append(html);
-            }
+            var html = "<p>"+result.msg+"</p>";
+            $("#anick_"+result.uuid).parent().prev().append(html);
         };
     };
 
@@ -575,7 +559,7 @@ $(function(){
 
     this.init = function(){
         this.getIp();
-        this.getPhone();
+        getPhone();
     };
 
     this.init();
