@@ -188,6 +188,7 @@ public class ConventionServiceImpl implements ConventionService {
                     @Override
                     public void run() {
                         new WebSocketDeviceLog().push(device.getUuid(),"安装软件请稍后...");
+                        new WebSocketDeviceLog().push(device.getUuid(),"注意手机安装提示...");
                         new Auto(device.getUuid()).install(filePath);
                         new WebSocketDeviceLog().push(device.getUuid(),"安装成功");
                     }
