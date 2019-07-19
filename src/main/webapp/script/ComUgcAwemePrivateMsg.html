@@ -25,96 +25,99 @@
     </div>
 </div>
 <script>
-    $(this).delegate('.script-zi','click',function(){
-        var suid = $(this).attr("data-id");
-        $.ajax({
-            url:'/script/getScript?suid='+suid,
-            type:'get',
-            dataType:'json',
-            success:function(datas){
-                if(datas.code == 200){
-                    $(".do-zhi").attr("data-id",datas.data.suid);
-                    $(".do-ting").attr("data-id",datas.data.suid);
 
-                    if(suid == "ComUgcAwemePrivateMsg"){
-                        $("#guan_"+datas.data.directMessagesType).click();
-                        $("#xin-hua").val(datas.data.directMessages);
-                        $('#si-mg').attr('src',datas.data.directMessagesImage);
-                        $(".dou-xin").show();
-                        $("#test").show();
-                        $("#log_window").show();
-                    }
-                }else{
-                    alert("服务器异常");
-                }
-            }
-        })
-    });
-
-    $(this).delegate('.do-zhi','click',function(){
-        var suid = $(this).attr("data-id");
-        if(suid == "ComUgcAwemePrivateMsg"){
-            var watchNum = 0;
-            var numStart = 0
-            var directMessagesNum = 0;
-            var isDirectMessagesOnAuthor = $('.guan-zi input[type="radio"]:checked').val();
-            var isDirectMessages = 0;
-            var directMessages = $("#xin-hua").val();
-            var directMessagesImage = $('#si-mg').attr('src');
-            var isFocus = 0;
-            var isFocusAuthor = 0;
-            var focusNum = 0;
-            var watchTime = 0;
-            var isComment = 0;
-            var isGiveLike = 0;
-            var commentStr = "";
-            var feedingTime = 0;
-            var watchTimeInterval = 0;
-            var directMessagesType = 0;
-            var data = {
-                "suid":suid,
-                "isFocus":isFocus,
-                "isFocusAuthor":isFocusAuthor,
-                "watchNum":watchNum,
-                "numStart":numStart,
-                "focusNum":focusNum,
-                "watchTime":watchTime,
-                "isComment":isComment,
-                "isGiveLike":isGiveLike,
-                "commentStr":commentStr,
-                "directMessages":directMessages,
-                "feedingTime":feedingTime,
-                "watchTimeMan":0,
-                "watchTimeMin":0,
-                "isDirectMessages":isDirectMessages,
-                "watchTimeInterval":watchTimeInterval,
-                "directMessagesNum":directMessagesNum,
-                "directMessagesImage":directMessagesImage,
-                "directMessagesType":directMessagesType,
-                "isDirectMessagesOnAuthor":isDirectMessagesOnAuthor,
-                "isOnlyDirectMessages":0,
-                "individuationString":"",
-                "individuationInt":0,
-                "individuationVar1":0,
-                "individuationVar2":0
-            };
+    $(function () {
+        $(this).delegate('.script-zi','click',function(){
+            var suid = $(this).attr("data-id");
             $.ajax({
-                url:'/script/saveScriptSetting',
-                type:'post',
-                data:data,
+                url:'/script/getScript?suid='+suid,
+                type:'get',
                 dataType:'json',
                 success:function(datas){
                     if(datas.code == 200){
-                        jianben.doExecute(suid);
+                        $(".do-zhi").attr("data-id",datas.data.suid);
+                        $(".do-ting").attr("data-id",datas.data.suid);
+
+                        if(suid == "ComUgcAwemePrivateMsg"){
+                            $("#guan_"+datas.data.directMessagesType).click();
+                            $("#xin-hua").val(datas.data.directMessages);
+                            $('#si-mg').attr('src',datas.data.directMessagesImage);
+                            $(".dou-xin").show();
+                            $("#test").show();
+                            $("#log_window").show();
+                        }
                     }else{
-                        alert("执行失败!");
+                        alert("服务器异常");
                     }
-                },error:function () {
-                    alert("服务器异常");
                 }
             })
-        }
-    });
+        });
+
+        $(this).delegate('.do-zhi','click',function(){
+            var suid = $(this).attr("data-id");
+            if(suid == "ComUgcAwemePrivateMsg"){
+                var watchNum = 0;
+                var numStart = 0
+                var directMessagesNum = 0;
+                var isDirectMessagesOnAuthor = $('.guan-zi input[type="radio"]:checked').val();
+                var isDirectMessages = 0;
+                var directMessages = $("#xin-hua").val();
+                var directMessagesImage = $('#si-mg').attr('src');
+                var isFocus = 0;
+                var isFocusAuthor = 0;
+                var focusNum = 0;
+                var watchTime = 0;
+                var isComment = 0;
+                var isGiveLike = 0;
+                var commentStr = "";
+                var feedingTime = 0;
+                var watchTimeInterval = 0;
+                var directMessagesType = 0;
+                var data = {
+                    "suid":suid,
+                    "isFocus":isFocus,
+                    "isFocusAuthor":isFocusAuthor,
+                    "watchNum":watchNum,
+                    "numStart":numStart,
+                    "focusNum":focusNum,
+                    "watchTime":watchTime,
+                    "isComment":isComment,
+                    "isGiveLike":isGiveLike,
+                    "commentStr":commentStr,
+                    "directMessages":directMessages,
+                    "feedingTime":feedingTime,
+                    "watchTimeMan":0,
+                    "watchTimeMin":0,
+                    "isDirectMessages":isDirectMessages,
+                    "watchTimeInterval":watchTimeInterval,
+                    "directMessagesNum":directMessagesNum,
+                    "directMessagesImage":directMessagesImage,
+                    "directMessagesType":directMessagesType,
+                    "isDirectMessagesOnAuthor":isDirectMessagesOnAuthor,
+                    "isOnlyDirectMessages":0,
+                    "individuationString":"",
+                    "individuationInt":0,
+                    "individuationVar1":0,
+                    "individuationVar2":0
+                };
+                $.ajax({
+                    url:'/script/saveScriptSetting',
+                    type:'post',
+                    data:data,
+                    dataType:'json',
+                    success:function(datas){
+                        if(datas.code == 200){
+                            jianben.doExecute(suid);
+                        }else{
+                            alert("执行失败!");
+                        }
+                    },error:function () {
+                        alert("服务器异常");
+                    }
+                })
+            }
+        });
+    })
 
 </script>
 </body>
