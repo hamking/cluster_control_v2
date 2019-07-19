@@ -1,26 +1,26 @@
 <html lang="en">
 <body>
-<div class="kuai-find-user show-type">
-    <div class="small-title">快手_查找模糊匹配用户：</div>
+<div class="kuai-find-label show-type">
+    <div class="small-title">快手_查找模糊匹配标签：</div>
     <div class="info">
-        <input type="checkbox" value="1" name="zan" id="guanzhu_user">
-        <label for="guanzhu_user">关注</label>
-        <input type="checkbox" value="1" name="zan" id="sixin_user">
-        <label for="sixin_user">私信</label>
+        <input type="checkbox" value="1" name="zan" id="guanzhu_label">
+        <label for="guanzhu_label">关注</label>
+        <input type="checkbox" value="1" name="zan" id="sixin_label">
+        <label for="sixin_label">私信</label>
     </div>
     <div class="info">
         <span>操作多少个：</span>
-        <input type="text" name="spaceCnt" id="operationNum_user" class="spaceCnt" data-type="space_cnt" />
+        <input type="text" name="spaceCnt" id="operationNum_label" class="spaceCnt" data-type="space_cnt" />
     </div>
     <div class="info">
         <span>搜索字段：</span>
-        <textarea type="text" name="spaceCnt" id="searchStr_user" class="spaceCnt" data-type="space_cnt" />
+        <textarea type="text" name="spaceCnt" id="searchStr_label" class="spaceCnt" data-type="space_cnt" />
         </textarea>
     </div>
 </div>
 <script>
     $(function(){
-        var scriptName = "ComSmileGifmakerFindUser";
+        var scriptName = "ComSmileGifmakerFindLabel";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
             $.ajax({
@@ -35,17 +35,17 @@
                         if(suid == scriptName){
 
                             if(datas.data.isComment == 1){
-                                $("#guanzhu_user").attr("checked",true);
+                                $("#guanzhu_label").attr("checked",true);
                             }
                             if(datas.data.isDirectMessages == 1){
-                                $("#sixin_user").attr("checked",true);
+                                $("#sixin_label").attr("checked",true);
                             }
-                            $("#operationNum_user").val(datas.data.watchNum);
-                            $("#searchStr_user").val(datas.data.commentStr);
+                            $("#operationNum_label").val(datas.data.watchNum);
+                            $("#searchStr_label").val(datas.data.commentStr);
 
                             $("#test").show();
                             $("#log_window").show();
-                            $(".kuai-find-user").show();
+                            $(".kuai-find-label").show();
                         }
                     }else{
                         alert("服务器异常");
@@ -58,20 +58,20 @@
             var suid = $(this).attr("data-id");
             if(suid == scriptName){
 
-                if($("#guanzhu_user").is(':checked') == true){
+                if($("#guanzhu_label").is(':checked') == true){
                     var isComment = 1;
                 }else{
                     var isComment = 0;
                 }
 
-                if($("#sixin_user").is(':checked') == true){
+                if($("#sixin_label").is(':checked') == true){
                     var isSixin = 1;
                 }else{
                     var isSixin = 0;
                 }
 
-                var watchNum = $("#operationNum_user").val();
-                var commentStr = $("#searchStr_user").val();
+                var watchNum = $("#operationNum_label").val();
+                var commentStr = $("#searchStr_label").val();
 
                 var data = {
                     "suid":suid,

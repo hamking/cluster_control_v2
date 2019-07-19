@@ -27,6 +27,7 @@
 <script>
 
     $(function () {
+        var scriptName = "ComUgcAwemePrivateMsg";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
             $.ajax({
@@ -38,7 +39,7 @@
                         $(".do-zhi").attr("data-id",datas.data.suid);
                         $(".do-ting").attr("data-id",datas.data.suid);
 
-                        if(suid == "ComUgcAwemePrivateMsg"){
+                        if(suid == scriptName){
                             $("#guan_"+datas.data.directMessagesType).click();
                             $("#xin-hua").val(datas.data.directMessages);
                             $('#si-mg').attr('src',datas.data.directMessagesImage);
@@ -55,7 +56,7 @@
 
         $(this).delegate('.do-zhi','click',function(){
             var suid = $(this).attr("data-id");
-            if(suid == "ComUgcAwemePrivateMsg"){
+            if(suid == scriptName){
                 var watchNum = 0;
                 var numStart = 0
                 var directMessagesNum = 0;

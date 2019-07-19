@@ -20,13 +20,11 @@ public class ComSmileGifmakerFindWorks {
     private String uuid;
     private Auto auto;
     private Script script;
-    private Device device;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
     public void script(String uuid, Script script, Device device) {
         this.uuid = uuid;
         this.script = script;
-        this.device = device;
         auto = new Auto(uuid,script.getPackageName());
 
 
@@ -55,8 +53,8 @@ public class ComSmileGifmakerFindWorks {
      * 正常浏览内容操作
      */
     private void start() {
-        String additional = device.getIndividuationString();
-        int index = device.getIndividuationInt();
+        String additional = script.getCommentStr();
+        int index = script.getWatchNum();
         auto.wait(2000);
         try {
             auto.findByXpatch("//android.widget.EditText", true).sendKeys(additional);
@@ -81,11 +79,11 @@ public class ComSmileGifmakerFindWorks {
                 }
                 for (int i1 = 2; i1 < bounds.size () && isFor; i1++) {
 
-                    if (device.getIndividuationVar1() == 1){
+                    if (script.getIsComment() == 1){
                         try{
                             bounds.get(i1).click();
                         }catch (IOException | InterruptedException e) { }
-                    }else if (device.getIndividuationVar2() == 1){
+                    }else if (script.getIsDirectMessages() == 1){
                         try{
                             auto.findByText("关注",true).click();
                             auto.findByXpatch("//*[@content-desc='头像']",true).click();
@@ -111,7 +109,7 @@ public class ComSmileGifmakerFindWorks {
                             } catch (DocumentException | IOException | InterruptedException e) { }
 
                         }catch (DocumentException | IOException | InterruptedException e) { }
-                    }else if (device.getIndividuationVar1() == 1 && device.getIndividuationVar2() == 1) {
+                    }else if (script.getIsComment() == 1 && script.getIsDirectMessages() == 1) {
                         try{
                             bounds.get(i1).click();
                         }catch (IOException | InterruptedException e) { }

@@ -42,6 +42,7 @@
 </div>
 <script>
     $(function () {
+        var scriptName = "ComUgcAwemeRaises";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
             $.ajax({
@@ -53,7 +54,7 @@
                         $(".do-zhi").attr("data-id",datas.data.suid);
                         $(".do-ting").attr("data-id",datas.data.suid);
 
-                        if(suid == "ComUgcAwemeRaises"){
+                        if(suid == scriptName){
                             if(datas.data.isGiveLike == 1){
                                 $("#dou-zan").attr("checked",true);
                             }
@@ -85,7 +86,7 @@
 
         $(this).delegate('.do-zhi','click',function(){
             var suid = $(this).attr("data-id");
-            if(suid == "ComUgcAwemeRaises"){
+            if(suid == scriptName){
                 var directMessagesType = 0;
                 if($("#dou-zan").is(':checked') == true){
                     var isGiveLike = 1;

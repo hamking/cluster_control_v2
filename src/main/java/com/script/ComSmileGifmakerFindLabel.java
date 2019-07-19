@@ -20,13 +20,11 @@ public class ComSmileGifmakerFindLabel {
     private String uuid;
     private Auto auto;
     private Script script;
-    private Device device;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
     public void script(String uuid, Script script, Device device) {
         this.uuid = uuid;
         this.script = script;
-        this.device = device;
         auto = new Auto(uuid,script.getPackageName());
 
         log.push(uuid, "快手_查找模糊匹配标签");
@@ -61,8 +59,8 @@ public class ComSmileGifmakerFindLabel {
         }
 
 
-        String additional = device.getIndividuationString();
-        int index = device.getIndividuationInt();
+        String additional = script.getCommentStr();
+        int index = script.getWatchNum();
         auto.wait(2000);
         try {
             auto.findByXpatch("//android.widget.EditText", true).sendKeys(additional);
@@ -96,9 +94,9 @@ public class ComSmileGifmakerFindLabel {
                     auto.wait(2000);
                     try{
 
-                        if (device.getIndividuationVar1() == 1){
+                        if (script.getIsComment() == 1){
                             auto.findByText("关注",true).click();
-                        }else if (device.getIndividuationVar2() == 1){
+                        }else if (script.getIsDirectMessages() == 1){
                             auto.findByXpatch("//*[@content-desc='头像']",true).click();
                             auto.wait(1500);
                             //点击消息图标
@@ -120,7 +118,7 @@ public class ComSmileGifmakerFindLabel {
                             try {
                                 auto.findByText("发送",true).click();
                             } catch (DocumentException | IOException | InterruptedException e) { }
-                        }else if (device.getIndividuationVar1() == 1 && device.getIndividuationVar2() == 1){
+                        }else if (script.getIsComment() == 1 && script.getIsDirectMessages() == 1){
                             auto.findByText("关注",true).click();
                             auto.findByXpatch("//*[@content-desc='头像']",true).click();
                             auto.wait(2500);

@@ -33,6 +33,7 @@
 
 <script>
     $(function(){
+        var scriptName = "ComSmileGifmakerPrivateMsg";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
             $.ajax({
@@ -44,7 +45,7 @@
                         $(".do-zhi").attr("data-id",datas.data.suid);
                         $(".do-ting").attr("data-id",datas.data.suid);
 
-                        if(suid == "ComSmileGifmakerPrivateMsg"){
+                        if(suid == scriptName){
                             $("#sizong").val(datas.data.watchNum);
                             $("#xindien").val(datas.data.numStart);
                             $("#xinmeitiao").val(datas.data.directMessagesNum);
@@ -64,7 +65,7 @@
 
         $(this).delegate('.do-zhi','click',function(){
             var suid = $(this).attr("data-id");
-            if(suid == "ComSmileGifmakerPrivateMsg"){
+            if(suid == scriptName){
                 var watchNum = $("#sizong").val();
                 var numStart = $("#xindien").val();
                 var directMessagesNum = $("#xinmeitiao").val();
