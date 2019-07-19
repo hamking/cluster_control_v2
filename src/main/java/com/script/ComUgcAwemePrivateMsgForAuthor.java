@@ -17,25 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 抖音_私信抖音号作者粉丝
+ * 抖音_关注抖音号作者粉丝
  */
 public class ComUgcAwemePrivateMsgForAuthor {
 
     private String uuid;
     private Auto auto;
     private Script script;
-    private Device device;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
     public void script(String uuid, Script script, Device device) {
         this.uuid = uuid;
         this.script = script;
-        this.device = device;
         auto = new Auto(uuid,script.getPackageName());
         auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
 
 
-        log.push(uuid,"抖音_私信抖音号作者粉丝");
+        log.push(uuid,"抖音_关注抖音号作者粉丝");
         auto.wait(15000);
         try {
             ScriptUtils.onLogin("点击青少年模式");
@@ -82,7 +80,7 @@ public class ComUgcAwemePrivateMsgForAuthor {
      */
     private void start() {
 
-        String str = device.getIndividuationString();
+        String str = script.getCommentStr();
 
         //点击首页
         try {
@@ -139,7 +137,7 @@ public class ComUgcAwemePrivateMsgForAuthor {
 
         auto.wait(3000);
 
-        int index = device.getIndividuationInt();
+        int index = script.getWatchNum();
         for (int i = 0; index > 0; i++) {
             List<Bound> bounds = new ArrayList<Bound> ();
             //开始关注粉丝

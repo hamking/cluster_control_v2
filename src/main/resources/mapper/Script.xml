@@ -28,6 +28,10 @@
      WHERE suid=#{suid}
     </delete>
 
+    <delete id="deleteAllScript">
+      DELETE FROM script
+    </delete>
+
     <update id="updateScript">
      UPDATE script SET
        isGiveLike=#{isGiveLike},

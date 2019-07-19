@@ -21,13 +21,11 @@ public class ComUgcAwemeFindUserNumber {
     private String uuid;
     private Auto auto;
     private Script script;
-    private Device device;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
     public void script(String uuid, Script script, Device device) {
         this.uuid = uuid;
         this.script = script;
-        this.device = device;
         auto = new Auto(uuid,script.getPackageName());
         auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
 
@@ -80,7 +78,7 @@ public class ComUgcAwemeFindUserNumber {
     private void start() {
 
         log.push(uuid,"开始关注指定作者");
-        String str = device.getIndividuationString();
+        String str = script.getCommentStr();
 
         //点击首页
         try {

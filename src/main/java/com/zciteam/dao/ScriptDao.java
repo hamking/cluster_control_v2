@@ -33,6 +33,8 @@ public interface ScriptDao {
      * @return int
      */
     int deleteScript(String suid);
+    int deleteAllScript();
+
 
     /**
      * 更新脚本信息

@@ -41,6 +41,9 @@ public class ScriptInit {
                 "comssandroidugcaweme");
 
 
+        //临时处理清空脚本表
+        scriptDao.deleteAllScript();
+
         //快手
         scriptDao.intertScript(
                 "快手_养号",
@@ -85,15 +88,20 @@ public class ScriptInit {
                 "com.ss.android.ugc.aweme/.splash.SplashActivity",
                 ComUgcAwemePrivateMsg.class.getSimpleName());
         scriptDao.intertScript(
-                "抖音_指定抖音号",
+                "抖音_关注指定抖音号",
                 "comssandroidugcaweme",
                 "com.ss.android.ugc.aweme/.splash.SplashActivity",
                 ComUgcAwemeFindUserNumber.class.getSimpleName());
         scriptDao.intertScript(
-                "抖音_私信抖音号作者粉丝",
+                "抖音_关注抖音号作者粉丝",
                 "comssandroidugcaweme",
                 "com.ss.android.ugc.aweme/.splash.SplashActivity",
                 ComUgcAwemePrivateMsgForAuthor.class.getSimpleName());
+        scriptDao.intertScript(
+                "抖音_关注直播评论人",
+                "comssandroidugcaweme",
+                "com.ss.android.ugc.aweme/.splash.SplashActivity",
+                ScriptComUgcAwemeLive.class.getSimpleName());
         scriptDao.intertScript(
                 "抖音_发视频",
                 "comssandroidugcaweme",

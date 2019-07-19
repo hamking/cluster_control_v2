@@ -1,0 +1,99 @@
+<html lang="en">
+<body>
+<div class="dao-live-focus show-type">
+    <div class="small-title">抖音_关注直播评论人：</div>
+    <div class="info">
+        <span>一共看几个直播：</span>
+        <input type="text" name="spaceCnt" id="dao_live_watchnum" class="spaceCnt" data-type="space_cnt" />
+    </div>
+    <div class="info">
+        <span>每个直播关注几个人：</span>
+        <textarea type="text" name="spaceCnt" id="dao_live_focus" class="spaceCnt" data-type="space_cnt" />
+        </textarea>
+    </div>
+</div>
+<script>
+    $(function(){
+        var scriptName = "ScriptComUgcAwemeLive";
+        $(this).delegate('.script-zi','click',function(){
+            var suid = $(this).attr("data-id");
+            $.ajax({
+                url:'/script/getScript?suid='+suid,
+                type:'get',
+                dataType:'json',
+                success:function(datas){
+                    if(datas.code == 200){
+                        $(".do-zhi").attr("data-id",datas.data.suid);
+                        $(".do-ting").attr("data-id",datas.data.suid);
+
+                        if(suid == scriptName){
+
+                            $("#operationNum_label").val(datas.data.watchNum);
+                            $("#searchStr_label").val(datas.data.commentStr);
+
+                            $("#test").show();
+                            $("#log_window").show();
+                            $(".dao-live-focus").show();
+                        }
+                    }else{
+                        alert("服务器异常");
+                    }
+                }
+            })
+        });
+
+        $(this).delegate('.do-zhi','click',function(){
+            var suid = $(this).attr("data-id");
+            if(suid == scriptName){
+
+                var watchNum = $("#dao_live_watchnum").val();
+                var focusNum = $("#dao_live_focus").val();
+
+                var data = {
+                    "suid":suid,
+                    "isFocus":0,
+                    "isFocusAuthor":0,
+                    "watchNum":watchNum,
+                    "numStart":0,
+                    "focusNum":focusNum,
+                    "watchTime":0,
+                    "isComment":0,
+                    "isGiveLike":0,
+                    "commentStr":"",
+                    "directMessages":"",
+                    "feedingTime":0,
+                    "watchTimeMan":0,
+                    "watchTimeMin":0,
+                    "isDirectMessages":0,
+                    "watchTimeInterval":0,
+                    "directMessagesNum":0,
+                    "directMessagesImage":"",
+                    "directMessagesType":0,
+                    "isDirectMessagesOnAuthor":0,
+                    "isOnlyDirectMessages":0,
+                    "individuationString":"",
+                    "individuationInt":0,
+                    "individuationVar1":0,
+                    "individuationVar2":0
+                };
+                $.ajax({
+                    url:'/script/saveScriptSetting',
+                    type:'post',
+                    data:data,
+                    dataType:'json',
+                    success:function(datas){
+                        if(datas.code == 200){
+                            jianben.doExecute(suid);
+                        }else{
+                            alert("执行失败!");
+                        }
+                    },error:function () {
+                        alert("服务器异常");
+                    }
+                })
+            }
+        });
+    })
+</script>
+</body>
+</html>
