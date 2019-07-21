@@ -31,6 +31,32 @@ public class ComUgcAwemeRaises {
 
 
         log.push(uuid,"抖音_养号");
+
+        String scriptMsg = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + "\n" +
+                "脚本执行详情:" + "\n" +
+                "点赞: " + (script.getIsGiveLike() == 1 ? "是":"否") + "\n" +
+                "评论: " + (script.getIsComment() == 1 ? "是":"否") + "\n"+
+                "关注评论者: " + (script.getIsFocus() == 1 ? "是":"否") + "\n"+
+                "每个视频关注总量: " + script.getFocusNum() + "\n"+
+                "关注作者: " + (script.getIsFocus() == 1 ? "是":"否") + "\n"+
+                "每个视频浏览时长: " + script.getWatchTime() + "毫秒" + "\n"+
+                "浏览视频间隔时长: " + script.getWatchTimeInterval() + "毫秒" + "\n"+
+                "观看总量: " + script.getWatchNum() + "个" + "\n"+
+                "从第n个视频观看: " + script.getNumStart() + "\n"+
+                "评论话术: " + script.getCommentStr() + "\n" +
+                ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        log.push(uuid,scriptMsg);
+
+        start();
+
+        log.push(uuid,"本次操作结束");
+    }
+
+    /**
+     * 正常浏览内容操作
+     */
+    private void start() {
+
         auto.wait(15000);
         try {
             log.push(uuid,"点击青少年模式");
@@ -69,13 +95,6 @@ public class ComUgcAwemeRaises {
         } catch (DocumentException | IOException | InterruptedException e) {
         }
 
-        start();
-    }
-
-    /**
-     * 正常浏览内容操作
-     */
-    private void start() {
         readArticle(script.getWatchNum());
     }
 

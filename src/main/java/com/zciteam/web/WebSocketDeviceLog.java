@@ -57,7 +57,8 @@ public class WebSocketDeviceLog extends TextWebSocketHandler {
                 "\"uuid\":\"" + uuid + "\"" +
                 ", \"msg\":\"" + msg + "\"" +
                 '}';
-        TextMessage message = new TextMessage(json);
+        String conversion = json.replace("\n","<br>");
+        TextMessage message = new TextMessage(conversion);
         try {
             WebSocketSession session = deviceLogMap.get(uuid);
             if (session != null && session.isOpen()) {
