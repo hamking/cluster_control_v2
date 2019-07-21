@@ -104,6 +104,9 @@ public class ScriptServiceImpl implements ScriptService {
     @Override
     public int run(String scope, String suid, String uuid) {
 
+        //执行前先结束当前设备正在运行的脚本
+        stop(scope,uuid);
+
         //获取设备 scope
         List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
 
