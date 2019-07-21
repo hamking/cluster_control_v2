@@ -429,7 +429,7 @@ $(function(){
             dataType:'json',
             success:function(datas){
                 if(datas.code == 200){
-                    alert("重命名成功！");
+                    alert("删除成功！");
                     $(".nick-show").remove();
                     window.location.reload();
                 }else{
