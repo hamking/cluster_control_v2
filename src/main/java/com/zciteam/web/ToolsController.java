@@ -73,4 +73,34 @@ public class ToolsController {
             return new Result(null, CodeEnum.CODE_400);
         }
     }
+
+    /**
+     * 设备关机
+     * @return Result
+     */
+    @RequestMapping(value = "/shutdown",method = RequestMethod.GET)
+    @ResponseBody
+    public Result shutdown(){
+        try{
+            toolsService.shutdown();
+            return new Result(null, CodeEnum.CODE_200);
+        }catch (RuntimeException e){
+            return new Result(null, CodeEnum.CODE_400);
+        }
+    }
+
+    /**
+     * 设备重启
+     * @return Result
+     */
+    @RequestMapping(value = "/reboot",method = RequestMethod.GET)
+    @ResponseBody
+    public Result reboot(){
+        try{
+            toolsService.reboot();
+            return new Result(null, CodeEnum.CODE_200);
+        }catch (RuntimeException e){
+            return new Result(null, CodeEnum.CODE_400);
+        }
+    }
 }

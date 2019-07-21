@@ -45,6 +45,10 @@ body{
     width: 380px;
 }
 
+.device-service{
+    width: 100px;
+}
+
 .chilun img{
     margin-left: 30px;
     width: 60px;

@@ -32,6 +32,11 @@ body{
     border-radius: 15px;
     height: 110px;
 }
+
+.device-service{
+    width: 100px;
+}
+
 .content-box-all{
     width: 1200px;
     border-radius: 15px;

@@ -10,6 +10,7 @@ import com.zciteam.web.WebSocketDeviceLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -47,5 +48,23 @@ public class ToolsServiceImpl implements ToolsService {
             }).start ();
         });
         return devices.size ();
+    }
+
+    @Override
+    public void shutdown() {
+        try {
+            Runtime.getRuntime().exec("shutdown -h now").waitFor();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace ();
+        }
+    }
+
+    @Override
+    public void reboot() {
+        try {
+            Runtime.getRuntime().exec("shutdown -r now").waitFor();
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace ();
+        }
     }
 }

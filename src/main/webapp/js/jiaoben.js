@@ -329,6 +329,36 @@ $(function () {
         scope = "-2";
     });
 
+    $(this).delegate(".reboot","click",function () {
+        $.ajax({
+            url:'/tools/reboot',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("重启服务器");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
+    $(this).delegate(".shutdown","click",function () {
+        $.ajax({
+            url:'/tools/shutdown',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("服务器关机");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
     function socket(id) {
         var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/"+id);
         ws.onmessage = function(evt) {

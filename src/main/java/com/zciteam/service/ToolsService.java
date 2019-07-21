@@ -9,4 +9,14 @@ public interface ToolsService {
      * @return int
      */
     int getInitPhone(String scope, String uuid);
+
+    /**
+     * 设备关机
+     */
+    void shutdown();
+
+    /**
+     * 设备重启
+     */
+    void reboot();
 }
