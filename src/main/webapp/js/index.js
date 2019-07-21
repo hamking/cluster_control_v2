@@ -209,6 +209,26 @@ $(function(){
         })
     });
 
+    $(this).delegate('.switch-keyboard','click',function () {
+        var data = {
+            'scope': "-2",
+            'uuid': "",
+            'keyboardEnum':1
+        };
+        $.ajax({
+            url:'/convention/switchKeyboard',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("切换为系统键盘");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
 
 
     function getDeviceList () {

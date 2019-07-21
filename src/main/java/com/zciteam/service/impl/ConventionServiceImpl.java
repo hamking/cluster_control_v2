@@ -168,7 +168,7 @@ public class ConventionServiceImpl implements ConventionService {
                 @Override
                 public void run() {
                     new Auto(device.getUuid()).switchKeyboardforSystem(keyboardEnum);
-                    new WebSocketDeviceLog().push(device.getUuid(),"切换键盘");
+                    new WebSocketDeviceLog().push(device.getUuid(),keyboardEnum.getStateInfo());
                 }
             }).start();
         });
