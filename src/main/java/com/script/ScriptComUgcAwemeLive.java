@@ -26,25 +26,57 @@ public class ScriptComUgcAwemeLive {
         auto = new Auto(uuid, script.getPackageName ());
 
         log.push(uuid,"抖音_关注直播评论人");
+
+        String scriptMsg = ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>" + "\n" +
+                "脚本执行详情:" + "\n" +
+                "一共观看几个直播: " + script.getWatchNum() + "\n" +
+                "每个直播关注几个人: " + script.getFocusNum() + "\n" +
+                ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>";
+        log.push(uuid,scriptMsg);
+
         start();
+
+        log.push(uuid,"本次脚本结束");
     }
 
     private void start(){
 
-        log.push(uuid,"点击青少年模式");
+        auto.wait(15000);
         try {
+            log.push(uuid,"点击青少年模式");
             auto.findByText("我知道了",true).click();
-        } catch (IOException | DocumentException | InterruptedException e) {
-            e.printStackTrace();
+            auto.wait(5000);
+        } catch (DocumentException | IOException | InterruptedException e) {
         }
-        auto.wait(5000);
+
         for (int i = 0; i < 4; i++) {
             try {
                 auto.findByText("允许",true).click();
                 auto.wait(3000);
-            } catch (IOException | InterruptedException | DocumentException e) {
-                e.printStackTrace ();
+            } catch (DocumentException | IOException | InterruptedException e) {
             }
+        }
+
+        try {
+            auto.findByText("继续播放", true).click();
+        } catch (DocumentException | IOException | InterruptedException e) {
+        }
+
+        //  用户隐私协议
+        try {
+            log.push(uuid,"检测用户权限");
+            auto.findByText("同意",true).click();
+            auto.wait(5000);
+            auto.back();
+        } catch (DocumentException | IOException | InterruptedException e) {
+        }
+
+        //版本检测
+        try {
+            log.push(uuid,"版本检测");
+            auto.findByText("以后再说",true).click();
+            auto.wait(5000);
+        } catch (DocumentException | IOException | InterruptedException e) {
         }
 
         //  点击直播广场
@@ -61,36 +93,34 @@ public class ScriptComUgcAwemeLive {
             try {
                 boundList.get(0).click();
                 for (int i = 0; i < script.getWatchNum(); i++) {
+                    auto.wait (8000);
                     for (int k = 0; k < script.getFocusNum (); k++) {
+                        auto.wait (1000);
+                        log.push(uuid,"开始关注第"+ (i+1) +"个视频, 第"+ (k+1) +"个用户");
                         //  点击用户
                         try {
                             List<Bound> bounds = auto.findsByXpatch ("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout", true);
-                            try {
-                                bounds.get(0).clickOffsetX(50);
-                            } catch (IOException e) {
-                                e.printStackTrace ();
-                            }
+
+                            bounds.get(bounds.size() - 1).clickOffsetX(50);
+
+                            log.push(uuid,"开始关注");
+                            //  点击关注
+                            auto.findByXpatch ("//android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1][@text='关注']", true).click ();
+                            auto.wait (1000);
+                            auto.back ();
                             auto.wait (2000);
                         } catch (DocumentException e) {
+                            if(auto.isFindNoteForText("/hierarchy/android.widget.FrameLayout","抖音号",true)){
+                                auto.back ();
+                            }
                             e.printStackTrace ();
                         }
-
-                        //  点击关注
-                        try {
-                            auto.findByText ("关注", true).click ();
-                            auto.wait (1000);
-                        } catch (IOException | DocumentException e) {
-                            e.printStackTrace ();
-                        }
-                        auto.back();
                     }
                     auto.swipeUp();
                 }
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
-            auto.wait(10000);
-
         } catch (DocumentException e) {
             e.printStackTrace();
         }
