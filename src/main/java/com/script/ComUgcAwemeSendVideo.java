@@ -35,7 +35,7 @@ public class ComUgcAwemeSendVideo {
         log.push(uuid,"抖音_发视频");
         auto.wait(15000);
         try {
-            ScriptUtils.onLogin("点击青少年模式");
+            new ScriptUtils().onLogin("点击青少年模式");
             auto.findByText("我知道了",true).click();
             auto.wait(5000);
         } catch (DocumentException | IOException | InterruptedException e) {
@@ -56,7 +56,7 @@ public class ComUgcAwemeSendVideo {
 
         //  用户隐私协议
         try {
-            ScriptUtils.onLogin("点击用户权限");
+            new ScriptUtils().onLogin("点击用户权限");
             auto.findByText("同意",true).click();
             auto.wait(5000);
             auto.back();
@@ -65,7 +65,7 @@ public class ComUgcAwemeSendVideo {
 
         //版本检测
         try {
-            ScriptUtils.onLogin("版本检测");
+            new ScriptUtils().onLogin("版本检测");
             auto.findByText("以后再说",true).click();
             auto.wait(5000);
         } catch (DocumentException | IOException | InterruptedException e) {

@@ -31,7 +31,7 @@ public class ConventionServiceImpl implements ConventionService {
     @Override
     public int home(String scope, String uuid){
 
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -46,7 +46,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int back(String scope, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -61,7 +61,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int killProgress(String scope, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -100,7 +100,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int lock(String scope, DeviceControlEnum controlEnum, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -122,7 +122,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int volume(String scope, DeviceControlEnum controlEnum, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -147,7 +147,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int reboot(String scope, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -162,7 +162,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int switchKeyboard(String scope, KeyboardEnum keyboardEnum, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -180,8 +180,8 @@ public class ConventionServiceImpl implements ConventionService {
 
         multipartFiles.forEach(file->{
             //保存文件到指定目录
-            String filePath = Directory.saveFile(DirectoryEnum.APPLICATION,file);
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+            String filePath = new Directory().saveFile(DirectoryEnum.APPLICATION,file);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -206,8 +206,8 @@ public class ConventionServiceImpl implements ConventionService {
     public int uploadVideo(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
         multipartFiles.forEach(multipartFile->{
-            String filePath = Directory.saveFile(DirectoryEnum.VIDEO,multipartFile);
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+            String filePath = new Directory().saveFile(DirectoryEnum.VIDEO,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -236,8 +236,8 @@ public class ConventionServiceImpl implements ConventionService {
     public int uploadImage(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
         multipartFiles.forEach(multipartFile->{
-            String filePath = Directory.saveFile(DirectoryEnum.IMAGE,multipartFile);
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+            String filePath = new Directory().saveFile(DirectoryEnum.IMAGE,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -262,8 +262,8 @@ public class ConventionServiceImpl implements ConventionService {
     public int uploadJar(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
         multipartFiles.forEach(multipartFile->{
-            String filePath = Directory.saveFile(DirectoryEnum.OYHER,multipartFile);
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+            String filePath = new Directory().saveFile(DirectoryEnum.OYHER,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -287,8 +287,8 @@ public class ConventionServiceImpl implements ConventionService {
     public int uploadZip(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
         multipartFiles.forEach(multipartFile->{
-            String filePath = Directory.saveFile(DirectoryEnum.OYHER,multipartFile);
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+            String filePath = new Directory().saveFile(DirectoryEnum.OYHER,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override

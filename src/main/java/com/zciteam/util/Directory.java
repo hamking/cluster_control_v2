@@ -29,7 +29,7 @@ public class Directory{
      * @param fileName 文件昵称
      * @return return
      */
-    public static String readFile(DirectoryEnum type, String fileName){
+    public String readFile(DirectoryEnum type, String fileName){
 
         String filePath = type.getStartInfo() + fileName;
         try (FileReader reader = new FileReader(filePath);
@@ -53,7 +53,7 @@ public class Directory{
      * @param file MultipartFile
      * @return boolean
      */
-    public static String saveFile(DirectoryEnum type, MultipartFile file) {
+    public String saveFile(DirectoryEnum type, MultipartFile file) {
 
         String filePath = type.getStartInfo () + file.getOriginalFilename();
         File desFile = new File (filePath);
@@ -73,7 +73,7 @@ public class Directory{
      * @param isAddDirectory 是否将子文件夹的路径也添加到map中
      * @return return
      */
-    public static Map<String,String> getAllFile(String directoryPath, boolean isAddDirectory) {
+    public Map<String,String> getAllFile(String directoryPath, boolean isAddDirectory) {
 
         Map<String,String> map = new HashMap<String, String> ();
         File baseFile = new File(directoryPath);
@@ -100,7 +100,7 @@ public class Directory{
      * @return return
      * @throws Exception Exception
      */
-    private static boolean createDir(String path){
+    private boolean createDir(String path){
         File file = new File(path);
         if (file.exists()){
             return false;

@@ -12,7 +12,7 @@ public class LayoutXml {
     public String getLayout(String deviceUUID){
 
         String path = "/tmp/yunsheng/book/";
-        FileUtil.createDir(path);
+        new FileUtil().createDir(path);
 
         try {
             new Execute().shell(deviceUUID, "uiautomator runtest LvmamaXmlKit.jar");

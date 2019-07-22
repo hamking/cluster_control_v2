@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
-    public static String toMD5(String plainText) {
+    public String toMD5(String plainText) {
         //定义一个字节数组
         byte[] secretBytes = null;
         try {

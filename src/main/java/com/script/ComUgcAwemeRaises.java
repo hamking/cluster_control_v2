@@ -140,14 +140,14 @@ public class ComUgcAwemeRaises {
             log.push(uuid,"评论该视频");
             try {
                 //  todo:提示xpath不存在 -已解决
-                ScriptUtils.onLogin("点击消息按钮，进入消息列表");
+                new ScriptUtils().onLogin("点击消息按钮，进入消息列表");
                 auto.findByXpatch("//android.widget.FrameLayout[3]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ImageView",true).click();
                 auto.wait(5000);
             } catch (DocumentException | IOException | InterruptedException e) {
             }
             try {
                 //  todo:提示xpath不存在 -已解决
-                ScriptUtils.onLogin("点击评论窗口");
+                new ScriptUtils().onLogin("点击评论窗口");
                 auto.findByText("留下你的精彩评论吧",true).click();
                 auto.wait(5000);
             } catch (DocumentException | IOException | InterruptedException e) {
@@ -156,16 +156,16 @@ public class ComUgcAwemeRaises {
             }
             try {
                 //  todo：提示越界异常 -已解决
-                ScriptUtils.onLogin("输入文字");
+                new ScriptUtils().onLogin("输入文字");
                 String[] strings = script.getCommentStr().split ("\n");
-                int s = ScriptUtils.random("随机评论", 0, strings.length);
+                int s = new ScriptUtils().random("随机评论", 0, strings.length);
                 auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.EditText",true).sendKeys(strings[s]);
             } catch (DocumentException | IOException | InterruptedException e) {
                 auto.wait(3000);
                 auto.back();
             }
             try {
-                ScriptUtils.onLogin("点击发送文本");
+                new ScriptUtils().onLogin("点击发送文本");
                 auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.ImageView[3]",true).click();
             } catch (DocumentException | IOException | InterruptedException e) {
                 auto.wait(3000);
@@ -249,7 +249,7 @@ public class ComUgcAwemeRaises {
             }
             auto.back();
         }else if (i == 0) {
-            ScriptUtils.onLogin("跳过关注评论的人");
+            new ScriptUtils().onLogin("跳过关注评论的人");
         }
     }
 
