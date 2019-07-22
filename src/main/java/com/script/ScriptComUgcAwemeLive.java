@@ -95,7 +95,7 @@ public class ScriptComUgcAwemeLive {
                 for (int i = 0; i < script.getWatchNum(); i++) {
                     auto.wait (8000);
                     for (int k = 0; k < script.getFocusNum (); k++) {
-                        auto.wait (1000);
+                        auto.wait (4000);
                         log.push(uuid,"开始关注第"+ (i+1) +"个视频, 第"+ (k+1) +"个用户");
                         //  点击用户
                         try {
@@ -106,12 +106,16 @@ public class ScriptComUgcAwemeLive {
                             log.push(uuid,"开始关注");
                             //  点击关注
                             auto.findByXpatch ("//android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1][@text='关注']", true).click ();
+                            log.push(uuid,"已关注");
                             auto.wait (1000);
                             auto.back ();
                             auto.wait (2000);
                         } catch (DocumentException e) {
                             if(auto.isFindNoteForText("/hierarchy/android.widget.FrameLayout","抖音号",true)){
                                 auto.back ();
+                                log.push(uuid,"关注异常");
+                            }else{
+                                log.push(uuid,"操作异常");
                             }
                             e.printStackTrace ();
                         }
@@ -120,9 +124,11 @@ public class ScriptComUgcAwemeLive {
                 }
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
+                log.push(uuid,"直播观看异常");
             }
         } catch (DocumentException e) {
             e.printStackTrace();
+            log.push(uuid,"直播广场异常");
         }
     }
 }
