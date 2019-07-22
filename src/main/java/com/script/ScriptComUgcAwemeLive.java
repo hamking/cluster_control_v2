@@ -94,6 +94,11 @@ public class ScriptComUgcAwemeLive {
                 boundList.get(0).click();
                 for (int i = 0; i < script.getWatchNum(); i++) {
                     auto.wait (8000);
+                    try{
+                        auto.findByText("我知道了",true).click();
+                    }catch (IOException | InterruptedException | DocumentException e) {
+                        e.printStackTrace ();
+                    }
                     for (int k = 0; k < script.getFocusNum (); k++) {
                         auto.wait (4000);
                         log.push(uuid,"开始关注第"+ (i+1) +"个视频, 第"+ (k+1) +"个用户");
