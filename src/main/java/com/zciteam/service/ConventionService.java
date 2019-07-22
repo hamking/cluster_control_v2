@@ -5,6 +5,8 @@ import com.zciteam.enums.DeviceControlEnum;
 import com.zciteam.enums.KeyboardEnum;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface ConventionService {
 
     /**
@@ -29,7 +31,7 @@ public interface ConventionService {
      * 安装软件
      * @param scope 控制范围
      */
-    int installApp(String scope, String uuid, MultipartFile multipartFile);
+    int installApp(String scope, String uuid, List<MultipartFile> multipartFiles);
 
     /**
      * 锁屏操作
@@ -64,8 +66,8 @@ public interface ConventionService {
      * @param multipartFile multipartFile
      * @param uuid uuid
      */
-    int uploadVideo(String scope, String uuid, MultipartFile multipartFile);
-    int uploadImage(String scope, String uuid, MultipartFile multipartFile);
-    int uploadJar(String scope, String uuid, MultipartFile multipartFile);
-    int uploadZip(String scope, String uuid, MultipartFile multipartFile);
+    int uploadVideo(String scope, String uuid, List<MultipartFile> multipartFiles);
+    int uploadImage(String scope, String uuid, List<MultipartFile> multipartFiles);
+    int uploadJar(String scope, String uuid, List<MultipartFile> multipartFiles);
+    int uploadZip(String scope, String uuid, List<MultipartFile> multipartFiles);
 }

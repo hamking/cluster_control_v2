@@ -15,12 +15,12 @@ public class LayoutXml {
         FileUtil.createDir(path);
 
         try {
-            Execute.shell(deviceUUID, "uiautomator runtest LvmamaXmlKit.jar");
+            new Execute().shell(deviceUUID, "uiautomator runtest LvmamaXmlKit.jar");
         } catch (IOException | InterruptedException ignored) {
         }
 
         try {
-            Execute.pull(deviceUUID, "/data/local/tmp/local/tmp/uidump.xml", path + deviceUUID + ".xml");
+            new Execute().pull(deviceUUID, "/data/local/tmp/local/tmp/uidump.xml", path + deviceUUID + ".xml");
         } catch (IOException | InterruptedException ignored) {
         }
 
