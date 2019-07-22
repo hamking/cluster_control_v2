@@ -136,7 +136,8 @@ public class ConventionController {
             int col = conventionService.volume(scope,DeviceControlEnum.stateOf(state),uuid);
             if (col>0){
                 return new Result<>(null,CodeEnum.CODE_200);
-            }        }catch (RuntimeException e){
+            }
+        }catch (RuntimeException e){
             return new Result<>(null, CodeEnum.CODE_503,e.getMessage());
         }
         return new Result<>(null, CodeEnum.CODE_400);

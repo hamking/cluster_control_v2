@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <META HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <META HTTP-EQUIV="expires" CONTENT="0">
+    <title>高级功能</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/jiaoben.css">
+    <link rel="stylesheet" href="css/senior.css">
+    <script src="js/jquery-1.7.1.min.js"></script>
+    <script src="js/blockly_compressed.js"></script>
+    <script src="js/blocks_compressed.js"></script>
+    <script src="msg/js/zh-hans.js"></script>
+</head>
+<body>
+<div class="index" id="load_overlay">
+    <div class="nav"></div>
+
+    <div id="blocklyDiv"></div>
+    <xml id="toolbox" style="display: none">
+        <block type="controls_if"></block>
+        <block type="controls_repeat_ext"></block>
+        <block type="logic_compare"></block>
+        <block type="math_number"></block>
+        <block type="math_arithmetic"></block>
+        <block type="text"></block>
+        <block type="text_print"></block>
+    </xml>
+</div>
+
+<script>
+    $(".nav").load("public/nav.html");
+</script>
+
+<script src="js/senior.js"></script>
+</body>
+</html>

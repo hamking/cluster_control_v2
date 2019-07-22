@@ -153,7 +153,7 @@ public class ConventionServiceImpl implements ConventionService {
                 @Override
                 public void run() {
                     new Auto(device.getUuid()).reboot();
-                    new WebSocketDeviceLog().push(device.getUuid(),"设备重启...设备断开");
+                    new WebSocketDeviceLog().push(device.getUuid(),"设备重启...\n设备断开...");
                 }
             }).start();
         });

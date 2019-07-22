@@ -1,0 +1,23 @@
+#blocklyDiv{
+    margin: 28px auto 0;
+    position: absolute;
+}
+
+#blocklyArea{
+    height: 99%;
+}
+
+.blocklySvg{
+	background-color: #151515;
+}
+.blocklyScrollbarHandle {
+    fill: #aaaaaa70;
+}
+.blocklyFlyoutBackground {
+    fill: #888888c7;
+    fill-opacity: .8;
+}
+.blocklyMainBackground {
+    stroke-width: 0;
+    stroke: #c6c6c6;
+}

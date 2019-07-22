@@ -12,40 +12,7 @@
 </head>
 <body>
 <div class="index" id="load_overlay">
-    <div id="head" class="bg">
-        <div class="head-center">
-            <div class="logo">
-                <span>云晟科技</span>
-            </div>
-            <ul class="header-nav">
-                <li>
-                    <a href="index.html" class="nav-a">控制台</a>
-                    <p class="heng-kong bg"></p>
-                </li>
-                <li>
-                    <a href="bianxian.html" class="nav-a">变现</a>
-                    <p class="heng-kong bg"></p>
-                </li>
-                <li>
-                    <a href="help.html" class="nav-a">帮助中心</a>
-                    <p class="heng-kong bg"></p>
-                </li>
-                <li>
-                    <a href="javascript:void(0)" class="nav-a">工具</a>
-                    <p class="heng-kong bg"></p>
-                    <div class="gongju-style">
-                        <a>手机初始化</a>
-                        <a>切换键盘</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="device-service">
-            <a class="reboot">服务器重启</a>
-            <br>
-            <a class="shutdown">服务器关机</a>
-        </div>
-    </div>
+    <div class="nav"></div>
     <div class="content-box-all bg">
         <div class="phone">
             <img src="img/phone.png">
@@ -61,30 +28,7 @@
             <span id="xing-shou">mb855</span>
         </div>
         <div class="cao-zuo">
-            <ul class="script">
-                <!--<li>-->
-                    <!--<span class='script-do' data-id="ComSmileGifmakerPrivateMsg">抖音</span>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<span class='script-do'>抖音</span>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<span class='script-do'>抖音</span>-->
-                <!--</li>-->
-                <!--<li>-->
-                    <!--<span class='script-do'>抖音</span>-->
-                <!--</li>-->
-            </ul>
-            <!--<div class="script-use" id="ComSmileGifmakerPrivateMsg" style="display: none;">-->
-                <!--<span class="script-zi">常规操作</span>-->
-                <!--<span>|</span>-->
-                <!--<span class="script-zi">常规操作</span>-->
-            <!--</div>-->
-            <!--<div class="script-use" style="display: none;">-->
-                <!--<span class="script-zi">常规操作</span>-->
-                <!--<span>|</span>-->
-                <!--<span class="script-zi">常规操作</span>-->
-            <!--</div>-->
+            <ul class="script"></ul>
         </div>
         <div class="kong-fan">
             <div class="left-kong clearfix">
@@ -103,58 +47,7 @@
             </div>
             <div class="right-kong">
                 <p class="kong-jian">常规操作</p>
-                <ul class="button-use">
-                    <li id="home">
-                        <img src="img/home.png">
-                        <span>主页</span>
-                    </li>
-                    <li id="return">
-                        <img src="img/return.png">
-                        <span>返回</span>
-                    </li>
-                    <li id="open">
-                        <img src="img/off.png">
-                        <span>关屏</span>
-                    </li>
-                    <li id="off">
-                        <img src="img/open.png">
-                        <span>开屏</span>
-                    </li>
-                    <li id="zanting">
-                        <img src="img/zanting.png">
-                        <span>停止运行</span>
-                    </li>
-                    <li id="delete">
-                        <img src="img/felete.png">
-                        <span>清空进程</span>
-                    </li>
-                    <li id="restart">
-                        <img src="img/restart.png">
-                        <span>重启设备</span>
-                    </li>
-                    <li id="do-ruan">
-                        <img src="img/off.png">
-                        <span>安装软件</span>
-                        <input id="fileRuan" type="file" size="30" name="files" multiple="">
-                    </li>
-                    <li id="import">
-                        <img src="img/import.png">
-                        <span>导入媒体</span>
-                        <input id="fileMedia" type="file" size="30" name="files" multiple="">
-                    </li>
-                    <li class="volume" data-volume = "2">
-                        <img src="img/icon2.png">
-                        <span>音量+</span>
-                    </li>
-                    <li class="volume" data-volume = "3">
-                        <img src="img/icon3.png">
-                        <span>音量-</span>
-                    </li>
-                    <li class="volume" data-volume = "4">
-                        <img src="img/mute.png">
-                        <span>静音</span>
-                    </li>
-                </ul>
+                <div class="button-use"></div>
             </div>
             <div>
 
@@ -187,6 +80,9 @@
     </div>
 </div>
 <script>
+    $(".nav").load("public/nav.html");
+    $(".button-use").load("public/conventionalButton.html");
+
     $("#ComSmileGifmakerRaises").load("script/ComSmileGifmakerRaises.html");
     $("#ComSmileGifmakerPrivateMsg").load("script/ComSmileGifmakerPrivateMsg.html");
     $("#ComUgcAwemeRaises").load("script/ComUgcAwemeRaises.html");
