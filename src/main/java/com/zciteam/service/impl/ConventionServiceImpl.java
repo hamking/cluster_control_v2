@@ -31,7 +31,7 @@ public class ConventionServiceImpl implements ConventionService {
     @Override
     public int home(String scope, String uuid){
 
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -46,7 +46,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int back(String scope, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -61,7 +61,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int killProgress(String scope, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -100,7 +100,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int lock(String scope, DeviceControlEnum controlEnum, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -122,7 +122,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int volume(String scope, DeviceControlEnum controlEnum, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -147,7 +147,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int reboot(String scope, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -162,7 +162,7 @@ public class ConventionServiceImpl implements ConventionService {
 
     @Override
     public int switchKeyboard(String scope, KeyboardEnum keyboardEnum, String uuid) {
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
         devices.forEach(device -> {
             new Thread (new Runnable () {
                 @Override
@@ -176,13 +176,12 @@ public class ConventionServiceImpl implements ConventionService {
     }
 
     @Override
-    public int installApp(String scope, String uuid, MultipartFile file) {
+    public int installApp(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
-        //保存文件到指定目录
-        String filePath = Directory.saveFile(DirectoryEnum.APPLICATION,file);
-
-        if (filePath != null && !filePath.isEmpty()) {
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+        multipartFiles.forEach(file->{
+            //保存文件到指定目录
+            String filePath = new Directory().saveFile(DirectoryEnum.APPLICATION,file);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -194,6 +193,9 @@ public class ConventionServiceImpl implements ConventionService {
                     }
                 }).start ();
             });
+        });
+
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
             return 1;
         }else {
             return 0;
@@ -201,11 +203,11 @@ public class ConventionServiceImpl implements ConventionService {
     }
 
     @Override
-    public int uploadVideo(String scope, String uuid, MultipartFile multipartFile) {
-        String filePath = Directory.saveFile(DirectoryEnum.VIDEO,multipartFile);
+    public int uploadVideo(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
-        if (filePath != null && !filePath.isEmpty()) {
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+        multipartFiles.forEach(multipartFile->{
+            String filePath = new Directory().saveFile(DirectoryEnum.VIDEO,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -221,6 +223,9 @@ public class ConventionServiceImpl implements ConventionService {
                     }
                 }).start();
             });
+        });
+
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
             return 1;
         }else {
             return 0;
@@ -228,22 +233,25 @@ public class ConventionServiceImpl implements ConventionService {
     }
 
     @Override
-    public int uploadImage(String scope, String uuid, MultipartFile multipartFile) {
-        String filePath = Directory.saveFile(DirectoryEnum.IMAGE,multipartFile);
+    public int uploadImage(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
-        if (filePath != null && !filePath.isEmpty()) {
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+        multipartFiles.forEach(multipartFile->{
+            String filePath = new Directory().saveFile(DirectoryEnum.IMAGE,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
                     public void run() {
                         new WebSocketDeviceLog().push(device.getUuid(),"导入图片");
-                        new Auto(device.getUuid()).rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
+//                        new Auto(device.getUuid()).rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
                         new Auto(device.getUuid()).pushFile(filePath, DeviceDirEnum.IMAGE.getStartInfo());
                         new Auto(device.getUuid()).refreshPhotoAlbum();
                     }
                 }).start();
             });
+        });
+
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
             return 1;
         }else {
             return 0;
@@ -251,11 +259,11 @@ public class ConventionServiceImpl implements ConventionService {
     }
 
     @Override
-    public int uploadJar(String scope, String uuid, MultipartFile multipartFile) {
-        String filePath = Directory.saveFile(DirectoryEnum.OYHER,multipartFile);
+    public int uploadJar(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
-        if (filePath != null && !filePath.isEmpty()) {
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+        multipartFiles.forEach(multipartFile->{
+            String filePath = new Directory().saveFile(DirectoryEnum.OYHER,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -266,6 +274,9 @@ public class ConventionServiceImpl implements ConventionService {
                     }
                 }).start();
             });
+        });
+
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
             return 1;
         }else {
             return 0;
@@ -273,11 +284,11 @@ public class ConventionServiceImpl implements ConventionService {
     }
 
     @Override
-    public int uploadZip(String scope, String uuid, MultipartFile multipartFile) {
-        String filePath = Directory.saveFile(DirectoryEnum.OYHER,multipartFile);
+    public int uploadZip(String scope, String uuid, List<MultipartFile> multipartFiles) {
 
-        if (filePath != null && !filePath.isEmpty()) {
-            List<Device> devices = ScopeDevice.getDevice (scope, uuid, deviceDao);
+        multipartFiles.forEach(multipartFile->{
+            String filePath = new Directory().saveFile(DirectoryEnum.OYHER,multipartFile);
+            List<Device> devices = new ScopeDevice().getDevice (scope, uuid, deviceDao);
             devices.forEach (device -> {
                 new Thread (new Runnable () {
                     @Override
@@ -286,6 +297,9 @@ public class ConventionServiceImpl implements ConventionService {
                     }
                 }).start();
             });
+        });
+
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
             return 1;
         }else {
             return 0;

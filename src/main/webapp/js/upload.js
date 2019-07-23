@@ -19,7 +19,9 @@ $(function(){
         var self = this;
         var files = $('#fileMedia').prop("files");
         var formdata = new FormData();
-        formdata.append("files", files[0]);
+        for (var i = 0; i < files.length; i++) {
+            formdata.append("files", files[i]);
+        }
         formdata.append("uuid", "");
         formdata.append("scope", -2);
         $.ajax({
@@ -43,7 +45,9 @@ $(function(){
         var self = this;
         var files = $('#fileRuan').prop("files");
         var formdata = new FormData();
-        formdata.append("files", files[0]);
+        for (var i = 0; i < files.length; i++) {
+            formdata.append("files", files[i]);
+        }
         formdata.append("uuid", "");
         formdata.append("scope", -2);
         $.ajax({

@@ -146,7 +146,7 @@ public class ComSmileGifmakerPrivateMsg {
                             String str = script.getDirectMessages();
                             if (str != null && str.length() > 0 && str.contains("\n")){
                                 String[] strings = str.split ("\n");
-                                int s = ScriptUtils.random("随机评论", 0, strings.length);
+                                int s = new ScriptUtils().random("随机评论", 0, strings.length);
                                 auto.findByText("请输入...",true).sendKeys(strings[s]);
                             }else if (str != null){
                                 auto.findByText("请输入...",true).sendKeys(str);
@@ -188,7 +188,7 @@ public class ComSmileGifmakerPrivateMsg {
                 String str = script.getDirectMessages();
                 if (str != null && str.length() > 0 && str.contains("\n")){
                     String[] strings = str.split ("\n");
-                    int s = ScriptUtils.random("随机评论", 0, strings.length);
+                    int s = new ScriptUtils().random("随机评论", 0, strings.length);
                     auto.findByText("请输入...",true).sendKeys(strings[s]);
                 }else if (str != null){
                     auto.findByText("请输入...",true).sendKeys(str);

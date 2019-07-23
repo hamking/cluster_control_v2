@@ -4,7 +4,7 @@ package com.adb.util;
 public class ScriptUtils {
 
     /** 随机数(start~num) */
-    public static int random(String msg,int start,int num) {
+    public int random(String msg,int start,int num) {
         int v = (int) (Math.random() * num) + start;
         System.out.println(msg + v);
         return v;

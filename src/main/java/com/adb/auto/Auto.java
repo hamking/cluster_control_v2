@@ -41,7 +41,7 @@ public class Auto {
 
         deviceUUID = device;
         try {
-            Execute.startApp(deviceUUID, packageName);
+            new Execute().startApp(deviceUUID, packageName);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -281,7 +281,7 @@ public class Auto {
     public void back(){
 
         try {
-            Execute.inputKeyevent(deviceUUID, Keyevent.BACK);
+            new Execute().inputKeyevent(deviceUUID, Keyevent.BACK);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -292,7 +292,7 @@ public class Auto {
     public void home(){
 
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.HOME);
+            new Execute().inputKeyevent(deviceUUID,Keyevent.HOME);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -302,7 +302,7 @@ public class Auto {
      */
     public void kill(String packageName){
         try {
-            Execute.kill(deviceUUID,packageName);
+            new Execute().kill(deviceUUID,packageName);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -313,7 +313,7 @@ public class Auto {
     public void swipeUp(){
 
         try {
-            Execute.inputSwipe(deviceUUID,"500 700 500 100");
+            new Execute().inputSwipe(deviceUUID,"500 700 500 100");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -324,7 +324,7 @@ public class Auto {
     public void swipeDown(){
 
         try {
-            Execute.inputSwipe(deviceUUID,"500 300 500 800");
+            new Execute().inputSwipe(deviceUUID,"500 300 500 800");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -335,7 +335,7 @@ public class Auto {
     public void swipeLeft(){
 
         try {
-            Execute.shell(deviceUUID,"input swipe 100 500 800 500");
+            new Execute().shell(deviceUUID,"input swipe 100 500 800 500");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -346,7 +346,7 @@ public class Auto {
     public void swipeRight(){
 
         try {
-            Execute.inputSwipe(deviceUUID,"100 500 800 500");
+            new Execute().inputSwipe(deviceUUID,"100 500 800 500");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -357,12 +357,12 @@ public class Auto {
     public void inputMediaEventScript(String path, String fileName){
 
         try {
-            Execute.push(deviceUUID,path,"/sdcard/DCIM/" + fileName);
+            new Execute().push(deviceUUID,path,"/sdcard/DCIM/" + fileName);
         } catch (IOException | InterruptedException ignored) {
         }
 
         try {
-            Execute.shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
+            new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -373,11 +373,11 @@ public class Auto {
     public void rmFileMediaEventScript(String path){
 
         try {
-            Execute.shell(deviceUUID,path);
+            new Execute().shell(deviceUUID,path);
         } catch (IOException | InterruptedException ignored) {
         }
         try {
-            Execute.shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
+            new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -388,7 +388,7 @@ public class Auto {
     public void enter(){
 
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.ENTER);
+            new Execute().inputKeyevent(deviceUUID,Keyevent.ENTER);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -402,14 +402,14 @@ public class Auto {
             case SYSTEM_KEYBOARD:
 
                 try {
-                    Execute.shell(deviceUUID,"ime set com.google.android.inputmethod.pinyin/.PinyinIME");
+                    new Execute().shell(deviceUUID,"ime set com.google.android.inputmethod.pinyin/.PinyinIME");
                 } catch (IOException | InterruptedException ignored) {
                 }
                 break;
             case ADB_KEYBOARD:
 
                 try {
-                    Execute.shell(deviceUUID,"ime set com.android.adbkeyboard/.AdbIME");
+                    new Execute().shell(deviceUUID,"ime set com.android.adbkeyboard/.AdbIME");
                 } catch (IOException | InterruptedException ignored) {
                 }
                 break;
@@ -423,7 +423,7 @@ public class Auto {
     public void addressBookImportEvent(String path){
 
         try {
-            Execute.push(deviceUUID,path,"/sdcard/contacts.vcf");
+            new Execute().push(deviceUUID,path,"/sdcard/contacts.vcf");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -434,7 +434,7 @@ public class Auto {
     public void addressBookClearEvent(){
 
         try {
-            Execute.shell(deviceUUID,"pm clear com.android.providers.contacts");
+            new Execute().shell(deviceUUID,"pm clear com.android.providers.contacts");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -444,7 +444,7 @@ public class Auto {
      */
     public void lock(){
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.POWER);
+            new Execute().inputKeyevent(deviceUUID,Keyevent.POWER);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -454,8 +454,8 @@ public class Auto {
      */
     public void unLock(){
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.POWER);
-            Execute.inputSwipe(deviceUUID,"500 600 500 100");
+            new Execute().inputKeyevent(deviceUUID,Keyevent.POWER);
+            new Execute().inputSwipe(deviceUUID,"500 600 500 100");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -465,7 +465,7 @@ public class Auto {
      */
     public void volumeUp(){
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.VOLUME_UP);
+            new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_UP);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -475,7 +475,7 @@ public class Auto {
      */
     public void volumeDown(){
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.VOLUME_DOWN);
+            new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_DOWN);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -485,7 +485,7 @@ public class Auto {
      */
     public void volumeMute(){
         try {
-            Execute.inputKeyevent(deviceUUID,Keyevent.VOLUME_MUTE);
+            new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_MUTE);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -495,7 +495,7 @@ public class Auto {
      */
     public void reboot(){
         try {
-            Execute.reboot(deviceUUID);
+            new Execute().reboot(deviceUUID);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -507,14 +507,14 @@ public class Auto {
      */
     public void pushFile(String fromPath, String toPath){
         try {
-            Execute.push(deviceUUID,fromPath,toPath);
+            new Execute().push(deviceUUID,fromPath,toPath);
         } catch (IOException | InterruptedException ignored) {
         }
     }
 
     public void mkdir(String path){
         try {
-            Execute.mkdir(deviceUUID, path);
+            new Execute().mkdir(deviceUUID, path);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -524,7 +524,7 @@ public class Auto {
      */
     public void refreshPhotoAlbum(){
         try {
-            Execute.shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
+            new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -535,7 +535,7 @@ public class Auto {
      */
     public void install(String apkPath){
         try {
-            Execute.install(deviceUUID, apkPath);
+            new Execute().install(deviceUUID, apkPath);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -546,7 +546,7 @@ public class Auto {
      */
     public void unInstall(String apkName){
         try {
-            Execute.unInstall(deviceUUID, apkName);
+            new Execute().unInstall(deviceUUID, apkName);
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -556,11 +556,11 @@ public class Auto {
      */
     public void inputHelperEventScript(){
         try {
-            Execute.shell(deviceUUID, "mkdir -p /data/local/tmp/local/tmp");
+            new Execute().shell(deviceUUID, "mkdir -p /data/local/tmp/local/tmp");
         } catch (IOException | InterruptedException ignored) {
         }
         try {
-            Execute.push(deviceUUID, "/", "/data/local/tmp/LvmamaXmlKit.jar");
+            new Execute().push(deviceUUID, "/", "/data/local/tmp/LvmamaXmlKit.jar");
         } catch (IOException | InterruptedException ignored) {
         }
     }
@@ -570,11 +570,11 @@ public class Auto {
      */
     public void flashEventScript(String path){
         try {
-            Execute.push(deviceUUID, path,"/sdcard/update.zip");
+            new Execute().push(deviceUUID, path,"/sdcard/update.zip");
         } catch (IOException | InterruptedException ignored) {
         }
         try {
-            Execute.shell(deviceUUID,"reboot recovery");
+            new Execute().shell(deviceUUID,"reboot recovery");
         } catch (IOException | InterruptedException ignored) {
         }
     }

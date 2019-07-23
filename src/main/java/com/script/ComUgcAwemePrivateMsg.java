@@ -35,7 +35,7 @@ public class ComUgcAwemePrivateMsg {
         log.push(uuid,"抖音_私信");
         auto.wait(15000);
         try {
-            ScriptUtils.onLogin("点击青少年模式");
+            new ScriptUtils().onLogin("点击青少年模式");
             auto.findByText("我知道了",true).click();
             auto.wait(5000);
         } catch (DocumentException | IOException | InterruptedException e) {
@@ -56,7 +56,7 @@ public class ComUgcAwemePrivateMsg {
 
         //  用户隐私协议
         try {
-            ScriptUtils.onLogin("点击用户权限");
+            new ScriptUtils().onLogin("点击用户权限");
             auto.findByText("同意",true).click();
             auto.wait(5000);
             auto.back();
@@ -65,7 +65,7 @@ public class ComUgcAwemePrivateMsg {
 
         //版本检测
         try {
-            ScriptUtils.onLogin("版本检测");
+            new ScriptUtils().onLogin("版本检测");
             auto.findByText("以后再说",true).click();
             auto.wait(5000);
         } catch (DocumentException | IOException | InterruptedException e) {
@@ -148,7 +148,7 @@ public class ComUgcAwemePrivateMsg {
                     if (directMessage.contains("\n")){
                         String[] strings = directMessage.split ("\n");
                         //点击文本框并输入文字
-                        int s = ScriptUtils.random("随机私信", 0, strings.length);
+                        int s = new ScriptUtils().random("随机私信", 0, strings.length);
                         try {
                             auto.findByXpatch ("//android.widget.LinearLayout/android.widget.FrameLayout/android.widget.EditText", true).sendKeys (strings[s]);
                         } catch (DocumentException | IOException | InterruptedException e) {

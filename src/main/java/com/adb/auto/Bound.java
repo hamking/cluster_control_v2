@@ -50,7 +50,7 @@ public class Bound {
      */
     public void click() throws IOException, InterruptedException {
 
-        Execute.shell(deviceUUID, "input tap" + " " + dx + " " + dy);
+        new Execute().shell(deviceUUID, "input tap" + " " + dx + " " + dy);
     }
 
     /**
@@ -60,7 +60,7 @@ public class Bound {
      */
     public void click(int offsetX, int offsetY)throws IOException, InterruptedException{
 
-        Execute.shell(deviceUUID, "input tap" + " " + (dx + offsetX) + " " + (dy + offsetY));
+        new Execute().shell(deviceUUID, "input tap" + " " + (dx + offsetX) + " " + (dy + offsetY));
     }
 
     /**
@@ -69,7 +69,7 @@ public class Bound {
      */
     public void clickOffsetX(int offsetX)throws IOException, InterruptedException{
 
-        Execute.shell(deviceUUID, "input tap" + " " + (dx + offsetX) + " " + dy);
+        new Execute().shell(deviceUUID, "input tap" + " " + (dx + offsetX) + " " + dy);
     }
 
     /**
@@ -78,7 +78,7 @@ public class Bound {
      */
     public void clickOffsetY(int offsetY) throws IOException, InterruptedException {
 
-        Execute.shell(deviceUUID, "input tap" + " " + dx + " " + (dy + offsetY));
+        new Execute().shell(deviceUUID, "input tap" + " " + dx + " " + (dy + offsetY));
     }
 
     /**
@@ -88,6 +88,6 @@ public class Bound {
     public void sendKeys(String str) throws IOException, InterruptedException{
 
         click();
-        Execute.shell(deviceUUID, "am broadcast -a ADB_INPUT_TEXT --es msg " + str);
+        new Execute().shell(deviceUUID, "am broadcast -a ADB_INPUT_TEXT --es msg " + str);
     }
 }

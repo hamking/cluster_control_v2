@@ -108,7 +108,7 @@ public class ScriptServiceImpl implements ScriptService {
         stop(scope,uuid);
 
         //获取设备 scope
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
 
         //获取脚本
         Script script = scriptDao.findScript(suid);
@@ -152,7 +152,7 @@ public class ScriptServiceImpl implements ScriptService {
     public int stop(String scope, String uuid) {
 
         //获取设备 scope
-        List<Device> devices = ScopeDevice.getDevice(scope,uuid,deviceDao);
+        List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
 
         devices.forEach(device -> {
             new Thread (new Runnable () {

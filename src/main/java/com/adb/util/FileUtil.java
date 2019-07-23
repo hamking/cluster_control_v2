@@ -12,7 +12,7 @@ public class FileUtil {
      * @param filePath 文件昵称
      * @return return
      */
-    public static String readFile(String filePath){
+    public String readFile(String filePath){
 
         try (FileReader reader = new FileReader(filePath);
              BufferedReader br = new BufferedReader(reader)) {
@@ -34,7 +34,7 @@ public class FileUtil {
      * @param filePath 文件昵称
      * @param content 文件内容
      */
-    public static void saveFile(String content,String filePath) {
+    public void saveFile(String content,String filePath) {
 
         FileOutputStream outputStream = null;
         OutputStreamWriter outputStreamWriter = null;
@@ -67,7 +67,7 @@ public class FileUtil {
      * @param isAddDirectory 是否将子文件夹的路径也添加到map中
      * @return return
      */
-    public static Map<String,String> getAllFile(String directoryPath, boolean isAddDirectory) {
+    public Map<String,String> getAllFile(String directoryPath, boolean isAddDirectory) {
 
         Map<String,String> map = new HashMap<String, String>();
         File baseFile = new File(directoryPath);
@@ -94,7 +94,7 @@ public class FileUtil {
      * @return return
      * @throws Exception Exception
      */
-    public static boolean createDir(String path){
+    public boolean createDir(String path){
         File file = new File(path);
         if (file.exists()){
             return false;
@@ -110,7 +110,7 @@ public class FileUtil {
      * 删除文件夹
      * @param path path
      */
-    public static void deleteDir(String path){
+    public void deleteDir(String path){
         File file = new File(path);
         file.delete();
     }
@@ -121,7 +121,7 @@ public class FileUtil {
      * @param dest dest
      * @throws IOException IOException
      */
-    public static void copyFileUsingFileChannels(File source, File dest) throws IOException {
+    public void copyFileUsingFileChannels(File source, File dest) throws IOException {
         FileChannel inputChannel = null;
         FileChannel outputChannel = null;
         try {

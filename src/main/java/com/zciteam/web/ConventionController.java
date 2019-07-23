@@ -203,11 +203,11 @@ public class ConventionController {
     public Result installApp(HttpServletRequest request) {
         try{
             MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)(request);
-            MultipartFile file = multiRequest.getFile("files");
+            List<MultipartFile> file = multiRequest.getFiles("files");
             String uuid = request.getParameter("uuid");
             String scope = request.getParameter("scope");
             int col = 0;
-            if (file!=null && file.getContentType().contains("application/vnd.android.package-archive")){
+            if (file!=null && file.get(0).getContentType().contains("application/vnd.android.package-archive")){
                 col = conventionService.installApp(scope,uuid,file);
             }else{
                 return new Result<>(null, CodeEnum.CODE_60001);
@@ -239,25 +239,26 @@ public class ConventionController {
             String uuid = request.getParameter("uuid");
             String scope = request.getParameter("scope");
 
-            for (MultipartFile file : files) {
-                if (file.getContentType().contains("video")){
+            if (files.isEmpty()){
+                return new Result<>(null,CodeEnum.CODE_403);
+            }
+                if (files.get(0).getContentType().contains("video")){
                     //是视频文件
-                    conventionService.uploadVideo(scope,uuid,file);
+                    conventionService.uploadVideo(scope,uuid,files);
 
-                }else if (file.getContentType().contains("image")){
+                }else if (files.get(0).getContentType().contains("image")){
                     //是图片文件
-                    conventionService.uploadImage(scope,uuid,file);
+                    conventionService.uploadImage(scope,uuid,files);
 
-                }else if (file.getContentType().contains("application/java-archive")){
+                }else if (files.get(0).getContentType().contains("application/java-archive")){
                     //是jar文件
-                    conventionService.uploadJar(scope,uuid,file);
-                }else if (file.getContentType().contains("application/x-zip-compressed")){
+                    conventionService.uploadJar(scope,uuid,files);
+                }else if (files.get(0).getContentType().contains("application/x-zip-compressed")){
                     //是jar文件
-                    conventionService.uploadZip(scope,uuid,file);
+                    conventionService.uploadZip(scope,uuid,files);
                 }else{
                     return new Result<>(null,CodeEnum.CODE_70001);
                 }
-            }
             return new Result<>(null,CodeEnum.CODE_200);
         }catch (RuntimeException e){
             return new Result<>(null, CodeEnum.CODE_503,e.getMessage());
