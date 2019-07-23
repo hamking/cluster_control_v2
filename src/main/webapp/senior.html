@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <META HTTP-EQUIV="pragma" CONTENT="no-cache">
     <META HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
     <META HTTP-EQUIV="expires" CONTENT="0">
-    <title>高级功能</title>
+    <title>脚本开发</title>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/jiaoben.css">
     <link rel="stylesheet" href="css/senior.css">
@@ -18,16 +18,104 @@
 <div class="index" id="load_overlay">
     <div class="nav"></div>
 
-    <div id="blocklyDiv"></div>
+    <div id="blockly_div"></div>
+    <div id="operating_area">
+        <div id="operating_buts">
+            <div id="operating_buts_th">
+                <p>脚本操作</p>
+            </div>
+            <button id="operating_buts_run">运行</button>
+            <button id="operating_buts_stop">终止</button>
+            <button id="operating_buts_save">保存</button>
+        </div>
+        <div id="script_files">
+            <div id="script_files_th">
+                <p>脚本文件</p>
+            </div>
+            <div id="script_files_table_div">
+                 <table id="script_files_table">
+                <tr>
+                    <td>test_script_1</td>
+                </tr>
+                <tr>
+                    <td>test_script_2</td>
+                </tr>
+                <tr>
+                    <td>test_script_3</td>
+                </tr>
+                <tr>
+                    <td>test_script_4</td>
+                </tr>
+            </table>
+            </div>
+        </div>
+        <div id="script_log">
+            <div id="script_log_th">
+                <p>日志</p>
+            </div>
+            <div id="log_out">
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+                <p>日志输出</p>
+            </div>
+        </div>
+    </div>
     <xml id="toolbox" style="display: none">
-        <block type="controls_if"></block>
-        <block type="controls_repeat_ext"></block>
-        <block type="logic_compare"></block>
-        <block type="math_number"></block>
-        <block type="math_arithmetic"></block>
-        <block type="text"></block>
-        <block type="text_print"></block>
-    </xml>
+        <category name="基本函数">
+            <block type="controls_if"></block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+        </category>
+        <category name="选择元素函数">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="模拟点击函数">
+            <block type="controls_if"></block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+        </category>
+        <category name="设备相关函数">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="日志操作函数">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="文件操作函数">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="高级函数">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+        <category name="其他函数">
+            <block type="controls_if"></block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for">
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
+        </category>
+</xml>
+
 </div>
 
 <script>

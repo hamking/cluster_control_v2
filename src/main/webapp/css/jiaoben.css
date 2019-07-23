@@ -86,6 +86,7 @@ body{
     height: 400px;
     border-radius: 15px;
     padding: 10px;
+    overflow: auto;
 }
 .title-jian{
     color: #fff;
