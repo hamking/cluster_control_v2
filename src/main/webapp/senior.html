@@ -12,7 +12,11 @@
     <script src="js/jquery-1.7.1.min.js"></script>
     <script src="js/blockly_compressed.js"></script>
     <script src="js/blocks_compressed.js"></script>
+    <script src="js/javascript_compressed.js"></script>
+    <script src="js/acorn_interpreter.js"></script>
     <script src="msg/js/zh-hans.js"></script>
+    <script src="js/blockly_myblock.js"></script>
+    <script src="js/senior.js"></script>
 </head>
 <body>
 <div class="index" id="load_overlay">
@@ -25,28 +29,16 @@
                 <p>脚本操作</p>
             </div>
             <button id="operating_buts_run">运行</button>
+            <button id="operating_buts_step">单步运行</button>
             <button id="operating_buts_stop">终止</button>
             <button id="operating_buts_save">保存</button>
         </div>
-        <div id="script_files">
-            <div id="script_files_th">
-                <p>脚本文件</p>
+        <div id="script_code">
+            <div id="script_code_th">
+                <p>代码</p>
             </div>
-            <div id="script_files_table_div">
-                 <table id="script_files_table">
-                <tr>
-                    <td>test_script_1</td>
-                </tr>
-                <tr>
-                    <td>test_script_2</td>
-                </tr>
-                <tr>
-                    <td>test_script_3</td>
-                </tr>
-                <tr>
-                    <td>test_script_4</td>
-                </tr>
-            </table>
+            <div id="script_code_div">
+                <p id="script_code_view"></p>
             </div>
         </div>
         <div id="script_log">
@@ -72,9 +64,7 @@
     </div>
     <xml id="toolbox" style="display: none">
         <category name="基本函数">
-            <block type="controls_if"></block>
-            <block type="controls_whileUntil"></block>
-            <block type="controls_for">
+            <block type="start"></block>
         </category>
         <category name="选择元素函数">
             <block type="logic_compare"></block>
@@ -121,7 +111,5 @@
 <script>
     $(".nav").load("public/nav.html");
 </script>
-
-<script src="js/senior.js"></script>
 </body>
 </html>

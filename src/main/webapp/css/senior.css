@@ -31,35 +31,49 @@
 #operating_buts_th{
 	height: 30px;
 	background-color: #4c4c4c;
+	padding: 5px 15px 5px 5px;
 	text-align: center;
 }
 
-#operating_buts_run, #operating_buts_stop, #operating_buts_save{
+#operating_buts_run, #operating_buts_stop, #operating_buts_save, #operating_buts_step{
 	width: 100%;
 	height: 30px;
 	border-radius: 15px 0 15px 0;
 	margin-top: 10px
 }
 
-#operating_buts_run{
+#operating_buts_run, #operating_buts_step{
 	background-color: #222;
 	color: #09d296;
+	border: none;
+}
+#operating_buts_run:hover{
+	border: 1px solid #09d296;
+}
+#operating_buts_step:hover{
 	border: 1px solid #09d296;
 }
 
 #operating_buts_stop{
 	background-color: #222;
 	color: #e20000;
+	border: none;
+}
+#operating_buts_stop:hover{
 	border: 1px solid #e20000;
 }
 
 #operating_buts_save{
 	background-color: #222;
 	color: #ff8c1f;
+	border: none;
+}
+#operating_buts_save:hover{
 	border: 1px solid #ff8c1f;
 }
 
-#script_files{
+
+#script_code{
 	float: right;
 	width: 57%;
 	height: 300px;
@@ -67,20 +81,13 @@
 	border-radius: 15px;
 }
 
-#script_files_table{
-   border-collapse: collapse;
-   width: 100%;
-   border-radius: 15px;
-}
-
-#script_files_table_div{
+#script_code_div{
 	width: 100%;
 	height: 270px;
-	border-radius: 15px;
 	overflow: auto;
 }
 
-#script_files_th {
+#script_code_th {
 	height: 30px;
 	background-color: #4c4c4c;
 	padding: 5px 15px 5px 5px;
@@ -95,10 +102,10 @@
 }
 
 #script_log{
-	padding: 10px;
+	margin: 10px auto 0;
 	float: left;
 	width: 100%;
-	height: calc(100% - 313px);
+	height: calc(100% - 310px);
 	background-color: #000;
 	border-radius: 15px;
 }
@@ -106,6 +113,7 @@
 #script_log_th{
 	height: 30px;
 	background-color: #4c4c4c;
+	padding: 5px 15px 5px 5px;
 	text-align: center;
 	border-radius: 15px 15px 0px 0;
 }
