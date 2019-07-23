@@ -11,17 +11,32 @@ $(function () {
 	function myUpdateFunction(event) {
 		var code = Blockly.JavaScript.workspaceToCode(workspace);
 		$("#script_code_view").html(code.replace(/\n/g,"<br>"));
-		$("#operating_buts_step").css("color","#525252");
-		$("#operating_buts_step").attr("disabled",true);
+		stepDisabled(true);
+		if (code.length <= 0){
+			saveDisabled(true);
+		}else{
+			saveDisabled(false);
+		}
 	}
 	workspace.addChangeListener(myUpdateFunction);
 
+	function runDisabled(bool){
+		$("#operating_buts_run").css("color",bool == true ? "#525252" : "#09d296");
+		$("#operating_buts_run").attr("disabled",bool == true ? true : false);
+	}
+	function stepDisabled(bool){
+		$("#operating_buts_step").css("color",bool == true ? "#525252" : "#09d296");
+		$("#operating_buts_step").attr("disabled",bool == true ? true : false);
+	}
+	function saveDisabled(bool){
+		$("#operating_buts_save").css("color",bool == true ? "#525252" : "#ff8c1f");
+		$("#operating_buts_save").attr("disabled",bool == true ? true : false);
+	}
+
 	$(this).delegate('#operating_buts_run','click',function(){
 		run();
-		$("#operating_buts_step").css("color","#09d296");
-		$("#operating_buts_step").attr("disabled",false);
-		$("#operating_buts_run").css("color","#525252");
-		$("#operating_buts_run").attr("disabled",true);
+		stepDisabled(false);
+		runDisabled(true);
 	})
 
 	$(this).delegate('#operating_buts_step','click',function(){
@@ -36,7 +51,7 @@ $(function () {
 		alert("sdfa");
 	})
 
-	var myInterpreter;
+	var myInterpreter = null;
 	function run(){
 		var code = Blockly.JavaScript.workspaceToCode(workspace);
 		myInterpreter = new Interpreter(code);
@@ -45,8 +60,13 @@ $(function () {
 
 	function nextStep() {
 		alert("aaa");
+		if (myInterpreter == null){
+			var code = Blockly.JavaScript.workspaceToCode(workspace);
+			myInterpreter = new Interpreter(code);
+		}
 		if (!myInterpreter.step()) {
 			alert("执行完毕");
+			myInterpreter = null;
 		}
 	}
 
@@ -55,8 +75,8 @@ $(function () {
 			alert("code");
 			window.setTimeout(nextRun, 10);
 		}else {
-			$("#operating_buts_run").css("color","#09d296");
-			$("#operating_buts_run").attr("disabled",false);
+			runDisabled(false);
+			myInterpreter = null;
 		}
 	}
 })
