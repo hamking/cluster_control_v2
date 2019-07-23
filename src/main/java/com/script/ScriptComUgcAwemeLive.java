@@ -100,7 +100,7 @@ public class ScriptComUgcAwemeLive {
                         e.printStackTrace ();
                     }
                     for (int k = 0; k < script.getFocusNum (); k++) {
-                        auto.wait (4000);
+                        auto.wait (7000);
                         log.push(uuid,"开始关注第"+ (i+1) +"个视频, 第"+ (k+1) +"个用户");
                         //  点击用户
                         try {
@@ -112,9 +112,9 @@ public class ScriptComUgcAwemeLive {
                             //  点击关注
                             auto.findByXpatch ("//android.widget.LinearLayout/android.widget.LinearLayout[3]/android.widget.LinearLayout/android.widget.TextView[1][@text='关注']", true).click ();
                             log.push(uuid,"已关注");
-                            auto.wait (1000);
-                            auto.back ();
-                            auto.wait (2000);
+                            auto.wait(1000);
+                            auto.back();
+                            auto.wait(2000);
                         } catch (DocumentException e) {
                             if(auto.isFindNoteForText("/hierarchy/android.widget.FrameLayout","抖音号",true)){
                                 auto.back ();
