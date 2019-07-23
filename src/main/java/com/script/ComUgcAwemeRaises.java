@@ -194,7 +194,7 @@ public class ComUgcAwemeRaises {
                 //获取有几个评论的人
                 List<Bound> bounds = new ArrayList<>();
                 try {
-                    bounds = auto.findsByXpatch("//android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.LinearLayout", true);
+                    bounds = auto.findsByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout", true);
                 } catch (DocumentException e) {
                 }
                 auto.wait(2000);
@@ -209,11 +209,10 @@ public class ComUgcAwemeRaises {
                     index += 1;
                     auto.wait(1000);
                     try {
-                        auto.findByXpatch("//android.support.v7.widget.RecyclerView/android.widget.LinearLayout["+ (k+1) +"]/android.widget.LinearLayout/android.widget.ImageView",true).click();
+                        auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout["+ (k+1) +"]/android.view.View/android.widget.ImageView[1]",true).click();
                     } catch (DocumentException | IOException | InterruptedException e) {
                         log.push(uuid,"**异常! 进行下一轮");
-                        auto.back();
-                        return;
+                        continue;
                     }
 
                     auto.wait(3000);
