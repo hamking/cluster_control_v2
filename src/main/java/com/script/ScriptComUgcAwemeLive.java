@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Device;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
 import com.zciteam.web.WebSocketDeviceLog;
@@ -89,7 +89,7 @@ public class ScriptComUgcAwemeLive {
 
         //  点击条目
         try {
-            List<Bound> boundList = auto.findsByXpatch("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout",true);
+            List<Device> boundList = auto.findsByXpatch("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout",true);
             try {
                 boundList.get(0).click();
                 for (int i = 0; i < script.getWatchNum(); i++) {
@@ -104,7 +104,7 @@ public class ScriptComUgcAwemeLive {
                         log.push(uuid,"开始关注第"+ (i+1) +"个视频, 第"+ (k+1) +"个用户");
                         //  点击用户
                         try {
-                            List<Bound> bounds = auto.findsByXpatch ("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout", true);
+                            List<Device> bounds = auto.findsByXpatch ("//android.support.v7.widget.RecyclerView/android.widget.RelativeLayout", true);
 
                             bounds.get(bounds.size() - 1).clickOffsetX(50);
 
