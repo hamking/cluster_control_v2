@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Device;
+import com.adb.auto.Bound;
 import com.adb.util.ScriptUtils;
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
@@ -139,7 +139,7 @@ public class ComUgcAwemePrivateMsgForAuthor {
 
         int index = script.getWatchNum();
         for (int i = 0; index > 0; i++) {
-            List<Device> bounds = new ArrayList<Device> ();
+            List<Bound> bounds = new ArrayList<Bound> ();
             //开始关注粉丝
             try {
                 bounds = auto.findByTexts("关注",true);

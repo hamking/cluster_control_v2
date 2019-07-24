@@ -51,7 +51,7 @@ public class Auto {
      * @param xpath xpath
      * @param isSearch 是否解析界面
      */
-    public List<Device> findsByXpatch(String xpath, boolean isSearch) throws DocumentException {
+    public List<Bound> findsByXpatch(String xpath, boolean isSearch) throws DocumentException {
 
         SAXReader reader = new SAXReader();
         if (isSearch){
@@ -61,10 +61,10 @@ public class Auto {
         new ChangeNodes ().getNodes(doc.getRootElement());
         List<Node> list = doc.selectNodes(xpath);
 
-        List<Device> bounds = new ArrayList<> ();
+        List<Bound> bounds = new ArrayList<> ();
         list.forEach(node -> {
 
-            final Device[] bound = new Device[1];
+            final Bound[] bound = new Bound[1];
             Element element = (Element) node;
             if (element == null){
                 try {
@@ -82,7 +82,7 @@ public class Auto {
                 String value=attribute.getValue();
                 noteMap.put(name,value);
                 if (name.equals("bounds")){
-                    bound[0] = new Device(value.toString(),noteMap,deviceUUID);
+                    bound[0] = new Bound(value.toString(),noteMap,deviceUUID);
                 }
             });
             bounds.add(bound[0]);
@@ -95,7 +95,7 @@ public class Auto {
      * @param xpath xpath
      * @param isSearch 是否解析界面
      */
-    public Device findByXpatch(String xpath, boolean isSearch) throws DocumentException {
+    public Bound findByXpatch(String xpath, boolean isSearch) throws DocumentException {
 
         //节点信息
         Map<String, String>noteMap = new HashMap<>();
@@ -119,7 +119,7 @@ public class Auto {
             }
             noteMap.put(name,value);
         });
-        return new Device(bound[0],noteMap,deviceUUID);
+        return new Bound(bound[0],noteMap,deviceUUID);
     }
 
     /**
@@ -127,7 +127,7 @@ public class Auto {
      * @param text text
      * @param isSearch 是否解析界面
      */
-    public Device findByText(String text, boolean isSearch) throws DocumentException {
+    public Bound findByText(String text, boolean isSearch) throws DocumentException {
 
         //节点信息
         Map<String, String>noteMap = new HashMap<>();
@@ -151,7 +151,7 @@ public class Auto {
             }
             noteMap.put(name,value);
         });
-        return new Device(bound[0],noteMap,deviceUUID);
+        return new Bound(bound[0],noteMap,deviceUUID);
     }
 
 
@@ -160,7 +160,7 @@ public class Auto {
      * @param text text
      * @param isSearch 是否解析界面
      */
-    public List<Device> findByTexts(String text, boolean isSearch) throws DocumentException {
+    public List<Bound> findByTexts(String text, boolean isSearch) throws DocumentException {
 
         SAXReader reader = new SAXReader();
         if (isSearch){
@@ -170,10 +170,10 @@ public class Auto {
         new ChangeNodes().getNodes(doc.getRootElement());
         List<Node> list = doc.selectNodes(String.format("//*[@text='%s']", text));
 
-        List<Device> bounds = new ArrayList<> ();
+        List<Bound> bounds = new ArrayList<> ();
         list.forEach(node -> {
 
-            final Device[] bound = new Device[1];
+            final Bound[] bound = new Bound[1];
             Element element = (Element) node;
             if (element == null){
                 try {
@@ -191,7 +191,7 @@ public class Auto {
                 String value=attribute.getValue();
                 noteMap.put(name,value);
                 if (name.equals("bounds")){
-                    bound[0] = new Device(value.toString(),noteMap,deviceUUID);
+                    bound[0] = new Bound(value.toString(),noteMap,deviceUUID);
                 }
             });
             bounds.add(bound[0]);
@@ -204,7 +204,7 @@ public class Auto {
      * @param xpath xpath
      * @param isSearch 是否解析界面
      */
-    public Device findByXpatchParent(String xpath, boolean isSearch) throws DocumentException {
+    public Bound findByXpatchParent(String xpath, boolean isSearch) throws DocumentException {
 
         //节点信息
         Map<String, String>noteMap = new HashMap<>();
@@ -228,7 +228,7 @@ public class Auto {
             }
             noteMap.put(name,value);
         });
-        return new Device(bound[0],noteMap,deviceUUID);
+        return new Bound(bound[0],noteMap,deviceUUID);
     }
 
 

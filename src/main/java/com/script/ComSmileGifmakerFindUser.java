@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Device;
+import com.adb.auto.Bound;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -72,7 +72,7 @@ public class ComSmileGifmakerFindUser {
         boolean isFor = true;
         for (int i = 0; num < index && isFor; i++) {
             try {
-                List<Device> bounds = auto.findByTexts("关注",true);
+                List<Bound> bounds = auto.findByTexts("关注",true);
                 if (bounds.size()<=1){
                     isFor = false;
                     return;

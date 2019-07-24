@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Device;
+import com.adb.auto.Bound;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -71,7 +71,7 @@ public class ComSmileGifmakerPrivateMsg {
                 auto.wait(1000);
                 auto.findByText("我知道了",true).click();
             } catch (DocumentException | IOException | InterruptedException e) { }
-            List<Device> bounds = new ArrayList<Device> ();
+            List<Bound> bounds = new ArrayList<Bound> ();
             try {
                 bounds = auto.findsByXpatch("//*[@content-desc='头像']",true);
             } catch (DocumentException e) { }
@@ -123,7 +123,7 @@ public class ComSmileGifmakerPrivateMsg {
                 int num = script.getDirectMessagesNum();
                 boolean isFor = true;
                 for (int j = 0; num > 0 && isFor; j++) {
-                    List<Device> bounds = auto.findsByXpatch("//android.widget.TableLayout/android.widget.TableRow",true);
+                    List<Bound> bounds = auto.findsByXpatch("//android.widget.TableLayout/android.widget.TableRow",true);
                     if (bounds.size() <= 0){
                         isFor = false;
                         backToHome();
