@@ -25,21 +25,21 @@ public class Auto {
 
     /**
      * 只做初始化
-     * @param device device
+     * @param deviceUUID deviceUUID
      */
-    public Auto(String device){
+    public Auto(String deviceUUID){
 
-        deviceUUID = device;
+        this.deviceUUID = deviceUUID;
     }
 
     /**
      * 启动应用
-     * @param device device
+     * @param deviceUUID deviceUUID
      * @param packageName packageName
      */
-    public Auto(String device, String packageName){
+    public Auto(String deviceUUID, String packageName){
 
-        deviceUUID = device;
+        this.deviceUUID = deviceUUID;
         try {
             new Execute().startApp(deviceUUID, packageName);
         } catch (IOException | InterruptedException ignored) {
