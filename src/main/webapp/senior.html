@@ -12,8 +12,7 @@
     <script src="js/jquery-1.7.1.min.js"></script>
     <script src="js/blockly_compressed.js"></script>
     <script src="js/blocks_compressed.js"></script>
-    <script src="js/javascript_compressed.js"></script>
-    <script src="js/acorn_interpreter.js"></script>
+    <script src="js/lua_compressed.js"></script>
     <script src="msg/js/zh-hans.js"></script>
     <script src="js/blockly_myblock.js"></script>
     <script src="js/senior.js"></script>
@@ -29,7 +28,6 @@
                 <p>脚本操作</p>
             </div>
             <button id="operating_buts_run">运行</button>
-            <button id="operating_buts_step">单步运行</button>
             <button id="operating_buts_stop">终止</button>
             <button id="operating_buts_save">保存</button>
         </div>
@@ -38,7 +36,7 @@
                 <p>代码</p>
             </div>
             <div id="script_code_div">
-                <p id="script_code_view"></p>
+                <textarea id="script_code_view" disabled="none" wrap="off"></textarea>
             </div>
         </div>
         <div id="script_log">
@@ -89,46 +87,82 @@
         </div>
     </div>
     <xml id="toolbox" style="display: none">
+        <category name="必要函数">
+            <block type="start">
+            </block>
+        </category>
         <category name="基本函数">
-            <block type="start"></block>
+            <block type="controls_if"></block>
+            <block type="controls_ifelse"></block>
+            <block type="controls_if_if"></block>
+            <block type="controls_whileUntil"></block>
+            <block type="controls_for"></block>
+            <block type="logic_compare"></block>
+            <block type="logic_operation"></block>
+            <block type="logic_boolean"></block>
         </category>
         <category name="选择元素函数">
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+            <block type="element_xpath">
+                <value name="element_xpath">
+                    <shadow type="element_none"></shadow>
+                </value>
+            </block>
+            <block type="element_xpaths">
+                <value name="element_xpaths">
+                    <shadow type="element_none"></shadow>
+                </value>
+            </block>
+            <block type="element_text_xpath">
+                <value name="element_text_xpath">
+                    <shadow type="element_none"></shadow>
+                </value>
+            </block>
+            <block type="element_text_xpaths">
+                <value name="element_text_xpaths">
+                    <shadow type="element_none"></shadow>
+                </value>
+            </block>
+            <block type="element_sup_xpath">
+                <value name="element_sup_xpath">
+                    <shadow type="element_none"></shadow>
+                </value>
+            </block>
+            <block type="element_isExist_xpath"></block>
+            <block type="element_wait"></block>
         </category>
-        <category name="模拟点击函数">
-            <block type="controls_if"></block>
-            <block type="controls_whileUntil"></block>
-            <block type="controls_for">
+        <category name="模拟操作函数">
+            <block type="element_click"></block>
+            <block type="element_click_offsetx"></block>
+            <block type="element_click_offsety"></block>
+            <block type="element_click_offsetx_offsety"></block>
+            <block type="element_send_text"></block>
         </category>
+
         <category name="设备相关函数">
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+            <block type="device_home"></block>
+            <block type="device_back"></block>
+            <block type="device_kill"></block>
+            <block type="device_swipeup"></block>
+            <block type="device_swipedown"></block>
+            <block type="device_switchkey"></block>
+            <block type="device_lock"></block>
+            <block type="device_unlock"></block>
         </category>
+
         <category name="日志操作函数">
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+
         </category>
+
         <category name="文件操作函数">
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+
         </category>
+
         <category name="高级函数">
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+
         </category>
+
         <category name="其他函数">
-            <block type="controls_if"></block>
-            <block type="controls_whileUntil"></block>
-            <block type="controls_for">
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+            
         </category>
 </xml>
 

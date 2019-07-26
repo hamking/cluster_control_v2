@@ -198,6 +198,13 @@
       <version>2.1.1</version>
     </dependency>
 
+    <!--java Lua交互-->
+    <dependency>
+      <groupId>org.luaj</groupId>
+      <artifactId>luaj-jse</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
   </dependencies>
 
   <build>
