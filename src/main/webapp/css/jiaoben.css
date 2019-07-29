@@ -200,7 +200,7 @@ body{
 .yang-hao,.si-xin,.dou-hao,.dou-xin,.kuai-find-user,.kuai-find-works,.kuai-find-label,.dao-find-user,.dao-find-author,.dao-live-focus{
     display: none;
 }
-.script-zi,.do-zhi.do-ting{
+.script-zi,.do-zhi.do-ting,.script-my-zi{
     cursor: pointer;
 }
 
@@ -212,7 +212,7 @@ body{
     font-size: 18px;
     margin-left: 40px;
 }
-.script-zi{
+.script-zi,.script-my-zi{
     display: inline-block;
     min-width: 105px;
     text-align: center;
@@ -262,7 +262,7 @@ body{
     float: right;
 }
 
-.do-zhi,.do-ting{
+.do-zhi,.do-ting,.do-edit,.do-delete{
     border-radius: 30px;
     display: inline-block;
     background-color: #151515;
@@ -273,7 +273,7 @@ body{
 .do-zhi{
     color: #E0AB37;
 }
-.do-ting{
+.do-ting,.do-edit,.do-delete{
     color: #D75054;
 }
 

@@ -40,7 +40,7 @@ public class ScriptInit {
                 "抖音",
                 "comssandroidugcaweme");
         scriptTypeDao.intertScriptType(
-                "我的脚本",
+                "我的",
                 "commyscirpt");
 
 

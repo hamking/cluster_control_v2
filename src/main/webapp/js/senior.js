@@ -9,7 +9,7 @@ $(function () {
 
 	function myUpdateFunction(event) {
 		var code = Blockly.Lua.workspaceToCode(workspace);
-		$("#script_code_view").html(code);
+		$("#script_code_view").val(code);
 		if (code.length <= 0){
 			saveDisabled(true);
 			runDisabled(true);
@@ -31,20 +31,62 @@ $(function () {
 	}
 
 	$(this).delegate('#operating_buts_run','click',function(){
-		run();
+		var code = Blockly.Lua.workspaceToCode(workspace);
+		var data = {
+			"code":code,
+		};
+		$.ajax({
+			url:'/scriptedit/run',
+			type:'post',
+			data:data,
+			dataType:'json',
+			success:function(datas){
+				if(datas.code == 200){
+					alert("正在运行！");
+				}else{
+					alert("服务器异常")
+				}
+			}
+		});
 	});
 
 	$(this).delegate('#operating_buts_stop','click',function(){
-		alert("sdfa");
+		$.ajax({
+			url:'/scriptedit/stop',
+			type:'get',
+			data:null,
+			dataType:'json',
+			success:function(datas){
+				if(datas.code == 200){
+					alert("停止运行！");
+				}else{
+					alert("服务器异常")
+				}
+			}
+		});
 	});
 
 	$(this).delegate('#operating_buts_save','click',function(){
-		alert("sdfa");
-	});
-
-	function run(){
+		var name=prompt("请输入脚本名称:");
 		var code = Blockly.Lua.workspaceToCode(workspace);
-
-		alert(code);
-	}
+		if (name!=null && name!=""){
+			var data = {
+				"code":code,
+				"scriptName":name,
+			};
+			$.ajax({
+				url:'/scriptedit/save',
+				type:'post',
+				data:data,
+				dataType:'json',
+				success:function(datas){
+					if(datas.code == 200){
+						alert("保存成功！");
+					}else{
+						alert("服务器异常")
+					}
+				}
+			});
+		}
+	});
 });

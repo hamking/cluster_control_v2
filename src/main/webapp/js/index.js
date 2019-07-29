@@ -396,6 +396,10 @@ $(function(){
 
     $(this).delegate('.del-device','click',function () {
         var uuid = $(this).parent().parent().attr("data-id");
+        var r=confirm("删除设备: " + uuid + "?");
+        if (r!=true) {
+            return;
+        }
         var data = {
             "uuid":uuid,
         };

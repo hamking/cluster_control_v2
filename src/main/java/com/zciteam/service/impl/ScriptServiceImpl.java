@@ -2,9 +2,11 @@ package com.zciteam.service.impl;
 
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
+import com.zciteam.bean.ScriptForMy;
 import com.zciteam.bean.ScriptType;
 import com.zciteam.dao.DeviceDao;
 import com.zciteam.dao.ScriptDao;
+import com.zciteam.dao.ScriptForMyDao;
 import com.zciteam.dao.ScriptTypeDao;
 import com.zciteam.dto.ScriptDetails;
 import com.zciteam.dto.ScriptResult;
@@ -25,11 +27,17 @@ public class ScriptServiceImpl implements ScriptService {
 
     private ScriptDao scriptDao;
     private ScriptTypeDao scriptTypeDao;
+    private ScriptForMyDao scriptForMyDao;
     private DeviceDao deviceDao;
 
     @Autowired
     public void setDeviceDao(DeviceDao deviceDao) {
         this.deviceDao = deviceDao;
+    }
+
+    @Autowired
+    public void setScriptForMyDao(ScriptForMyDao scriptForMyDao) {
+        this.scriptForMyDao = scriptForMyDao;
     }
 
     @Autowired
@@ -48,11 +56,19 @@ public class ScriptServiceImpl implements ScriptService {
 
         ScriptResult scriptResult = null;
         List<ScriptDetails>scriptResults = new ArrayList<>();
+        //查询脚本类型
         List<ScriptType> scriptTypes = scriptTypeDao.findAllScriptType();
+        //组装我的脚本到结构体中
+        List<ScriptForMy> scriptForMyList = scriptForMyDao.findAllScript();
         scriptTypes.forEach (scriptType -> {
+            //根据类型查询脚本
             List<Script> scriptList = scriptDao.findScriptForType(scriptType.getType());
             if (scriptList.size()>0){
                 ScriptDetails scriptDetails = new ScriptDetails(scriptType.getScriptName(),scriptType.getType(),scriptList);
+                scriptResults.add(scriptDetails);
+            }
+            if (scriptType.getType().equals("commyscirpt") && scriptForMyList.size()>0){
+                ScriptDetails scriptDetails = new ScriptDetails(scriptType.getScriptName(),scriptType.getType(),scriptForMyList);
                 scriptResults.add(scriptDetails);
             }
         });
@@ -162,6 +178,7 @@ public class ScriptServiceImpl implements ScriptService {
                     threadMap.forEach((k, v)->{
                         if (k.equals(device.getUuid())){
                             v.stop();
+                            v = null;
                             threadMap.remove(k);
                             new WebSocketDeviceLog ().push(device.getUuid(),"停止脚本");
                         }
