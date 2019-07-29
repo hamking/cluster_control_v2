@@ -27,7 +27,7 @@
                     success: function (datas) {
                         if (datas.code == 200) {
                             $("#runscriptCode").val(datas.data.code);
-                            $("#small-title").val("脚本名称：" + datas.data.scriptName);
+                            $(".small-title").html("脚本名称：" + datas.data.scriptName);
                             $("#test").show();
                             $("#log_window").show();
                             $(".my-script").show();
@@ -40,14 +40,59 @@
         });
 
         $(this).delegate('.do-zhi','click',function(){
-            var suid = $(this).attr("data-suid");
+            var suid = $(this).attr("data-id");
+            alert(suid);
             if (suid == "MyScript") {
                 var code = $("#runscriptCode").val();
+                jianben.doExecute("",code);
+            }
+        });
+
+        $(this).delegate('.do-edit','click',function(){
+            var suid = $(this).attr("data-suid");
+            var id = $(this).attr("data-id");
+            alert(suid);
+            alert(id);
+            var code = $("#runscriptCode").val();
+            if (suid == "MyScript") {
                 var data = {
                     "code": code,
+                    "id":id,
                 };
                 $.ajax({
-                    url: '/scriptedit/run',
+                    url: '/scriptedit/update',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $("#test").hide();
+                            $("#log_window").hide();
+                            $(".my-script").hide();
+                        } else {
+                            alert("执行失败!");
+                        }
+                    }, error: function () {
+                        alert("服务器异常");
+                    }
+
+                })
+            }
+        });
+
+        $(this).delegate('.do-delete','click',function(){
+            var suid = $(this).attr("data-suid");
+            var id = $(this).attr("data-id");
+            var r=confirm("删除脚本 ?");
+            if (r!=true) {
+                return;
+            }
+            if (suid == "MyScript") {
+                var data = {
+                    "id": id,
+                };
+                $.ajax({
+                    url: '/scriptedit/delete',
                     type: 'post',
                     data: data,
                     dataType: 'json',
