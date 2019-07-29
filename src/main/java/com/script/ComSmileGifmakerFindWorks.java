@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -72,7 +72,7 @@ public class ComSmileGifmakerFindWorks {
         boolean isFor = true;
         for (int i = 0; num < index && isFor; i++) {
             try {
-                List<Bound> bounds = auto.findsByXpatch("//*[@content-desc='头像']",true);
+                List<Android> bounds = auto.findsByXpatch("//*[@content-desc='头像']",true);
                 if (bounds.size()<=1){
                     isFor = false;
                     return;

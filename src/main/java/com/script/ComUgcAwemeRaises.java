@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -193,7 +193,7 @@ public class ComUgcAwemeRaises {
             auto.wait(4000);
             for (int j = 0; j < script.getFocusNum() && (index < script.getFocusNum()); j++) {
                 //获取有几个评论的人
-                List<Bound> bounds = new ArrayList<>();
+                List<Android> bounds = new ArrayList<>();
                 try {
                     bounds = auto.findsByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout", true);
                 } catch (DocumentException e) {

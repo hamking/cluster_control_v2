@@ -45,44 +45,6 @@
             </div>
             <div id="log_out">
                 <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
-                <p>日志输出</p>
             </div>
         </div>
     </div>
@@ -91,34 +53,86 @@
             <block type="start">
             </block>
         </category>
+
         <category name="基本函数">
-            <block type="controls_if"></block>
-            <block type="controls_ifelse"></block>
-            <block type="controls_if_if"></block>
-            <block type="controls_whileUntil"></block>
-            <block type="controls_for"></block>
-            <block type="logic_compare"></block>
-            <block type="logic_operation"></block>
-            <block type="logic_boolean"></block>
+            <category name="逻辑">
+                <block type="controls_if"></block>
+                <block type="logic_compare">
+                    <field name="OP">EQ</field>
+                </block>
+                <block type="logic_operation">
+                    <field name="OP">AND</field>
+                </block>
+                <block type="logic_negate"></block>
+                <block type="logic_boolean">
+                    <field name="BOOL">TRUE</field>
+                </block>
+                <block type="logic_null"></block>
+                <block type="logic_ternary"></block>
+            </category>
+            <category name="循环">
+                <block type="controls_repeat_ext">
+                    <value name="TIMES">
+                        <shadow type="math_number">
+                            <field name="NUM">10</field>
+                        </shadow>
+                    </value>
+                </block>
+                <block type="controls_whileUntil">
+                    <field name="MODE">WHILE</field>
+                </block>
+                <block type="controls_for">
+                    <field name="VAR" id="J[y);maJ?cfldaU|WrF^">i</field>
+                    <value name="FROM">
+                        <shadow type="math_number">
+                            <field name="NUM">1</field>
+                        </shadow>
+                    </value>
+                    <value name="TO">
+                        <shadow type="math_number">
+                            <field name="NUM">10</field>
+                        </shadow>
+                    </value>
+                    <value name="BY">
+                        <shadow type="math_number">
+                            <field name="NUM">1</field>
+                        </shadow>
+                    </value>
+                </block>
+            </category>
+            <category name="数学">
+                <block type="math_number">
+                    <field name="NUM">0</field>
+                </block>
+                <block type="math_random_int">
+                    <value name="FROM">
+                        <shadow type="math_number">
+                            <field name="NUM">1</field>
+                        </shadow>
+                    </value>
+                    <value name="TO">
+                        <shadow type="math_number">
+                            <field name="NUM">100</field>
+                        </shadow>
+                    </value>
+                </block>
+            </category>
         </category>
         <category name="选择元素函数">
+            <block type="element_xpaths"></block>
+            <block type="element_text_xpaths"></block>
+            <block type="element_local">
+                <value name="element_local">
+                    <shadow type="element_none"></shadow>
+                </value>
+            </block>
             <block type="element_xpath">
                 <value name="element_xpath">
                     <shadow type="element_none"></shadow>
                 </value>
             </block>
-            <block type="element_xpaths">
-                <value name="element_xpaths">
-                    <shadow type="element_none"></shadow>
-                </value>
-            </block>
             <block type="element_text_xpath">
                 <value name="element_text_xpath">
-                    <shadow type="element_none"></shadow>
-                </value>
-            </block>
-            <block type="element_text_xpaths">
-                <value name="element_text_xpaths">
                     <shadow type="element_none"></shadow>
                 </value>
             </block>
@@ -130,6 +144,7 @@
             <block type="element_isExist_xpath"></block>
             <block type="element_wait"></block>
         </category>
+
         <category name="模拟操作函数">
             <block type="element_click"></block>
             <block type="element_click_offsetx"></block>
@@ -141,7 +156,6 @@
         <category name="设备相关函数">
             <block type="device_home"></block>
             <block type="device_back"></block>
-            <block type="device_kill"></block>
             <block type="device_swipeup"></block>
             <block type="device_swipedown"></block>
             <block type="device_switchkey"></block>
@@ -150,19 +164,7 @@
         </category>
 
         <category name="日志操作函数">
-
-        </category>
-
-        <category name="文件操作函数">
-
-        </category>
-
-        <category name="高级函数">
-
-        </category>
-
-        <category name="其他函数">
-            
+            <block type="device_log"></block>
         </category>
 </xml>
 

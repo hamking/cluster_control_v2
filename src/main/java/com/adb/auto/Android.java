@@ -5,7 +5,7 @@ import com.adb.autoComponent.Execute;
 import java.io.IOException;
 import java.util.Map;
 
-public class Bound {
+public class Android {
 
     private int x;
     private int y;
@@ -24,7 +24,7 @@ public class Bound {
      * @param noteMap 节点的map
      * @param deviceUUID deviceUUID
      */
-    public Bound(String bound, Map noteMap, String deviceUUID) {
+    public Android(String bound, Map noteMap, String deviceUUID) {
 
         String s1  = bound.replace("][", ",");
         String s2  = s1.replace("[", "");

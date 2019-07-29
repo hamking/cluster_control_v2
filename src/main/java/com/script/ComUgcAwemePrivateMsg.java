@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -106,7 +106,7 @@ public class ComUgcAwemePrivateMsg {
         } catch (DocumentException e) {
         }
         for (int j = 0; j < (num > nameArr ? (num / nameArr) : 1); j++) {
-            List<Bound> bounds = new ArrayList<Bound>();
+            List<Android> bounds = new ArrayList<Android>();
             //获取当前界面有几个可点击项
             try {
                 bounds = auto.findsByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.TextView",true);

@@ -36,8 +36,8 @@ public class ConventionServiceImpl implements ConventionService {
             new Thread (new Runnable () {
                 @Override
                 public void run() {
-                    new Auto(device.getUuid()).home();
                     new WebSocketDeviceLog().push(device.getUuid(),"主页操作");
+                    new Auto(device.getUuid()).home();
                 }
             }).start();
         });
@@ -51,8 +51,8 @@ public class ConventionServiceImpl implements ConventionService {
             new Thread (new Runnable () {
                 @Override
                 public void run() {
-                    new Auto(device.getUuid()).back();
                     new WebSocketDeviceLog().push(device.getUuid(),"返回操作");
+                    new Auto(device.getUuid()).back();
                 }
             }).start();
         });
@@ -89,8 +89,8 @@ public class ConventionServiceImpl implements ConventionService {
 //                    list.add("com.jm.video");
 //                    list.add("com.android.dialer");
                     list.forEach(l->{
-                        new Auto(device.getUuid()).kill(l);
                         new WebSocketDeviceLog().push(device.getUuid(),"清空进程: "+l);
+                        new Auto(device.getUuid()).kill(l);
                     });
                 }
             }).start();
@@ -107,12 +107,12 @@ public class ConventionServiceImpl implements ConventionService {
                 public void run() {
                     switch (controlEnum){
                         case LOCK:
-                            new Auto(device.getUuid()).lock();
                             new WebSocketDeviceLog().push(device.getUuid(),"锁屏幕");
+                            new Auto(device.getUuid()).lock();
                             break;
                         case UNLOCK:
-                            new Auto(device.getUuid()).unLock();
                             new WebSocketDeviceLog().push(device.getUuid(),"解锁");
+                            new Auto(device.getUuid()).unLock();
                     }
                 }
             }).start();
@@ -129,15 +129,15 @@ public class ConventionServiceImpl implements ConventionService {
                 public void run() {
                     switch (controlEnum){
                         case VOLUMEUP:
-                            new Auto(device.getUuid()).volumeUp();
                             new WebSocketDeviceLog().push(device.getUuid(),"音量加");
+                            new Auto(device.getUuid()).volumeUp();
                             break;
                         case VOLUMEDOWN:
-                            new Auto(device.getUuid()).volumeDown();
                             new WebSocketDeviceLog().push(device.getUuid(),"音量减");
+                            new Auto(device.getUuid()).volumeDown();
                         case MUTE:
-                            new Auto(device.getUuid()).volumeMute();
                             new WebSocketDeviceLog().push(device.getUuid(),"静音");
+                            new Auto(device.getUuid()).volumeMute();
                     }
                 }
             }).start();
@@ -152,8 +152,8 @@ public class ConventionServiceImpl implements ConventionService {
             new Thread (new Runnable () {
                 @Override
                 public void run() {
-                    new Auto(device.getUuid()).reboot();
                     new WebSocketDeviceLog().push(device.getUuid(),"设备重启...\n设备断开...");
+                    new Auto(device.getUuid()).reboot();
                 }
             }).start();
         });
@@ -167,8 +167,8 @@ public class ConventionServiceImpl implements ConventionService {
             new Thread (new Runnable () {
                 @Override
                 public void run() {
-                    new Auto(device.getUuid()).switchKeyboardforSystem(keyboardEnum);
                     new WebSocketDeviceLog().push(device.getUuid(),keyboardEnum.getStateInfo());
+                    new Auto(device.getUuid()).switchKeyboardforSystem(keyboardEnum);
                 }
             }).start();
         });

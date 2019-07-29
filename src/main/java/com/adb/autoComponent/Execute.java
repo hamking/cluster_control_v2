@@ -28,7 +28,6 @@ public class Execute {
 
     public void push(String uuid, String fromPath, String toPath) throws IOException, InterruptedException {
 
-        System.out.println("adb -s " + uuid + " push " + fromPath + " " + toPath);
         Runtime.getRuntime().exec("adb -s " + uuid + " push " + fromPath + " " + toPath).waitFor();
     }
 
