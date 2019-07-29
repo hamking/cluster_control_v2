@@ -23,22 +23,21 @@
         var scriptName = "ComSmileGifmakerFindWorks";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
-            $.ajax({
-                url:'/script/getScript?suid='+suid,
-                type:'get',
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $(".do-zhi").attr("data-id",datas.data.suid);
-                        $(".do-ting").attr("data-id",datas.data.suid);
+            if(suid == scriptName) {
+                $.ajax({
+                    url: '/script/getScript?suid=' + suid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $(".do-zhi").attr("data-id", datas.data.suid);
+                            $(".do-ting").attr("data-id", datas.data.suid);
 
-                        if(suid == scriptName){
-
-                            if(datas.data.isComment == 1){
-                                $("#guanzhu_works").attr("checked",true);
+                            if (datas.data.isComment == 1) {
+                                $("#guanzhu_works").attr("checked", true);
                             }
-                            if(datas.data.isDirectMessages == 1){
-                                $("#sixin_works").attr("checked",true);
+                            if (datas.data.isDirectMessages == 1) {
+                                $("#sixin_works").attr("checked", true);
                             }
                             $("#operationNum_works").val(datas.data.watchNum);
                             $("#searchStr_works").val(datas.data.commentStr);
@@ -46,12 +45,12 @@
                             $("#test").show();
                             $("#log_window").show();
                             $(".kuai-find-works").show();
+                        } else {
+                            alert("服务器异常");
                         }
-                    }else{
-                        alert("服务器异常");
                     }
-                }
-            })
+                })
+            }
         });
 
         $(this).delegate('.do-zhi','click',function(){

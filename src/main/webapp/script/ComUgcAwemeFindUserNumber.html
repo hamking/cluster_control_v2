@@ -16,28 +16,27 @@
         var scriptName = "ComUgcAwemeFindUserNumber";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
-            $.ajax({
-                url:'/script/getScript?suid='+suid,
-                type:'get',
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $(".do-zhi").attr("data-id",datas.data.suid);
-                        $(".do-ting").attr("data-id",datas.data.suid);
-
-                        if(suid == scriptName){
+            if(suid == scriptName){
+                $.ajax({
+                    url:'/script/getScript?suid='+suid,
+                    type:'get',
+                    dataType:'json',
+                    success:function(datas){
+                        if(datas.code == 200){
+                            $(".do-zhi").attr("data-id",datas.data.suid);
+                            $(".do-ting").attr("data-id",datas.data.suid);
 
                             $("#searchStr_dao_user").val(datas.data.commentStr);
 
                             $("#test").show();
                             $("#log_window").show();
                             $(".dao-find-user").show();
+                        }else{
+                            alert("服务器异常");
                         }
-                    }else{
-                        alert("服务器异常");
                     }
-                }
-            })
+                })
+            }
         });
 
         $(this).delegate('.do-zhi','click',function(){

@@ -12,51 +12,58 @@
     </div>
 </div>
 <script>
+    $(".my-script").hide();
+
     $(function(){
         $(this).delegate('.script-my-zi','click',function(){
             var id = $(this).attr("data-id");
             var suid = $(this).attr("data-suid");
-            $.ajax({
-                url:'/scriptedit/getScript',
-                type:'post',
-                data:{"id":id},
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $("#runscriptCode").val(datas.data.code);
-                        $("#small-title").val("脚本名称："+datas.data.scriptName);
-                        $("#test").show();
-                        $("#log_window").show();
-                        $(".my-script").show();
-                    }else{
-                        alert("服务器异常");
+            if (suid == "MyScript") {
+                $.ajax({
+                    url: '/scriptedit/getScript',
+                    type: 'post',
+                    data: {"id": id},
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $("#runscriptCode").val(datas.data.code);
+                            $("#small-title").val("脚本名称：" + datas.data.scriptName);
+                            $("#test").show();
+                            $("#log_window").show();
+                            $(".my-script").show();
+                        } else {
+                            alert("服务器异常");
+                        }
                     }
-                }
-            })
+                })
+            }
         });
 
         $(this).delegate('.do-zhi','click',function(){
-            var code = $("#runscriptCode").val();
-            var data = {
-                "code":code,
-            };
-            $.ajax({
-                url:'/scriptedit/run',
-                type:'post',
-                data:data,
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $("#test").hide();
-                        $("#log_window").hide();
-                        $(".my-script").hide();
-                    }else{
-                        alert("执行失败!");
+            var suid = $(this).attr("data-suid");
+            if (suid == "MyScript") {
+                var code = $("#runscriptCode").val();
+                var data = {
+                    "code": code,
+                };
+                $.ajax({
+                    url: '/scriptedit/run',
+                    type: 'post',
+                    data: data,
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $("#test").hide();
+                            $("#log_window").hide();
+                            $(".my-script").hide();
+                        } else {
+                            alert("执行失败!");
+                        }
+                    }, error: function () {
+                        alert("服务器异常");
                     }
-                },error:function () {
-                    alert("服务器异常");
-                }
-            })
+                })
+            }
         });
     })
 </script>

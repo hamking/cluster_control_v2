@@ -30,28 +30,27 @@
         var scriptName = "ComUgcAwemePrivateMsg";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
-            $.ajax({
-                url:'/script/getScript?suid='+suid,
-                type:'get',
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $(".do-zhi").attr("data-id",datas.data.suid);
-                        $(".do-ting").attr("data-id",datas.data.suid);
-
-                        if(suid == scriptName){
-                            $("#guan_"+datas.data.directMessagesType).click();
+            if(suid == scriptName) {
+                $.ajax({
+                    url: '/script/getScript?suid=' + suid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $(".do-zhi").attr("data-id", datas.data.suid);
+                            $(".do-ting").attr("data-id", datas.data.suid);
+                            $("#guan_" + datas.data.directMessagesType).click();
                             $("#xin-hua").val(datas.data.directMessages);
-                            $('#si-mg').attr('src',datas.data.directMessagesImage);
+                            $('#si-mg').attr('src', datas.data.directMessagesImage);
                             $(".dou-xin").show();
                             $("#test").show();
                             $("#log_window").show();
+                        } else {
+                            alert("服务器异常");
                         }
-                    }else{
-                        alert("服务器异常");
                     }
-                }
-            })
+                })
+            }
         });
 
         $(this).delegate('.do-zhi','click',function(){
