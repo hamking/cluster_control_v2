@@ -369,7 +369,7 @@ $(function () {
         var code =
             'var '+ text_variable + ' = Auto.findByXpatchs('+ '"' + text_xpath + '"' +');' + '\n' +
             text_variable +'.forEach(function(v){\n' +
-            '' + statements_element_text_xpaths+
+            '' + statements_element_xpaths+
             '})\n';
         return code;
     };
