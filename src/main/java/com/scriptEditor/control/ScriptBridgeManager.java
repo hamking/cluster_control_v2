@@ -10,12 +10,12 @@ import javax.script.ScriptException;
 public class ScriptBridgeManager {
 
     public String globalCode =
-            "var AdbControl = Java.type(\"com.scriptEditor.control.AdbControl\");\n" +
+                    "var AdbControl = Java.type(\"com.scriptEditor.control.AdbControl\");\n" +
                     "var Auto = new AdbControl();\n" +
-            "function sleep(n) {\n" +
-            "    var start = new Date().getTime();\n" +
-            "    while(true)  if(new Date().getTime()-start > n) break;\n" +
-            "}\n";
+                    "function sleep(n) {\n" +
+                    "    var start = new Date().getTime();\n" +
+                    "    while(true)  if(new Date().getTime()-start > n) break;\n" +
+                    "}\n";
 
     public void evel(String code) throws ScriptException{
         String scriptStr = globalCode;
