@@ -421,7 +421,7 @@ $(function () {
 
     Blockly.JavaScript['element_click'] = function() {
         // TODO: Assemble JavaScript into code variable.
-        var code = '.click();';
+        var code = '.click()';
         // TODO: Change ORDER_NONE to the correct strength.
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
@@ -429,7 +429,7 @@ $(function () {
     Blockly.JavaScript['element_click_offsety'] = function(block) {
         var text_offsety = block.getFieldValue('offsety');
         // TODO: Assemble JavaScript into code variable.
-        var code = '.clickOffsetY('+ text_offsety +');';
+        var code = '.clickOffsetY('+ text_offsety +')';
         // TODO: Change ORDER_NONE to the correct strength.
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
@@ -437,7 +437,7 @@ $(function () {
     Blockly.JavaScript['element_click_offsetx'] = function(block) {
         var text_offsetx = block.getFieldValue('offsetx');
         // TODO: Assemble JavaScript into code variable.
-        var code = '.clickOffsetX('+ text_offsetx +');';
+        var code = '.clickOffsetX('+ text_offsetx +')';
         // TODO: Change ORDER_NONE to the correct strength.
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
@@ -446,7 +446,7 @@ $(function () {
         var text_offsetx = block.getFieldValue('offsetx');
         var text_offsety = block.getFieldValue('offsety');
         // TODO: Assemble JavaScript into code variable.
-        var code = '.click('+ text_offsetx + ',' + text_offsety +');';
+        var code = '.click('+ text_offsetx + ',' + text_offsety +')';
         // TODO: Change ORDER_NONE to the correct strength.
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
@@ -518,7 +518,7 @@ $(function () {
 
     Blockly.JavaScript['element_none'] = function(block) {
         // TODO: Assemble JavaScript into code variable.
-        var code = ';';
+        var code = '';
         // TODO: Change ORDER_NONE to the correct strength.
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
