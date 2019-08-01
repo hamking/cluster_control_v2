@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
@@ -111,7 +112,11 @@ public class ScriptEditController {
             String code = request.getParameter("code");
             scriptEditService.run(code);
             return new Result(null, CodeEnum.CODE_200);
-        }catch(RuntimeException e){}
+        }catch(RuntimeException e){
+            System.out.println(e.getMessage());
+        }catch (ScriptException e){
+            return new Result(null, CodeEnum.CODE_80001,e.getMessage());
+        }
         return new Result(null, CodeEnum.CODE_400);
     }
 

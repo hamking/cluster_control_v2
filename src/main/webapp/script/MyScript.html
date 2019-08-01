@@ -17,8 +17,11 @@
     $(function(){
         $(this).delegate('.script-my-zi','click',function(){
             var id = $(this).attr("data-id");
-            var suid = $(this).attr("data-suid");
-            if (suid == "MyScript") {
+            $(".do-zhi").attr("data-id", id);
+            $(".do-ting").attr("data-id", id);
+            $(".do-edit").attr("data-id", id);
+            $(".do-delete").attr("data-id", id);
+            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
                 $.ajax({
                     url: '/scriptedit/getScript',
                     type: 'post',
@@ -40,21 +43,19 @@
         });
 
         $(this).delegate('.do-zhi','click',function(){
-            var suid = $(this).attr("data-id");
-            alert(suid);
-            if (suid == "MyScript") {
+            var id = $(this).attr("data-id");
+            alert(Number(id));
+
+            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
                 var code = $("#runscriptCode").val();
                 jianben.doExecute("",code);
             }
         });
 
         $(this).delegate('.do-edit','click',function(){
-            var suid = $(this).attr("data-suid");
             var id = $(this).attr("data-id");
-            alert(suid);
-            alert(id);
             var code = $("#runscriptCode").val();
-            if (suid == "MyScript") {
+            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
                 var data = {
                     "code": code,
                     "id":id,
@@ -75,19 +76,17 @@
                     }, error: function () {
                         alert("服务器异常");
                     }
-
                 })
             }
         });
 
         $(this).delegate('.do-delete','click',function(){
-            var suid = $(this).attr("data-suid");
             var id = $(this).attr("data-id");
             var r=confirm("删除脚本 ?");
             if (r!=true) {
                 return;
             }
-            if (suid == "MyScript") {
+            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
                 var data = {
                     "id": id,
                 };

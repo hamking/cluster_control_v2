@@ -265,9 +265,9 @@ $(function () {
                         for (var j = 0; j < scriptDetails.length; j++){
                             if (result[i].type == "commyscirpt"){
                                 if (j ==0){
-                                    cao +=  "<span class='script-my-zi' data-suid='MyScript' data-id=" + scriptDetails[j].id + ">" + scriptDetails[j].scriptName + "</span>\n";
+                                    cao +=  "<span class='script-my-zi' data-id=" + scriptDetails[j].id + ">" + scriptDetails[j].scriptName + "</span>\n";
                                 }else{
-                                    cao +=  "<span>|</span><span class='script-my-zi' data-suid='MyScript' data-id=" + scriptDetails[j].id + ">" + scriptDetails[j].scriptName + "</span>\n"
+                                    cao +=  "<span>|</span><span class='script-my-zi' data-id=" + scriptDetails[j].id + ">" + scriptDetails[j].scriptName + "</span>\n"
                                 }
                             } else{
                                 if (j ==0){

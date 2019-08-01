@@ -1,10 +1,13 @@
 package com.zciteam.service.impl;
 
+import com.scriptEditor.control.ScriptBridgeManager;
 import com.zciteam.bean.ScriptForMy;
 import com.zciteam.dao.ScriptForMyDao;
 import com.zciteam.service.ScriptEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.script.ScriptException;
 
 @Service
 public class ScriptEditServiceImpl implements ScriptEditService {
@@ -38,11 +41,14 @@ public class ScriptEditServiceImpl implements ScriptEditService {
 
     private Thread thread = null;
     @Override
-    public void run(String code) {
+    public void run(String code) throws ScriptException{
         thread = new Thread (new Runnable () {
             @Override
             public void run() {
-                System.out.println(code);
+                try {
+                    new ScriptBridgeManager().evel(code);
+                } catch (ScriptException e) {
+                }
             }
         });
         thread.start();
@@ -51,6 +57,7 @@ public class ScriptEditServiceImpl implements ScriptEditService {
     @Override
     public void stop() {
         if (thread != null){
+
             thread.stop();
             thread = null;
         }

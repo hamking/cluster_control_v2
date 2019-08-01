@@ -3,40 +3,43 @@ package com.scriptEditor.control;
 import com.adb.auto.Auto;
 import com.adb.auto.Android;
 import com.zciteam.enums.KeyboardEnum;
+import org.dom4j.DocumentException;
+
 import java.util.List;
 
 public class AdbControl {
 
     private Auto auto = null;
-    public AdbControl(String uuid,String packageName){
+
+    public void start(String uuid,String packageName){
         auto = new Auto(uuid,packageName);
     }
 
-    void back(){
+    public void back(){
         auto.back();
     }
 
-    void home(){
+    public void home(){
         auto.home();
     }
 
-    void switchKey(int index){
+    public void switchKey(int index){
         auto.switchKeyboardforSystem(KeyboardEnum.stateOf(index));
     }
 
-    void swipeDown(){
+    public void swipeDown(){
         auto.swipeDown ();
     }
 
-    void swipeUp(){
+    public void swipeUp(){
         auto.swipeUp();
     }
 
-    void lock(){
+    public void lock(){
         auto.lock();
     }
 
-    void unLock(){
+    public void unLock(){
         auto.unLock();
     }
 
@@ -48,7 +51,7 @@ public class AdbControl {
 
         try {
             return auto.findsByXpatch(xpath,true);
-        } catch (Exception e) {
+        } catch (DocumentException e) {
             e.printStackTrace ();
         }
         return null;
@@ -62,7 +65,7 @@ public class AdbControl {
 
         try {
             return auto.findByXpatch(xpath,true);
-        } catch (Exception e) {
+        } catch (DocumentException e) {
             e.printStackTrace ();
         }
         return null;
@@ -76,7 +79,7 @@ public class AdbControl {
 
         try {
             return auto.findByText(text,true);
-        } catch (Exception e) {
+        } catch (DocumentException e) {
             e.printStackTrace ();
         }
         return null;
@@ -89,7 +92,7 @@ public class AdbControl {
     public List<Android> findByTexts(String text){
         try {
             return auto.findByTexts(text,true);
-        } catch (Exception e) {
+        } catch (DocumentException e) {
             e.printStackTrace ();
         }
         return null;
@@ -102,7 +105,7 @@ public class AdbControl {
     public Android findByXpatchParent(String xpath){
         try {
             return auto.findByXpatchParent(xpath, true);
-        } catch (Exception e) {
+        } catch (DocumentException e) {
             e.printStackTrace ();
         }
         return null;
@@ -116,7 +119,7 @@ public class AdbControl {
         boolean isFind = false;
         try {
             isFind = auto.isFindNoteForText(xpath, findText, true);
-        } catch (Exception e) {
+        } catch (DocumentException e) {
             e.printStackTrace ();
         }
         return isFind;

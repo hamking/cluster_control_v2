@@ -12,7 +12,9 @@ public enum CodeEnum {
     CODE_50003(50003,"手机初始化失败"),
     CODE_50004(50004,"设备同步超时"),
     CODE_60001(60001,"程序安装失败"),
-    CODE_70001(70001,"文件类型不受支持!");
+    CODE_70001(70001,"文件类型不受支持!"),
+    CODE_80001(80001,"代码编译错误\n");
+
 
     private int state;
     private String stateInfo;

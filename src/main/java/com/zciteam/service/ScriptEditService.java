@@ -3,6 +3,8 @@ package com.zciteam.service;
 import com.zciteam.bean.ScriptForMy;
 import org.apache.ibatis.annotations.Param;
 
+import javax.script.ScriptException;
+
 public interface ScriptEditService {
 
     /**
@@ -28,7 +30,7 @@ public interface ScriptEditService {
     /**
      * 运行脚本
      */
-    void run(String code);
+    void run(String code) throws ScriptException;
 
     /**
      * 终止运行

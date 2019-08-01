@@ -8,7 +8,7 @@ $(function () {
 		});
 
 	function myUpdateFunction(event) {
-		var code = Blockly.Lua.workspaceToCode(workspace);
+		var code = Blockly.JavaScript.workspaceToCode(workspace);
 		$("#script_code_view").val(code);
 		if (code.length <= 0){
 			saveDisabled(true);
@@ -31,7 +31,7 @@ $(function () {
 	}
 
 	$(this).delegate('#operating_buts_run','click',function(){
-		var code = Blockly.Lua.workspaceToCode(workspace);
+		var code = Blockly.JavaScript.workspaceToCode(workspace);
 		var data = {
 			"code":code,
 		};
@@ -44,7 +44,7 @@ $(function () {
 				if(datas.code == 200){
 					alert("正在运行！");
 				}else{
-					alert("服务器异常")
+					alert(datas.message)
 				}
 			}
 		});
@@ -68,7 +68,7 @@ $(function () {
 
 	$(this).delegate('#operating_buts_save','click',function(){
 		var name=prompt("请输入脚本名称:");
-		var code = Blockly.Lua.workspaceToCode(workspace);
+		var code = Blockly.JavaScript.workspaceToCode(workspace);
 		if (name!=null && name!=""){
 			var data = {
 				"code":code,

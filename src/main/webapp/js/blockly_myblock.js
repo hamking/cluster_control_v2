@@ -346,184 +346,180 @@ $(function () {
 
 
 
-    Blockly.Lua['start'] = function(block) {
+    Blockly.JavaScript['start'] = function(block) {
         var text_uuid = block.getFieldValue('uuid');
         var text_action = block.getFieldValue('action');
-        // TODO: Assemble Lua into code variable.
-        var code = 'uuid = ' + '"' + text_uuid + '"' + '\n' +
-                   'action = ' + '"' + text_action + '"' + '\n';
+        var code = 'var uuid = ' + '"' + text_uuid + '";' + '\n' +
+                   'var action = ' + '"' + text_action + '";' + '\n' +
+                    "var AndroidStart;\n";
         return code;
     };
 
-    Blockly.Lua['element_xpath'] = function(block) {
+    Blockly.JavaScript['element_xpath'] = function(block) {
         var text_xpath = block.getFieldValue('xpath');
-        var value_element_xpath = Blockly.Lua.valueToCode(block, 'element_xpath', Blockly.Lua.ORDER_NONE);
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:findByXpatch('+ '"' + text_xpath + '"' +')' + value_element_xpath + '\n';
+        var value_element_xpath = Blockly.JavaScript.valueToCode(block, 'element_xpath', Blockly.JavaScript.ORDER_NONE);
+        var code = 'Auto.findByXpatch('+ '"' + text_xpath + '"' +')' + value_element_xpath + '\n';
         return code;
     };
 
-    Blockly.Lua['element_xpaths'] = function(block) {
+    Blockly.JavaScript['element_xpaths'] = function(block) {
         var text_xpath = block.getFieldValue('xpath');
         var text_variable = block.getFieldValue('variable');
-        var statements_element_xpaths = Blockly.Lua.statementToCode(block, 'element_xpaths');
-        // TODO: Assemble Lua into code variable.
+        var statements_element_xpaths = Blockly.JavaScript.statementToCode(block, 'element_xpaths');
         var code =
-            'local '+ text_variable + ' = Auto:findByXpatchs('+ '"' + text_xpath + '"' +')' + '\n' +
-            'for v in '+ text_variable +' do\n' +
-            '' + statements_element_xpaths +
-            'end \n';
+            'var '+ text_variable + ' = Auto.findByXpatchs('+ '"' + text_xpath + '"' +');' + '\n' +
+            text_variable +'.forEach(function(v){\n' +
+            '' + statements_element_text_xpaths+
+            '})\n';
         return code;
     };
 
-    Blockly.Lua['element_text_xpaths'] = function(block) {
+    Blockly.JavaScript['element_text_xpaths'] = function(block) {
         var text_text = block.getFieldValue('text');
         var text_variable = block.getFieldValue('variable');
-        var statements_element_text_xpaths = Blockly.Lua.statementToCode(block, 'element_text_xpaths');
-        // TODO: Assemble Lua into code variable.
-        var code =
-            'local '+ text_variable + ' = Auto:findByTexts('+ '"' + text_text + '"' +')' + '\n' +
-            'for v in '+ text_variable +' do\n' +
-            '' + statements_element_text_xpaths +
-            'end \n';
-        return code;
-    };
-
-    Blockly.Lua['element_local'] = function(block) {
-        var value_element_local = Blockly.Lua.valueToCode(block, 'element_local', Blockly.Lua.ORDER_NONE);
-        // TODO: Assemble Lua into code variable.
-        var code = 'v' + value_element_local + '\n';
-        return code;
-    };
-
-    Blockly.Lua['element_text_xpath'] = function(block) {
-        var text_text = block.getFieldValue('text');
-        var value_element_text_xpath = Blockly.Lua.valueToCode(block, 'element_text_xpath', Blockly.Lua.ORDER_NONE);
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:findByText('+ '"' + text_text + '"' + ')' + value_element_text_xpath + '\n';
-        // TODO: Change ORDER_NONE to the correct strength.
-        return code;
-    };
-
-    Blockly.Lua['element_sup_xpath'] = function(block) {
-        var text_xpath = block.getFieldValue('xpath');
-        var value_element_sup_xpath = Blockly.Lua.valueToCode(block, 'element_sup_xpath', Blockly.Lua.ORDER_NONE);
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:findByXpatchParent('+ '"' + text_xpath + '"' + ')' + value_element_sup_xpath + '\n';
-        // TODO: Change ORDER_NONE to the correct strength.
-        return code;
-    };
-
-    Blockly.Lua['element_isExist_xpath'] = function(block) {
-        var text_text = block.getFieldValue('text');
-        var text_xpath = block.getFieldValue('xpath');
-        var code = 'Auto:isFindNoteForText('+ '"' + text_xpath + '"' + ',' + '"' + text_text + '"' +')' + '\n';
-        return [code, Blockly.Lua.ORDER_NONE];
-    };
-
-    Blockly.Lua['element_click'] = function() {
+        var statements_element_text_xpaths = Blockly.JavaScript.statementToCode(block, 'element_text_xpaths');
         // TODO: Assemble JavaScript into code variable.
-        var code = '.click()';
-        // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.Lua.ORDER_NONE];
+        var code =
+            'local '+ text_variable + ' = Auto.findByTexts('+ '"' + text_text + '"' +')' + '\n' +
+            text_variable +'.forEach(function(v){\n' +
+            '' + statements_element_text_xpaths+
+            '})\n';
+        return code;
     };
 
-    Blockly.Lua['element_click_offsety'] = function(block) {
+    Blockly.JavaScript['element_local'] = function(block) {
+        var value_element_local = Blockly.JavaScript.valueToCode(block, 'element_local', Blockly.JavaScript.ORDER_NONE);
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'v' + value_element_local + ';\n';
+        return code;
+    };
+
+    Blockly.JavaScript['element_text_xpath'] = function(block) {
+        var text_text = block.getFieldValue('text');
+        var value_element_text_xpath = Blockly.JavaScript.valueToCode(block, 'element_text_xpath', Blockly.JavaScript.ORDER_NONE);
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.findByText('+ '"' + text_text + '"' + ')' + value_element_text_xpath + '\n';
+        // TODO: Change ORDER_NONE to the correct strength.
+        return code;
+    };
+
+    Blockly.JavaScript['element_sup_xpath'] = function(block) {
+        var text_xpath = block.getFieldValue('xpath');
+        var value_element_sup_xpath = Blockly.JavaScript.valueToCode(block, 'element_sup_xpath', Blockly.JavaScript.ORDER_NONE);
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.findByXpatchParent('+ '"' + text_xpath + '"' + ')' + value_element_sup_xpath + '\n';
+        // TODO: Change ORDER_NONE to the correct strength.
+        return code;
+    };
+
+    Blockly.JavaScript['element_isExist_xpath'] = function(block) {
+        var text_text = block.getFieldValue('text');
+        var text_xpath = block.getFieldValue('xpath');
+        var code = 'Auto.isFindNoteForText('+ '"' + text_xpath + '"' + ',' + '"' + text_text + '"' +')' + '\n';
+        return [code, Blockly.JavaScript.ORDER_NONE];
+    };
+
+    Blockly.JavaScript['element_click'] = function() {
+        // TODO: Assemble JavaScript into code variable.
+        var code = '.click();';
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code, Blockly.JavaScript.ORDER_NONE];
+    };
+
+    Blockly.JavaScript['element_click_offsety'] = function(block) {
         var text_offsety = block.getFieldValue('offsety');
-        // TODO: Assemble Lua into code variable.
-        var code = '.clickOffsetY('+ text_offsety +')';
+        // TODO: Assemble JavaScript into code variable.
+        var code = '.clickOffsetY('+ text_offsety +');';
         // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.Lua.ORDER_NONE];
+        return [code, Blockly.JavaScript.ORDER_NONE];
     };
 
-    Blockly.Lua['element_click_offsetx'] = function(block) {
+    Blockly.JavaScript['element_click_offsetx'] = function(block) {
         var text_offsetx = block.getFieldValue('offsetx');
-        // TODO: Assemble Lua into code variable.
-        var code = '.clickOffsetX('+ text_offsetx +')';
+        // TODO: Assemble JavaScript into code variable.
+        var code = '.clickOffsetX('+ text_offsetx +');';
         // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.Lua.ORDER_NONE];
+        return [code, Blockly.JavaScript.ORDER_NONE];
     };
 
-    Blockly.Lua['element_click_offsetx_offsety'] = function(block) {
+    Blockly.JavaScript['element_click_offsetx_offsety'] = function(block) {
         var text_offsetx = block.getFieldValue('offsetx');
         var text_offsety = block.getFieldValue('offsety');
-        // TODO: Assemble Lua into code variable.
-        var code = '.click('+ text_offsetx + ',' + text_offsety +')';
+        // TODO: Assemble JavaScript into code variable.
+        var code = '.click('+ text_offsetx + ',' + text_offsety +');';
         // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.Lua.ORDER_NONE];
+        return [code, Blockly.JavaScript.ORDER_NONE];
     };
 
-    Blockly.Lua['element_send_text'] = function(block) {
+    Blockly.JavaScript['element_send_text'] = function(block) {
         var text_sendtext = block.getFieldValue('sendText');
-        // TODO: Assemble Lua into code variable.
+        // TODO: Assemble JavaScript into code variable.
         var code = '.sendKeys('+ text_sendtext + ')';
         // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.Lua.ORDER_NONE];
+        return [code, Blockly.JavaScript.ORDER_NONE];
     };
 
-    Blockly.Lua['element_wait'] = function(block) {
+    Blockly.JavaScript['element_wait'] = function(block) {
         var text_wait = block.getFieldValue('wait');
-        // TODO: Assemble Lua into code variable.
-        var code = 'function sleep(' + text_wait + ')\n' +
-            '   os.execute("sleep " .. ' + text_wait + ')\n' +
-            'end\n';
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'sleep('+text_wait+');\n';
         return code;
     };
 
-    Blockly.Lua['device_home'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:home()' + '\n';
+    Blockly.JavaScript['device_home'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.home();' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_back'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:back()' + '\n';
+    Blockly.JavaScript['device_back'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.back();' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_swipeup'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:swipeUp()' + '\n';
+    Blockly.JavaScript['device_swipeup'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.swipeUp();' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_swipedown'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:swipeDown()' + '\n';
+    Blockly.JavaScript['device_swipedown'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.swipeDown();' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_switchkey'] = function(block) {
+    Blockly.JavaScript['device_switchkey'] = function(block) {
         var dropdown_type = block.getFieldValue('type');
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:switchKey(' + dropdown_type + ')' + '\n';
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.switchKey(' + dropdown_type + ');' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_lock'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:lock()' + '\n';
+    Blockly.JavaScript['device_lock'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.lock();' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_unlock'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = 'Auto:unlock()' + '\n';
+    Blockly.JavaScript['device_unlock'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Auto.unlock();' + '\n';
         return code;
     };
 
-    Blockly.Lua['device_log'] = function(block) {
+    Blockly.JavaScript['device_log'] = function(block) {
         var text_logstr = block.getFieldValue('logstr');
-        // TODO: Assemble Lua into code variable.
-        var code = 'Log:push('+ '"' + text_logstr + '"' +')' + '\n';
+        // TODO: Assemble JavaScript into code variable.
+        var code = 'Log:push('+ '"' + text_logstr + '"' +');' + '\n';
         return code;
     };
 
-    Blockly.Lua['element_none'] = function(block) {
-        // TODO: Assemble Lua into code variable.
-        var code = '';
+    Blockly.JavaScript['element_none'] = function(block) {
+        // TODO: Assemble JavaScript into code variable.
+        var code = ';';
         // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.Lua.ORDER_NONE];
+        return [code, Blockly.JavaScript.ORDER_NONE];
     };
 });
