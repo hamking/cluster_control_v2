@@ -137,6 +137,7 @@ public class ScriptServiceImpl implements ScriptService {
                             int id = Integer.parseInt(suid);
                             String code = scriptForMyDao.findScript(id).getCode();
 
+                            //替换code中uuid为当前的设备的uuid
                             String[] codes = code.split("\n");
                             codes[0] = "var uuid = "+ "\"" + device.getUuid() + "\"" +";";
 
@@ -144,8 +145,12 @@ public class ScriptServiceImpl implements ScriptService {
                             for (int i = 0; i < codes.length; i++) {
                                 scriptTryStr.append(codes[i]).append ("\n");
                             }
+
+                            //替换日志中的uuid为当前当前设备的uuid
+                            String codeDeviceLogStr = scriptTryStr.toString().replace("editDeviceUuid",device.getUuid());
+
                             try {
-                                new ScriptBridgeManager ().evel(scriptTryStr.toString());
+                                new ScriptBridgeManager ().evel(codeDeviceLogStr);
                             } catch (ScriptException e) {
                             }
                         }catch (Exception e) {

@@ -512,7 +512,7 @@ $(function () {
     Blockly.JavaScript['device_log'] = function(block) {
         var text_logstr = block.getFieldValue('logstr');
         // TODO: Assemble JavaScript into code variable.
-        var code = 'Log:push('+ '"' + text_logstr + '"' +');' + '\n';
+        var code = 'Auto.push('+ '"editDeviceUuid",' +'"' + text_logstr + '"' +');' + '\n';
         return code;
     };
 

@@ -4,7 +4,10 @@ $(function () {
 	try {
 		id = getQueryString("id");
 	}catch (e) {}
+	var ip;
+	var port;
 
+	getIp();
 	var workspace = Blockly.inject('blockly_div',
 		{
 			toolbox: $("#toolbox")[0],
@@ -142,4 +145,34 @@ $(function () {
 			}
 		}
 	});
+
+	function socket() {
+		var ws = new WebSocket("ws://"+ip+":"+port+"//socket/device/log/editDeviceUuid");
+		ws.onmessage = function(evt) {
+			if (ws.readyState != WebSocket.OPEN) {
+				return;
+			}
+			var result = JSON.parse(evt.data);
+			$('.log-cont').prepend(result.msg + "<br>");
+		};
+	};
+
+	function getIp() {
+		$.ajax({
+			url:'/tools/getAddrPort',
+			type:'get',
+			dataType:'json',
+			success:function(datas){
+				if(datas.code == 200){
+					ip = datas.data.addr;
+					port = datas.data.port;
+				}else{
+					alert("获取IP失败！");
+				}
+				socket(id);
+			},error:function () {
+				alert("服务器异常");
+			}
+		})
+	};
 });

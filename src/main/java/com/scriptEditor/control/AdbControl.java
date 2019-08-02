@@ -3,6 +3,7 @@ package com.scriptEditor.control;
 import com.adb.auto.Auto;
 import com.adb.auto.Android;
 import com.zciteam.enums.KeyboardEnum;
+import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
 import java.util.List;
@@ -10,6 +11,8 @@ import java.util.List;
 public class AdbControl {
 
     private Auto auto = null;
+    private WebSocketDeviceLog log = new WebSocketDeviceLog();
+
 
     public void start(String uuid,String packageName){
         auto = new Auto(uuid,packageName);
@@ -123,5 +126,13 @@ public class AdbControl {
             e.printStackTrace ();
         }
         return isFind;
+    }
+
+    /**
+     * 输出日志相关
+     * @param msg msg
+     */
+    public void push(String uuid,String msg){
+        log.push(uuid,msg);
     }
 }
