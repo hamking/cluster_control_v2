@@ -263,18 +263,11 @@ $(function () {
                         var scriptDetails = result[i].scriptDetails;
                         cao += "<div class='script-use' id = " + result[i].scriptName + "  data-id=" + result[i].scriptName + " style='display: none;'>";
                         for (var j = 0; j < scriptDetails.length; j++){
-                            if (result[i].type == "commyscirpt"){
-                                if (j ==0){
-                                    cao +=  "<span class='script-my-zi' data-id=" + scriptDetails[j].id + ">" + scriptDetails[j].scriptName + "</span>\n";
-                                }else{
-                                    cao +=  "<span>|</span><span class='script-my-zi' data-id=" + scriptDetails[j].id + ">" + scriptDetails[j].scriptName + "</span>\n"
-                                }
-                            } else{
-                                if (j ==0){
-                                    cao +=  "<span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n";
-                                }else{
-                                    cao +=  "<span>|</span><span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n"
-                                }
+
+                            if (j ==0){
+                                cao +=  "<span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n";
+                            }else{
+                                cao +=  "<span>|</span><span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n"
                             }
                         }
                         cao +=  "</div>";

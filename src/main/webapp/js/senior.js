@@ -70,8 +70,11 @@ $(function () {
 		var name=prompt("请输入脚本名称:");
 		var code = Blockly.JavaScript.workspaceToCode(workspace);
 		if (name!=null && name!=""){
+			var xml = Blockly.Xml.workspaceToDom(workspace);
+			var xml_text = Blockly.Xml.domToText(xml);
 			var data = {
 				"code":code,
+				"workxml":xml_text,
 				"scriptName":name,
 			};
 			$.ajax({

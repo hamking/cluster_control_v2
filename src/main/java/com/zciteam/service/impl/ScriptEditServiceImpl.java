@@ -20,23 +20,23 @@ public class ScriptEditServiceImpl implements ScriptEditService {
     }
 
     @Override
-    public ScriptForMy findScript(int id) {
-        return scriptForMyDao.findScript(id);
+    public ScriptForMy findScript(int suid) {
+        return scriptForMyDao.findScript(suid);
     }
 
     @Override
-    public int deleteScript(int id) {
-        return scriptForMyDao.deleteScript(id);
+    public int deleteScript(int suid) {
+        return scriptForMyDao.deleteScript(suid);
     }
 
     @Override
-    public int updateScript(int id, String code) {
-        return scriptForMyDao.updateScript(id,code);
+    public int updateScript(int suid, String code, String workxml) {
+        return scriptForMyDao.updateScript(suid,code,workxml);
     }
 
     @Override
-    public int intertScript(String scriptName, String code) {
-        return scriptForMyDao.intertScript(scriptName,code);
+    public int intertScript(String scriptName, String code, String workxml) {
+        return scriptForMyDao.intertScript(scriptName,code,workxml);
     }
 
     private Thread thread = null;

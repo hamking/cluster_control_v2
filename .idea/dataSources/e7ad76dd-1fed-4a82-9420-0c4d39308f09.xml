@@ -1344,7 +1344,7 @@
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="321" parent="281" name="id">
+    <column id="321" parent="281" name="suid">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
@@ -1359,32 +1359,37 @@
     </column>
     <column id="323" parent="281" name="code">
       <Position>3</Position>
-      <DataType>varchar(16000)|0s</DataType>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="324" parent="281" name="PRIMARY">
+    <column id="324" parent="281" name="workxml">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="325" parent="281" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
+      <ColNames>suid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="325" parent="282" name="id">
+    <column id="326" parent="282" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="326" parent="282" name="scriptName">
+    <column id="327" parent="282" name="scriptName">
       <Position>2</Position>
       <DataType>char(40)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="327" parent="282" name="type">
+    <column id="328" parent="282" name="type">
       <Position>3</Position>
       <DataType>char(40)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="328" parent="282" name="PRIMARY">
+    <key id="329" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

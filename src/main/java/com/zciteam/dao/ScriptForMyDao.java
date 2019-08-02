@@ -15,22 +15,22 @@ public interface ScriptForMyDao {
 
     /**
      * 根据脚本id获取脚本详情
-     * @param id id
+     * @param suid suid
      */
-    ScriptForMy findScript(@Param("id") int id);
+    ScriptForMy findScript(@Param("suid") int suid);
 
     /**
      * 删除脚本
      */
-    int deleteScript(@Param("id") int id);
+    int deleteScript(@Param("suid") int suid);
 
     /**
      * 更新脚本
      */
-    int updateScript(@Param("id") int id,@Param("code") String code);
+    int updateScript(@Param("suid") int suid, @Param("code") String code, @Param("workxml") String workxml);
 
     /**
      * 插入脚本
      */
-    int intertScript(@Param("scriptName") String scriptName, @Param("code") String code);
+    int intertScript(@Param("scriptName") String scriptName, @Param("code") String code, @Param("workxml") String workxml);
 }

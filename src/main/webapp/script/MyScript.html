@@ -15,17 +15,17 @@
     $(".my-script").hide();
 
     $(function(){
-        $(this).delegate('.script-my-zi','click',function(){
-            var id = $(this).attr("data-id");
-            $(".do-zhi").attr("data-id", id);
-            $(".do-ting").attr("data-id", id);
-            $(".do-edit").attr("data-id", id);
-            $(".do-delete").attr("data-id", id);
-            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
+        $(this).delegate('.script-zi','click',function(){
+            var suid = $(this).attr("data-id");
+            $(".do-zhi").attr("data-id", suid);
+            $(".do-ting").attr("data-id", suid);
+            $(".do-edit").attr("data-id", suid);
+            $(".do-delete").attr("data-id", suid);
+            if (Number(suid).toString() != "NaN") {
                 $.ajax({
-                    url: '/scriptedit/getScript',
+                    url: '/scriptedit/getScript?suid=' + suid,
                     type: 'post',
-                    data: {"id": id},
+                    data: {"suid": suid},
                     dataType: 'json',
                     success: function (datas) {
                         if (datas.code == 200) {
@@ -43,22 +43,20 @@
         });
 
         $(this).delegate('.do-zhi','click',function(){
-            var id = $(this).attr("data-id");
-            alert(Number(id));
-
-            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
+            var suid = $(this).attr("data-id");
+            if (Number(suid).toString() != "NaN") {
                 var code = $("#runscriptCode").val();
                 jianben.doExecute("",code);
             }
         });
 
         $(this).delegate('.do-edit','click',function(){
-            var id = $(this).attr("data-id");
+            var suid = $(this).attr("data-id");
             var code = $("#runscriptCode").val();
-            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
+            if (Number(suid).toString() != "NaN") {
                 var data = {
                     "code": code,
-                    "id":id,
+                    "suid":suid,
                 };
                 $.ajax({
                     url: '/scriptedit/update',
@@ -81,14 +79,14 @@
         });
 
         $(this).delegate('.do-delete','click',function(){
-            var id = $(this).attr("data-id");
+            var suid = $(this).attr("data-id");
             var r=confirm("删除脚本 ?");
             if (r!=true) {
                 return;
             }
-            if ((typeof Number(id)) == (typeof 0) && id!=undefined) {
+            if (Number(suid).toString() != "NaN") {
                 var data = {
-                    "id": id,
+                    "suid": suid,
                 };
                 $.ajax({
                     url: '/scriptedit/delete',

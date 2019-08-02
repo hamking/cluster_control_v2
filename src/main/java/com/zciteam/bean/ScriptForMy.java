@@ -2,16 +2,25 @@ package com.zciteam.bean;
 
 public class ScriptForMy {
 
-    private int id;
+    private int suid;
     private String scriptName;
     private String code;
+    private String workxml;
 
-    public int getId() {
-        return id;
+    public int getSuid() {
+        return suid;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSuid(int suid) {
+        this.suid = suid;
+    }
+
+    public String getWorkxml() {
+        return workxml;
+    }
+
+    public void setWorkxml(String workxml) {
+        this.workxml = workxml;
     }
 
     public String getScriptName() {
@@ -33,7 +42,7 @@ public class ScriptForMy {
     @Override
     public String toString() {
         return "ScriptForMy{" +
-                "id=" + id +
+                "suid=" + suid +
                 ", scriptName='" + scriptName + '\'' +
                 ", code='" + code + '\'' +
                 '}';

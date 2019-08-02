@@ -33,8 +33,8 @@ public class ScriptEditController {
     public Result findScript(HttpServletRequest request){
 
         try{
-            int id = Integer.parseInt(request.getParameter("id"));
-            ScriptForMy scriptForMy = scriptEditService.findScript(id);
+            int suid = Integer.parseInt(request.getParameter("suid"));
+            ScriptForMy scriptForMy = scriptEditService.findScript(suid);
             if (scriptForMy != null){
                 return new Result(scriptForMy, CodeEnum.CODE_200);
             }
@@ -54,7 +54,9 @@ public class ScriptEditController {
         try{
             String code = request.getParameter("code");
             String scriptName = request.getParameter("scriptName");
-            int col = scriptEditService.intertScript(scriptName, code);
+            String workxml = request.getParameter("workxml");
+
+            int col = scriptEditService.intertScript(scriptName, code, workxml);
             if (col > 0){
                 return new Result(null, CodeEnum.CODE_200);
             }
@@ -71,8 +73,8 @@ public class ScriptEditController {
     public Result delete(HttpServletRequest request){
 
         try{
-            int id = Integer.parseInt(request.getParameter("id"));
-            int col = scriptEditService.deleteScript(id);
+            int suid = Integer.parseInt(request.getParameter("suid"));
+            int col = scriptEditService.deleteScript(suid);
             if (col > 0){
                 return new Result(null, CodeEnum.CODE_200);
             }
@@ -90,9 +92,10 @@ public class ScriptEditController {
     public Result update(HttpServletRequest request){
 
         try{
-            int id = Integer.parseInt(request.getParameter("id"));
+            int suid = Integer.parseInt(request.getParameter("suid"));
             String code = request.getParameter("code");
-            int col = scriptEditService.updateScript(id,code);
+            String workxml = request.getParameter("workxml");
+            int col = scriptEditService.updateScript(suid,code,workxml);
             if (col > 0){
                 return new Result(null, CodeEnum.CODE_200);
             }

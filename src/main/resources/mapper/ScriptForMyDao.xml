@@ -14,23 +14,23 @@
     <select id="findScript" resultType="ScriptForMy">
         SELECT *
         FROM script_for_my
-        WHERE id=#{id}
+        WHERE suid=#{suid}
     </select>
 
     <delete id="deleteScript">
         DELETE
         FROM script_for_my
-        WHERE id=#{id}
+        WHERE suid=#{suid}
     </delete>
 
     <update id="updateScript">
         UPDATE script_for_my
-        SET code=#{code}
-        WHERE id=#{id}
+        SET code=#{code}, workxml=#{workxml}
+        WHERE suid=#{suid}
     </update>
 
     <insert id="intertScript">
-        INSERT INTO script_for_my(scriptName, code)
-        VALUES (#{scriptName},#{code})
+        INSERT INTO script_for_my(scriptName, code, workxml)
+        VALUES (#{scriptName},#{code},#{workxml})
     </insert>
 </mapper>
