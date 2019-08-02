@@ -18,8 +18,8 @@ public class ScriptBridgeManager {
                     "}\n";
 
     private String tryStr =
-            "try{\n" +
-                    "code\n" +
+                    "try{\n" +
+                        "code\n" +
                     "}catch(e){}\n";
 
     public void evel(String code) throws ScriptException{
