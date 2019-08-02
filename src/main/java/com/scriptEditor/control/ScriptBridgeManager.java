@@ -9,7 +9,7 @@ import javax.script.ScriptException;
  */
 public class ScriptBridgeManager {
 
-    public String globalCode =
+    private String globalCode =
                     "var AdbControl = Java.type(\"com.scriptEditor.control.AdbControl\");\n" +
                     "var Auto = new AdbControl();\n" +
                     "function sleep(n) {\n" +
@@ -17,14 +17,30 @@ public class ScriptBridgeManager {
                     "    while(true)  if(new Date().getTime()-start > n) break;\n" +
                     "}\n";
 
+    private String tryStr =
+            "try{\n" +
+                    "code\n" +
+                    "}catch(e){}\n";
+
     public void evel(String code) throws ScriptException{
         String scriptStr = globalCode;
 
-        String codeStr = (code.replace("var AndroidStart","Auto.start(uuid,action)"));
+        String[] codes = code.split("\n");
+        for (int i = 0; i < codes.length; i++) {
+            if (codes[i].contains("Auto") && (codes[i].contains("click") || codes[i].contains("sendKeys"))){
+                codes[i] = tryStr.replace("code",codes[i]);
+            }
+        }
+
+        StringBuilder scriptTryStr = new StringBuilder ();
+        for (int i = 0; i < codes.length; i++) {
+            scriptTryStr.append(codes[i]).append ("\n");
+        }
+
+        String codeStr = (scriptTryStr.toString().replace("var AndroidStart","Auto.start(uuid,action)"));
 
         ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
         ScriptEngine nashorn = scriptEngineManager.getEngineByName("js");
-
         nashorn.eval(scriptStr + codeStr);
     }
 }
