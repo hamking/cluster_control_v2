@@ -1,5 +1,10 @@
 $(function () {
 
+	var id = null;
+	try {
+		id = getQueryString("id");
+	}catch (e) {}
+
 	var workspace = Blockly.inject('blockly_div',
 		{
 			toolbox: $("#toolbox")[0],
@@ -19,6 +24,28 @@ $(function () {
 		}
 	}
 	workspace.addChangeListener(myUpdateFunction);
+
+	function initWork(id) {
+		if (id != null) {
+			$.ajax({
+				url: '/scriptedit/getScript',
+				type: 'post',
+				data: {"suid": id},
+				dataType: 'json',
+				success: function (datas) {
+					if (datas.code == 200) {
+						Blockly.mainWorkspace.clear();
+						var xml = Blockly.Xml.textToDom(datas.data.workxml);
+						Blockly.Xml.domToWorkspace(xml, workspace);
+					} else {
+						alert("服务器异常");
+					}
+				}
+			})
+		}
+	}
+
+	initWork(id);
 
 	function runDisabled(bool){
 		$("#operating_buts_run").css("color",bool == true ? "#525252" : "#09d296");
@@ -67,29 +94,52 @@ $(function () {
 	});
 
 	$(this).delegate('#operating_buts_save','click',function(){
-		var name=prompt("请输入脚本名称:");
+		var xml = Blockly.Xml.workspaceToDom(workspace);
+		var xml_text = Blockly.Xml.domToText(xml);
 		var code = Blockly.JavaScript.workspaceToCode(workspace);
-		if (name!=null && name!=""){
-			var xml = Blockly.Xml.workspaceToDom(workspace);
-			var xml_text = Blockly.Xml.domToText(xml);
+		if (id != null){
 			var data = {
-				"code":code,
-				"workxml":xml_text,
-				"scriptName":name,
+				"suid": id,
+				"code": code,
+				"workxml": xml_text,
 			};
 			$.ajax({
-				url:'/scriptedit/save',
-				type:'post',
-				data:data,
-				dataType:'json',
-				success:function(datas){
-					if(datas.code == 200){
-						alert("保存成功！");
-					}else{
-						alert("服务器异常")
+				url: '/scriptedit/update',
+				type: 'post',
+				data: data,
+				dataType: 'json',
+				success: function (datas) {
+					if (datas.code == 200) {
+						alert("以保存!");
+					} else {
+						alert("执行失败!");
 					}
+				}, error: function () {
+					alert("服务器异常");
 				}
-			});
+			})
+		}else{
+			var name=prompt("请输入脚本名称:");
+			if (name!=null && name!=""){
+				var data = {
+					"code":code,
+					"workxml":xml_text,
+					"scriptName":name,
+				};
+				$.ajax({
+					url:'/scriptedit/save',
+					type:'post',
+					data:data,
+					dataType:'json',
+					success:function(datas){
+						if(datas.code == 200){
+							alert("保存成功！");
+						}else{
+							alert("服务器异常")
+						}
+					}
+				});
+			}
 		}
 	});
 });

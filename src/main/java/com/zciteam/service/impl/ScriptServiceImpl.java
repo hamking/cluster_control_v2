@@ -1,5 +1,6 @@
 package com.zciteam.service.impl;
 
+import com.scriptEditor.control.ScriptBridgeManager;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
 import com.zciteam.bean.ScriptForMy;
@@ -16,6 +17,7 @@ import com.zciteam.web.WebSocketDeviceLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.script.ScriptException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -126,31 +128,43 @@ public class ScriptServiceImpl implements ScriptService {
         List<Device> devices = new ScopeDevice().getDevice(scope,uuid,deviceDao);
 
         //获取脚本
-        Script script = scriptDao.findScript(suid);
-
-        if (devices.size() > 0 && script != null) {
+        if (devices.size() > 0) {
             devices.forEach (device -> {
                 Thread thread = new Thread(new Runnable () {
                     @Override
                     public void run() {
-                        deviceDao.updateRunningState(device.getUuid(),1);
+                        try{
+                            int id = Integer.parseInt(suid);
+                            String code = scriptForMyDao.findScript(id).getCode();
 
-                        //根据suid得到相应的类并初始化
-                        try {
-                            Class c = Class.forName("com.script." + suid);
-                            Object o = c.newInstance();
-                            Method[] methods = c.getMethods();
-                            for (Method method : methods) {
-                                if (method.getName().equals("script")){
-                                    try {
-                                        method.invoke(o,device.getUuid(),script,device);
-                                    }catch (Exception e){
+                            String[] codes = code.split("\n");
+                            codes[0] = "var uuid = "+ "\"" + device.getUuid() + "\"" +";";
 
+                            StringBuilder scriptTryStr = new StringBuilder ();
+                            for (int i = 0; i < codes.length; i++) {
+                                scriptTryStr.append(codes[i]).append ("\n");
+                            }
+                            try {
+                                new ScriptBridgeManager ().evel(scriptTryStr.toString());
+                            } catch (ScriptException e) {
+                            }
+                        }catch (Exception e) {
+                            Script script = scriptDao.findScript(suid);
+                            //根据suid得到相应的类并初始化
+                            try {
+                                Class c = Class.forName ("com.script." + suid);
+                                Object o = c.newInstance ();
+                                Method[] methods = c.getMethods ();
+                                for (Method method : methods) {
+                                    if (method.getName ().equals ("script")) {
+                                        try {
+                                            method.invoke (o, device.getUuid (), script, device);
+                                        } catch (Exception e1) { }
                                     }
                                 }
+                            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e2) {
+                                e.printStackTrace ();
                             }
-                        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-                            e.printStackTrace ();
                         }
                     }
                 });
@@ -174,8 +188,8 @@ public class ScriptServiceImpl implements ScriptService {
                 @Override
                 public void run() {
                     //TODO 停止脚本逻辑
-                    System.out.println("停止脚本");
                     threadMap.forEach((k, v)->{
+                        System.out.println("停止脚本");
                         if (k.equals(device.getUuid())){
                             v.stop();
                             v = null;

@@ -196,52 +196,29 @@ $(function () {
     (function () {
         jianben ={
             doExecute:function (suid,code) {
-                if (suid.length > 0){
-                    var data = {
-                        "scope": scope,
-                        "suid":suid,
-                        "uuid":id
-                    };
-                    $.ajax({
-                        url:'/script/run',
-                        type:'post',
-                        data:data,
-                        dataType:'json',
-                        success:function(datas){
-                            if(datas.code == 200){
-                                alert("正在执行！");
-                                $("#test").hide();
-                                $('#log_window').hide();
-                                $(".show-type").hide();
-                            }else{
-                                alert("执行失败!");
-                            }
-                        },error:function () {
-                            alert("服务器异常");
+                var data = {
+                    "scope": scope,
+                    "suid":suid,
+                    "uuid":id
+                };
+                $.ajax({
+                    url:'/script/run',
+                    type:'post',
+                    data:data,
+                    dataType:'json',
+                    success:function(datas){
+                        if(datas.code == 200){
+                            alert("正在执行！");
+                            $("#test").hide();
+                            $('#log_window').hide();
+                            $(".show-type").hide();
+                        }else{
+                            alert("执行失败!");
                         }
-                    })
-                }else{
-                    var data = {
-                        "code": code,
-                    };
-                    $.ajax({
-                        url: '/scriptedit/run',
-                        type: 'post',
-                        data: data,
-                        dataType: 'json',
-                        success: function (datas) {
-                            if (datas.code == 200) {
-                                $("#test").hide();
-                                $("#log_window").hide();
-                                $(".my-script").hide();
-                            } else {
-                                alert("执行失败!");
-                            }
-                        }, error: function () {
-                            alert("服务器异常");
-                        }
-                    });
-                }
+                    },error:function () {
+                        alert("服务器异常");
+                    }
+                })
             }
         }
     })();

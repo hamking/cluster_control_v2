@@ -45,46 +45,22 @@
         $(this).delegate('.do-zhi','click',function(){
             var suid = $(this).attr("data-id");
             if (Number(suid).toString() != "NaN") {
-                var code = $("#runscriptCode").val();
-                jianben.doExecute("",code);
+                jianben.doExecute(suid,"");
             }
         });
 
         $(this).delegate('.do-edit','click',function(){
             var suid = $(this).attr("data-id");
-            var code = $("#runscriptCode").val();
-            if (Number(suid).toString() != "NaN") {
-                var data = {
-                    "code": code,
-                    "suid":suid,
-                };
-                $.ajax({
-                    url: '/scriptedit/update',
-                    type: 'post',
-                    data: data,
-                    dataType: 'json',
-                    success: function (datas) {
-                        if (datas.code == 200) {
-                            $("#test").hide();
-                            $("#log_window").hide();
-                            $(".my-script").hide();
-                        } else {
-                            alert("执行失败!");
-                        }
-                    }, error: function () {
-                        alert("服务器异常");
-                    }
-                })
-            }
+            window.location.href = "senior.html?id="+suid;
         });
 
         $(this).delegate('.do-delete','click',function(){
             var suid = $(this).attr("data-id");
-            var r=confirm("删除脚本 ?");
-            if (r!=true) {
-                return;
-            }
             if (Number(suid).toString() != "NaN") {
+                var r=confirm("删除脚本 ?");
+                if (r!=true) {
+                    return;
+                }
                 var data = {
                     "suid": suid,
                 };
@@ -98,6 +74,7 @@
                             $("#test").hide();
                             $("#log_window").hide();
                             $(".my-script").hide();
+                            window.location.reload();
                         } else {
                             alert("执行失败!");
                         }
