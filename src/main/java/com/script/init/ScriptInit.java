@@ -39,6 +39,9 @@ public class ScriptInit {
         scriptTypeDao.intertScriptType(
                 "抖音",
                 "comssandroidugcaweme");
+        scriptTypeDao.intertScriptType(
+                "我的",
+                "commyscirpt");
 
 
         //临时处理清空脚本表

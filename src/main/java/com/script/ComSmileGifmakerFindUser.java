@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -36,15 +36,15 @@ public class ComSmileGifmakerFindUser {
             auto.findByText("允许",true).click();
             auto.wait(1000);
             auto.findByText("允许",false).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         try {
             auto.wait(5000);
             auto.findByText("我知道了",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
         try {
             auto.findByXpatch("//android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.ImageButton", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
         start();
     }
@@ -58,7 +58,7 @@ public class ComSmileGifmakerFindUser {
         auto.wait(2000);
         try {
             auto.findByXpatch("//android.widget.EditText", true).sendKeys(additional);
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
         auto.switchKeyboardforSystem(KeyboardEnum.SYSTEM_KEYBOARD);
         auto.wait(4000);
         auto.enter();
@@ -66,31 +66,27 @@ public class ComSmileGifmakerFindUser {
         auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
         try {
             auto.findByText("用户", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
         auto.wait(2000);
         int num = 0;
         boolean isFor = true;
         for (int i = 0; num < index && isFor; i++) {
             try {
-                List<Bound> bounds = auto.findByTexts("关注",true);
+                List<Android> bounds = auto.findByTexts("关注",true);
                 if (bounds.size()<=1){
                     isFor = false;
                     return;
                 }
                 for (int i1 = 1; i1 < bounds.size () && isFor; i1++) {
                     if (script.getIsComment() == 1){
-                        try{
-                            bounds.get(i1).click();
-                        }catch (IOException | InterruptedException e) { }
+                        bounds.get(i1).click();
                     }else if (script.getIsDirectMessages() == 1){
-                        try{
-                            bounds.get(i1).clickOffsetX(-100);
-                        }catch (IOException | InterruptedException e) { }
+                        bounds.get(i1).clickOffsetX(-100);
                         auto.wait(2000);
                         //点击消息图标
                         try {
                             auto.findByXpatch("//android.widget.FrameLayout/android.widget.ImageButton",true).click();
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                         auto.wait(3000);
                         //准备发送消息
                         try {
@@ -102,22 +98,18 @@ public class ComSmileGifmakerFindUser {
                             }else if (str != null){
                                 auto.findByText("请输入...",true).sendKeys(str);
                             }
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                         try {
                             auto.findByText("发送",true).click();
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                     }else if (script.getIsComment() == 1 && script.getIsDirectMessages() == 1) {
-                        try{
-                            bounds.get(i1).click();
-                        }catch (IOException | InterruptedException e) { }
-                        try{
-                            bounds.get(i1).clickOffsetX(-100);
-                        }catch (IOException | InterruptedException e) { }
+                        bounds.get(i1).click();
+                        bounds.get(i1).clickOffsetX(-100);
                         auto.wait(3000);
                         //点击消息图标
                         try {
                             auto.findByXpatch("//android.widget.FrameLayout/android.widget.ImageButton",true).click();
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                         auto.wait(3000);
                         //准备发送消息
                         try {
@@ -129,10 +121,10 @@ public class ComSmileGifmakerFindUser {
                             }else if (str != null){
                                 auto.findByText("请输入...",true).sendKeys(str);
                             }
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                         try {
                             auto.findByText("发送",true).click();
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                     }
 
                     backToLabel();

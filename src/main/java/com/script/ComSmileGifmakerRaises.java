@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -48,12 +48,12 @@ public class ComSmileGifmakerRaises {
             auto.findByText("允许",true).click();
             auto.wait(1000);
             auto.findByText("允许",false).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         try {
             auto.wait(5000);
             auto.findByText("我知道了",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         //是否是同城或是热门执行不同操作
         if (script.getDirectMessagesType() == 4){ //同城
@@ -61,14 +61,14 @@ public class ComSmileGifmakerRaises {
             log.push(uuid, "同城操作");
             try {
                 auto.findByText("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.view.View[2]", true).click();
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }else { //热门
             System.out.println("热门操作");
             System.out.println("热门操作");
             try {
                 auto.findByText("//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.view.View[3]", true).click();
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }
 
@@ -85,8 +85,8 @@ public class ComSmileGifmakerRaises {
             try {
                 auto.wait(1000);
                 auto.findByText("我知道了",true).click();
-            } catch (DocumentException | IOException | InterruptedException e) { }
-            List<Bound> bounds = new ArrayList<Bound> ();
+            } catch (DocumentException e) { }
+            List<Android> bounds = new ArrayList<Android> ();
             try {
                 bounds = auto.findsByXpatch("//*[@content-desc='头像']",true);
             } catch (DocumentException e) { }
@@ -95,8 +95,7 @@ public class ComSmileGifmakerRaises {
                 try {
                     auto.wait(1000);
                     auto.findByText("我知道了",true).click();
-                } catch (DocumentException | IOException | InterruptedException e) { }
-                try {
+                } catch (DocumentException e) { }
                     bounds.get(i1).click();
 //                    phoneItem.terminalLog("开始观看视频" + scriptDao.getScript(script).getWatchTime() + "秒");
                     auto.wait(1000 * script.getWatchTime());
@@ -106,7 +105,7 @@ public class ComSmileGifmakerRaises {
                         auto.findByXpatch("(//android.widget.ImageView[@content-desc='喜欢'])[2]", true).click();
                         auto.wait(3000);
                         auto.swipeUp();
-                    }catch (DocumentException | IOException | InterruptedException e) { }
+                    }catch (DocumentException e) { }
                     auto.swipeUp();
 
                     giveLike(script.getIsGiveLike () == 1);
@@ -119,7 +118,6 @@ public class ComSmileGifmakerRaises {
                     auto.swipeUp();
 
                     satchNum -= 1;
-                }catch (IOException | InterruptedException e) { }
                 backToHome();
                 //设置间隔
                 auto.wait(1000 * script.getWatchTimeInterval());
@@ -139,7 +137,7 @@ public class ComSmileGifmakerRaises {
             log.push(uuid, "点赞操作");
             try {
                 auto.findByXpatch ("//*[@content-desc='喜欢']", true).click ();
-            } catch (DocumentException | IOException | InterruptedException e) { }
+            } catch (DocumentException e) { }
         }
     }
 
@@ -160,10 +158,10 @@ public class ComSmileGifmakerRaises {
                 }else if (str != null){
                     auto.findByText("说点什么...",true).sendKeys(str);
                 }
-            } catch (DocumentException | IOException | InterruptedException e) { }
+            } catch (DocumentException e) { }
             try {
                 auto.findByText("发送",true).click();
-            } catch (DocumentException | IOException | InterruptedException e) { }
+            } catch (DocumentException e) { }
         }
     }
 
@@ -177,7 +175,7 @@ public class ComSmileGifmakerRaises {
             log.push(uuid, "开始关注作者");
             try {
                 auto.findByText("关注",true).click();
-            } catch (DocumentException | IOException | InterruptedException e) { }
+            } catch (DocumentException e) { }
         }
     }
 
@@ -194,21 +192,19 @@ public class ComSmileGifmakerRaises {
                 int num = script.getFocusNum();
                 boolean isFor = true;
                 for (int j= 0; num > 0 && isFocus; j++) {
-                    List<Bound> bounds = auto.findsByXpatch("//android.widget.TableLayout/android.widget.TableRow",true);
+                    List<Android> bounds = auto.findsByXpatch("//android.widget.TableLayout/android.widget.TableRow",true);
                     if (bounds.size() <= 0){
                         isFor = false;
                         backToHome();
                         return;
                     }
                     for (int i = 1; i < (bounds.size() - 1) && isFocus; i++) {
-                        try {
-                            bounds.get(i).clickOffsetX(-80);
-                        }catch (IOException | InterruptedException e) { }
+                        bounds.get(i).clickOffsetX(-80);
                         auto.wait(2000);
                         try {
                             auto.findByText("i 关注",true).click();
                             auto.back();
-                        } catch (DocumentException | IOException | InterruptedException e) { }
+                        } catch (DocumentException e) { }
                         num -= 1;
                     }
                     auto.swipeUp();

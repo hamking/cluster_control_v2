@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -9,6 +9,7 @@ import com.zciteam.enums.KeyboardEnum;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
+import javax.script.ScriptEngineManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,20 +63,20 @@ public class ComUgcAwemeRaises {
             log.push(uuid,"点击青少年模式");
             auto.findByText("我知道了",true).click();
             auto.wait(5000);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         for (int i = 0; i < 4; i++) {
             try {
                 auto.findByText("允许",true).click();
                 auto.wait(3000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }
 
         try {
             auto.findByText("继续播放", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //  用户隐私协议
@@ -84,7 +85,7 @@ public class ComUgcAwemeRaises {
             auto.findByText("同意",true).click();
             auto.wait(5000);
             auto.back();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //版本检测
@@ -92,7 +93,7 @@ public class ComUgcAwemeRaises {
             log.push(uuid,"版本检测");
             auto.findByText("以后再说",true).click();
             auto.wait(5000);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         readArticle(script.getWatchNum());
@@ -143,14 +144,14 @@ public class ComUgcAwemeRaises {
                 new ScriptUtils().onLogin("点击消息按钮，进入消息列表");
                 auto.findByXpatch("//android.widget.FrameLayout[3]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ImageView",true).click();
                 auto.wait(5000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
             try {
                 //  todo:提示xpath不存在 -已解决
                 new ScriptUtils().onLogin("点击评论窗口");
                 auto.findByText("留下你的精彩评论吧",true).click();
                 auto.wait(5000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
                 auto.wait(3000);
                 auto.back();
             }
@@ -160,14 +161,14 @@ public class ComUgcAwemeRaises {
                 String[] strings = script.getCommentStr().split ("\n");
                 int s = new ScriptUtils().random("随机评论", 0, strings.length);
                 auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.EditText",true).sendKeys(strings[s]);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
                 auto.wait(3000);
                 auto.back();
             }
             try {
                 new ScriptUtils().onLogin("点击发送文本");
                 auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.ImageView[3]",true).click();
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
                 auto.wait(3000);
                 auto.back();
             }
@@ -188,11 +189,11 @@ public class ComUgcAwemeRaises {
 
             try {
                 auto.findByXpatch("//android.widget.FrameLayout[3]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ImageView", true).click();
-            } catch (DocumentException | IOException | InterruptedException e) { }
+            } catch (DocumentException e) { }
             auto.wait(4000);
             for (int j = 0; j < script.getFocusNum() && (index < script.getFocusNum()); j++) {
                 //获取有几个评论的人
-                List<Bound> bounds = new ArrayList<>();
+                List<Android> bounds = new ArrayList<>();
                 try {
                     bounds = auto.findsByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout", true);
                 } catch (DocumentException e) {
@@ -210,7 +211,7 @@ public class ComUgcAwemeRaises {
                     auto.wait(1000);
                     try {
                         auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.support.v7.widget.RecyclerView/android.widget.FrameLayout["+ (k+1) +"]/android.view.View/android.widget.ImageView[1]",true).click();
-                    } catch (DocumentException | IOException | InterruptedException e) {
+                    } catch (DocumentException e) {
                         log.push(uuid,"**异常! 进行下一轮");
                         continue;
                     }
@@ -218,7 +219,7 @@ public class ComUgcAwemeRaises {
                     auto.wait(3000);
                     try {
                         auto.findByText("关注",true).click();
-                    } catch (DocumentException | IOException | InterruptedException e) { }
+                    } catch (DocumentException e) { }
 
                     auto.wait(3000);
                     try {
@@ -259,7 +260,7 @@ public class ComUgcAwemeRaises {
                 log.push(uuid,"点击关注该视频作者");
                 auto.findByXpatch("//android.widget.LinearLayout/android.widget.FrameLayout[1]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.FrameLayout/android.widget.ImageView",true).click();
                 auto.wait(6000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         } else if (b == 0) {
             log.push(uuid,"跳过关注该视频作者");
@@ -273,7 +274,7 @@ public class ComUgcAwemeRaises {
                 log.push(uuid,"点赞");
                 auto.findByXpatch("//android.widget.FrameLayout[2]/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.ImageView",true).click();
                 auto.wait(6000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }else if (b == 0) {
             log.push(uuid,"跳过点赞");

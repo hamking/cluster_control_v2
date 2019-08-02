@@ -195,7 +195,7 @@ $(function () {
 
     (function () {
         jianben ={
-            doExecute:function (suid) {
+            doExecute:function (suid,code) {
                 var data = {
                     "scope": scope,
                     "suid":suid,
@@ -240,6 +240,7 @@ $(function () {
                         var scriptDetails = result[i].scriptDetails;
                         cao += "<div class='script-use' id = " + result[i].scriptName + "  data-id=" + result[i].scriptName + " style='display: none;'>";
                         for (var j = 0; j < scriptDetails.length; j++){
+
                             if (j ==0){
                                 cao +=  "<span class='script-zi' data-id=" + scriptDetails[j].suid + ">" + scriptDetails[j].scriptName + "</span>\n";
                             }else{
@@ -325,38 +326,8 @@ $(function () {
             },error:function () {
                 alert("服务器异常");
             }
-        })
+        });
         scope = "-2";
-    });
-
-    $(this).delegate(".reboot","click",function () {
-        $.ajax({
-            url:'/tools/reboot',
-            type:'get',
-            dataType:'json',
-            success:function(datas){
-                if(datas.code == 200){
-                    alert("重启服务器");
-                }else{
-                    alert("服务器异常");
-                }
-            }
-        })
-    });
-
-    $(this).delegate(".shutdown","click",function () {
-        $.ajax({
-            url:'/tools/shutdown',
-            type:'get',
-            dataType:'json',
-            success:function(datas){
-                if(datas.code == 200){
-                    alert("服务器关机");
-                }else{
-                    alert("服务器异常");
-                }
-            }
-        })
     });
 
     function socket(id) {

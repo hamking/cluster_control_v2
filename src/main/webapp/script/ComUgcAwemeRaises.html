@@ -45,28 +45,27 @@
         var scriptName = "ComUgcAwemeRaises";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
-            $.ajax({
-                url:'/script/getScript?suid='+suid,
-                type:'get',
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $(".do-zhi").attr("data-id",datas.data.suid);
-                        $(".do-ting").attr("data-id",datas.data.suid);
-
-                        if(suid == scriptName){
-                            if(datas.data.isGiveLike == 1){
-                                $("#dou-zan").attr("checked",true);
+            if(suid == scriptName) {
+                $.ajax({
+                    url: '/script/getScript?suid=' + suid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $(".do-zhi").attr("data-id", datas.data.suid);
+                            $(".do-ting").attr("data-id", datas.data.suid);
+                            if (datas.data.isGiveLike == 1) {
+                                $("#dou-zan").attr("checked", true);
                             }
-                            if(datas.data.isComment == 1){
-                                $("#dou-lun").attr("checked",true);
+                            if (datas.data.isComment == 1) {
+                                $("#dou-lun").attr("checked", true);
                             }
-                            if(datas.data.isFocus == 1){
-                                $("#dou-zhuping").attr("checked",true);
+                            if (datas.data.isFocus == 1) {
+                                $("#dou-zhuping").attr("checked", true);
                             }
                             $("#shi-cnt").val(datas.data.focusNum);
-                            if(datas.data.isFocusAuthor == 1){
-                                $("#guan-zuo").attr("checked",true);
+                            if (datas.data.isFocusAuthor == 1) {
+                                $("#guan-zuo").attr("checked", true);
                             }
                             $("#mei-chang").val(datas.data.watchTime);
                             $("#jian-ge").val(datas.data.watchTimeInterval);
@@ -76,12 +75,12 @@
                             $("#test").show();
                             $("#log_window").show();
                             $(".dou-hao").show();
+                        } else {
+                            alert("服务器异常");
                         }
-                    }else{
-                        alert("服务器异常");
                     }
-                }
-            })
+                })
+            }
         });
 
         $(this).delegate('.do-zhi','click',function(){
@@ -155,7 +154,7 @@
                     dataType:'json',
                     success:function(datas){
                         if(datas.code == 200){
-                            jianben.doExecute(suid);
+                            jianben.doExecute(suid,"");
                         }else{
                             alert("执行失败!");
                         }

@@ -79,9 +79,9 @@ public class ScriptController {
 
         /**
          * //    private String ;
-         * ////    private int ;
-         * ////    private int ;
-         * ////    private int individuationVar2;
+         * //    private int ;
+         * //    private int ;
+         * //    private int individuationVar2;
          */
         try{
             String uuid                     = request.getParameter("uuid");

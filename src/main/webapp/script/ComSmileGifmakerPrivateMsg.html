@@ -36,31 +36,30 @@
         var scriptName = "ComSmileGifmakerPrivateMsg";
         $(this).delegate('.script-zi','click',function(){
             var suid = $(this).attr("data-id");
-            $.ajax({
-                url:'/script/getScript?suid='+suid,
-                type:'get',
-                dataType:'json',
-                success:function(datas){
-                    if(datas.code == 200){
-                        $(".do-zhi").attr("data-id",datas.data.suid);
-                        $(".do-ting").attr("data-id",datas.data.suid);
-
-                        if(suid == scriptName){
+            if(suid == scriptName) {
+                $.ajax({
+                    url: '/script/getScript?suid=' + suid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $(".do-zhi").attr("data-id", datas.data.suid);
+                            $(".do-ting").attr("data-id", datas.data.suid);
                             $("#sizong").val(datas.data.watchNum);
                             $("#xindien").val(datas.data.numStart);
                             $("#xinmeitiao").val(datas.data.directMessagesNum);
-                            $("#si_"+datas.data.isDirectMessagesOnAuthor).click();
+                            $("#si_" + datas.data.isDirectMessagesOnAuthor).click();
                             $("#sixinhuashu").val(datas.data.directMessages);
-                            $('#simg').attr('src',datas.data.directMessagesImage);
+                            $('#simg').attr('src', datas.data.directMessagesImage);
                             $(".si-xin").show();
                             $("#test").show();
                             $("#log_window").show();
+                        } else {
+                            alert("服务器异常");
                         }
-                    }else{
-                        alert("服务器异常");
                     }
-                }
-            })
+                })
+            }
         });
 
         $(this).delegate('.do-zhi','click',function(){
@@ -117,7 +116,7 @@
                     dataType:'json',
                     success:function(datas){
                         if(datas.code == 200){
-                            jianben.doExecute(suid);
+                            jianben.doExecute(suid,"");
                         }else{
                             alert("执行失败!");
                         }

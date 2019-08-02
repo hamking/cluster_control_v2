@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
@@ -50,12 +50,12 @@ public class ComSmileGifmakerPrivateMsg {
             auto.findByText("允许",true).click();
             auto.wait(1000);
             auto.findByText("允许",false).click();
-        } catch (DocumentException | IOException | InterruptedException  e) { }
+        } catch (DocumentException   e) { }
 
         try {
             auto.wait(5000);
             auto.findByText("我知道了",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         //从第几个开始观看
         for (int i = 0; i < script.getNumStart(); i++) {
@@ -70,8 +70,8 @@ public class ComSmileGifmakerPrivateMsg {
             try {
                 auto.wait(1000);
                 auto.findByText("我知道了",true).click();
-            } catch (DocumentException | IOException | InterruptedException e) { }
-            List<Bound> bounds = new ArrayList<Bound> ();
+            } catch (DocumentException e) { }
+            List<Android> bounds = new ArrayList<Android> ();
             try {
                 bounds = auto.findsByXpatch("//*[@content-desc='头像']",true);
             } catch (DocumentException e) { }
@@ -80,8 +80,7 @@ public class ComSmileGifmakerPrivateMsg {
                 try {
                     auto.wait(1000);
                     auto.findByText("我知道了",true).click();
-                } catch (DocumentException | IOException | InterruptedException e) { }
-                try {
+                } catch (DocumentException e) { }
                     bounds.get(i1).click();
 //                    phoneItem.terminalLog("开始观看视频" + scriptDao.getScript(script).getWatchTime() + "秒");
                     auto.wait(1000 * script.getWatchTime());
@@ -91,7 +90,7 @@ public class ComSmileGifmakerPrivateMsg {
                         auto.findByXpatch("(//android.widget.ImageView[@content-desc='喜欢'])[2]", true).click();
                         auto.wait(3000);
                         auto.swipeUp();
-                    }catch (DocumentException | IOException | InterruptedException e) { }
+                    }catch (DocumentException e) { }
                     auto.swipeUp();
 
                     directMessagesFocus(script.getIsDirectMessages() == 1 && script.getIsDirectMessagesOnAuthor() == 0);
@@ -102,7 +101,6 @@ public class ComSmileGifmakerPrivateMsg {
                     auto.swipeUp();
 
                     satchNum -= 1;
-                }catch (IOException | InterruptedException e) { }
                 backToHome();
                 //设置间隔
                 auto.wait(1000 * script.getWatchTimeInterval());
@@ -123,26 +121,20 @@ public class ComSmileGifmakerPrivateMsg {
                 int num = script.getDirectMessagesNum();
                 boolean isFor = true;
                 for (int j = 0; num > 0 && isFor; j++) {
-                    List<Bound> bounds = auto.findsByXpatch("//android.widget.TableLayout/android.widget.TableRow",true);
+                    List<Android> bounds = auto.findsByXpatch("//android.widget.TableLayout/android.widget.TableRow",true);
                     if (bounds.size() <= 0){
                         isFor = false;
                         backToHome();
                     }
                     for (int i = 1; i < (bounds.size() - 1) && isFor; i++) {
 
-                        try {
-                            bounds.get (i).clickOffsetX (-80);
-                        }catch (IOException | InterruptedException e) {
-                        }
+                        bounds.get (i).clickOffsetX (-80);
 
                         auto.wait(4000);
                         //点击消息图标
-                        try {
                             auto.findByXpatch("//android.widget.FrameLayout/android.widget.ImageButton",true).click();
-                        } catch (IOException | InterruptedException e) { }
                         auto.wait(3000);
                         //准备发送消息
-                        try {
                             String str = script.getDirectMessages();
                             if (str != null && str.length() > 0 && str.contains("\n")){
                                 String[] strings = str.split ("\n");
@@ -151,10 +143,7 @@ public class ComSmileGifmakerPrivateMsg {
                             }else if (str != null){
                                 auto.findByText("请输入...",true).sendKeys(str);
                             }
-                        } catch (IOException | InterruptedException e) { }
-                        try {
                             auto.findByText("发送",true).click();
-                        } catch (IOException | InterruptedException e) { }
                         num -= 1;
                         backToComment();
                     }
@@ -176,12 +165,12 @@ public class ComSmileGifmakerPrivateMsg {
             //点击头像
             try {
                 auto.findByXpatch("//*[@content-desc='头像']",true).click();
-            } catch (IOException | InterruptedException | DocumentException e) { }
+            } catch (DocumentException e) { }
             auto.wait(4000);
             //点击消息图标
             try {
                 auto.findByXpatch("//android.widget.FrameLayout/android.widget.ImageButton",true).click();
-            } catch (IOException | InterruptedException | DocumentException e) { }
+            } catch (DocumentException e) { }
             auto.wait(3000);
             //准备发送消息
             try {
@@ -193,10 +182,10 @@ public class ComSmileGifmakerPrivateMsg {
                 }else if (str != null){
                     auto.findByText("请输入...",true).sendKeys(str);
                 }
-            } catch (IOException | InterruptedException | DocumentException e) { }
+            } catch (DocumentException e) { }
             try {
                 auto.findByText("发送",true).click();
-            } catch (IOException | InterruptedException | DocumentException e) { }
+            } catch (DocumentException e) { }
         }
     }
 

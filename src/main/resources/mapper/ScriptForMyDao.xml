@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zciteam.dao.ScriptForMyDao">
+
+    <select id="findAllScript" resultType="ScriptForMy">
+        SELECT *
+        FROM script_for_my
+    </select>
+
+    <select id="findScript" resultType="ScriptForMy">
+        SELECT *
+        FROM script_for_my
+        WHERE suid=#{suid}
+    </select>
+
+    <delete id="deleteScript">
+        DELETE
+        FROM script_for_my
+        WHERE suid=#{suid}
+    </delete>
+
+    <update id="updateScript">
+        UPDATE script_for_my
+        SET code=#{code}, workxml=#{workxml}
+        WHERE suid=#{suid}
+    </update>
+
+    <insert id="intertScript">
+        INSERT INTO script_for_my(scriptName, code, workxml)
+        VALUES (#{scriptName},#{code},#{workxml})
+    </insert>
+</mapper>

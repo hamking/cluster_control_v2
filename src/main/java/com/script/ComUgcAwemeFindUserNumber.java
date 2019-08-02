@@ -36,20 +36,20 @@ public class ComUgcAwemeFindUserNumber {
             new ScriptUtils().onLogin("点击青少年模式");
             auto.findByText("我知道了",true).click();
             auto.wait(5000);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         for (int i = 0; i < 4; i++) {
             try {
                 auto.findByText("允许",true).click();
                 auto.wait(3000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }
 
         try {
             auto.findByText("继续播放", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //  用户隐私协议
@@ -58,7 +58,7 @@ public class ComUgcAwemeFindUserNumber {
             auto.findByText("同意",true).click();
             auto.wait(5000);
             auto.back();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //版本检测
@@ -66,7 +66,7 @@ public class ComUgcAwemeFindUserNumber {
             new ScriptUtils().onLogin("版本检测");
             auto.findByText("以后再说",true).click();
             auto.wait(5000);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         start();
@@ -83,13 +83,13 @@ public class ComUgcAwemeFindUserNumber {
         //点击首页
         try {
             auto.findByText("首页", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //点击搜索图标
         try {
             auto.findByXpatch("//android.widget.ImageView[@content-desc='搜索']", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         if (str.length() > 0) {
@@ -111,18 +111,18 @@ public class ComUgcAwemeFindUserNumber {
         //点击输入框并输入文字
         try {
             auto.findByXpatch("//android.widget.EditText", true).sendKeys(str);
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         //点击搜索
         try {
             auto.findByText("搜索", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         auto.wait(3000);
         //点击关注
         try {
             auto.findByText("关注", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
         auto.back();
     }
 }

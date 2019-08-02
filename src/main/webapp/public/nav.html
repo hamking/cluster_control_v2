@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div id="head" class="bg">
+    <div class="head-center">
+        <div class="logo">
+            <a href="index.html"><span>云晟科技</span></a>
+        </div>
+        <ul class="header-nav clearfix">
+            <li>
+                <a href="index.html" class="nav-a">控制台</a>
+                <p class="heng-kong bg"></p>
+            </li>
+            <li>
+                <a href="bianxian.html" class="nav-a">变现</a>
+                <p class="heng-kong bg"></p>
+            </li>
+            <li>
+                <a href="help.html" class="nav-a">帮助中心</a>
+                <p class="heng-kong bg"></p>
+            </li>
+            <li>
+                <a href="senior.html" class="nav-a">脚本开发</a>
+                <p class="heng-kong bg"></p>
+            </li>
+            <li class="gongju">
+                <a href="javascript:void(0)" class="nav-a">工具</a>
+                <p class="heng-kong bg"></p>
+                <div class="gongju-style">
+                    <a class="mobile-chu">手机初始化</a>
+                    <a class="switch-keyboard">切换键盘</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="device-service">
+        <a class="reboot">服务器重启</a>
+        <br>
+        <a class="shutdown">服务器关机</a>
+    </div>
+</div>
+
+<script>
+    $(this).delegate('.mobile-chu','click',function(){
+        var state = $(this).attr("data-volume");
+        var data = {
+            'scope': "-2",
+            'uuid': ""
+        };
+        $.ajax({
+            url:'/tools/initPhone',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    // alert("操作成功");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
+    $(this).delegate('.switch-keyboard','click',function () {
+        var data = {
+            'scope': "-2",
+            'uuid': "",
+            'keyboardEnum':1
+        };
+        $.ajax({
+            url:'/convention/switchKeyboard',
+            type:'post',
+            data:data,
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("切换为系统键盘");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
+    $(this).delegate(".reboot","click",function () {
+        $.ajax({
+            url:'/tools/reboot',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("重启服务器");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+
+    $(this).delegate(".shutdown","click",function () {
+        $.ajax({
+            url:'/tools/shutdown',
+            type:'get',
+            dataType:'json',
+            success:function(datas){
+                if(datas.code == 200){
+                    alert("服务器关机");
+                }else{
+                    alert("服务器异常");
+                }
+            }
+        })
+    });
+</script>
+</body>
+</html>

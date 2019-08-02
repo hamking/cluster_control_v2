@@ -5,7 +5,7 @@ import com.adb.autoComponent.Execute;
 import java.io.IOException;
 import java.util.Map;
 
-public class Bound {
+public class Android {
 
     private int x;
     private int y;
@@ -24,7 +24,7 @@ public class Bound {
      * @param noteMap 节点的map
      * @param deviceUUID deviceUUID
      */
-    public Bound(String bound, Map noteMap, String deviceUUID) {
+    public Android(String bound, Map noteMap, String deviceUUID) {
 
         String s1  = bound.replace("][", ",");
         String s2  = s1.replace("[", "");
@@ -48,7 +48,7 @@ public class Bound {
     /**
      * 点击
      */
-    public void click() throws IOException, InterruptedException {
+    public void click()  {
 
         new Execute().shell(deviceUUID, "input tap" + " " + dx + " " + dy);
     }
@@ -58,7 +58,7 @@ public class Bound {
      * @param offsetX x轴偏移量
      * @param offsetY y轴偏移量
      */
-    public void click(int offsetX, int offsetY)throws IOException, InterruptedException{
+    public void click(int offsetX, int offsetY){
 
         new Execute().shell(deviceUUID, "input tap" + " " + (dx + offsetX) + " " + (dy + offsetY));
     }
@@ -67,7 +67,7 @@ public class Bound {
      * 点击
      * @param offsetX x轴偏移量
      */
-    public void clickOffsetX(int offsetX)throws IOException, InterruptedException{
+    public void clickOffsetX(int offsetX){
 
         new Execute().shell(deviceUUID, "input tap" + " " + (dx + offsetX) + " " + dy);
     }
@@ -76,7 +76,7 @@ public class Bound {
      * 点击
      * @param offsetY y轴偏移量
      */
-    public void clickOffsetY(int offsetY) throws IOException, InterruptedException {
+    public void clickOffsetY(int offsetY)  {
 
         new Execute().shell(deviceUUID, "input tap" + " " + dx + " " + (dy + offsetY));
     }
@@ -85,7 +85,7 @@ public class Bound {
      * 发送文字
      * @param str str
      */
-    public void sendKeys(String str) throws IOException, InterruptedException{
+    public void sendKeys(String str) {
 
         click();
         new Execute().shell(deviceUUID, "am broadcast -a ADB_INPUT_TEXT --es msg " + str);

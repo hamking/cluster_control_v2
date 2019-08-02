@@ -37,12 +37,12 @@ public class ComSmileGifmakerSendVideo {
             auto.findByText("允许",true).click();
             auto.wait(1000);
             auto.findByText("允许",false).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         try {
             auto.wait(5000);
             auto.findByText("我知道了",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         start();
     }
@@ -54,32 +54,32 @@ public class ComSmileGifmakerSendVideo {
         //点击发布按钮
         try {
             auto.findByXpatch("//android.support.v4.widget.SlidingPaneLayout/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.ImageView",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
         auto.wait(3000);
         //点击关闭权限
         for (int i = 0; i < 3; i++) {
             try {
                 auto.findByText("允许",true).click();
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }
         try {
             auto.findByText("相册",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
         auto.wait(2000);
 
         //  选取视频
         try {
             auto.findByXpatch("//android.support.v7.widget.RecyclerView/android.widget.FrameLayout[1]/android.widget.LinearLayout/android.widget.TextView",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //  点击下一步
         try {
             auto.findByText("下一步(1)",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //点击下一步
@@ -89,7 +89,7 @@ public class ComSmileGifmakerSendVideo {
                 auto.wait(5000);
                 try {
                     auto.findByText("下一步",true).click();
-                } catch (DocumentException | IOException | InterruptedException e) {
+                } catch (DocumentException e) {
                     notReturn = false;
                 }
             }
@@ -102,12 +102,12 @@ public class ComSmileGifmakerSendVideo {
         String[] path1 = device.getFunction1().split("\\.");
         try {
             auto.findByText("说点什么...",true).sendKeys(path1[0]);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
         //点击发布
         try {
             auto.findByText("发布",true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
         auto.wait(3000);
         auto.back();

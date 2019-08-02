@@ -1,24 +1,38 @@
 package com.zciteam.service.impl;
 
-import com.zciteam.service.ConventionService;
-import com.zciteam.web.ConventionController;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.junit.Assert.*;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath:spring/spring-service.xml", "classpath:spring/spring-dao.xml"})
 public class ConventionServiceImplTest {
-
-    @Autowired
-    private ConventionService conventionService;
 
     @Test
     public void home() {
-//        conventionService.home(1,"");
+
+        ScriptEngineManager scriptEngineManager = new ScriptEngineManager();
+        ScriptEngine nashorn = scriptEngineManager.getEngineByName("js");
+
+        String name =
+                "var Auto = Java.type(\"com.zciteam.service.impl.AdbControlTest\");\n" +
+                "Auto.back1();";
+        try {
+            nashorn.eval(name);
+        } catch(ScriptException e) {
+            System.out.println("Error executing script: "+ e.getMessage());
+        }
+    }
+
+    @Test
+    public void javaTolua(){
+    }
+
+    @Test
+    public void luaTojava(){
+    }
+
+    public void luaTest(String str){
+        System.out.println("lua to java" + str);
     }
 }

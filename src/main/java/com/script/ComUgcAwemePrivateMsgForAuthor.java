@@ -1,7 +1,7 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.auto.Bound;
+import com.adb.auto.Android;
 import com.adb.util.ScriptUtils;
 import com.android.ddmlib.AdbCommandRejectedException;
 import com.android.ddmlib.ShellCommandUnresponsiveException;
@@ -39,20 +39,20 @@ public class ComUgcAwemePrivateMsgForAuthor {
             new ScriptUtils().onLogin("点击青少年模式");
             auto.findByText("我知道了",true).click();
             auto.wait(5000);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         for (int i = 0; i < 4; i++) {
             try {
                 auto.findByText("允许",true).click();
                 auto.wait(3000);
-            } catch (DocumentException | IOException | InterruptedException e) {
+            } catch (DocumentException e) {
             }
         }
 
         try {
             auto.findByText("继续播放", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //  用户隐私协议
@@ -61,7 +61,7 @@ public class ComUgcAwemePrivateMsgForAuthor {
             auto.findByText("同意",true).click();
             auto.wait(5000);
             auto.back();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //版本检测
@@ -69,7 +69,7 @@ public class ComUgcAwemePrivateMsgForAuthor {
             new ScriptUtils().onLogin("版本检测");
             auto.findByText("以后再说",true).click();
             auto.wait(5000);
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
         start();
         log.push(uuid,"关注指定抖音号粉丝结束");
@@ -85,13 +85,13 @@ public class ComUgcAwemePrivateMsgForAuthor {
         //点击首页
         try {
             auto.findByText("首页", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         //点击搜索图标
         try {
             auto.findByXpatch("//android.widget.ImageView[@content-desc='搜索']", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) {
+        } catch (DocumentException e) {
         }
 
         if (str.length() > 0) {
@@ -113,33 +113,33 @@ public class ComUgcAwemePrivateMsgForAuthor {
         //点击输入框并输入文字
         try {
             auto.findByXpatch("//android.widget.EditText", true).sendKeys(str);
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         //点击搜索
         try {
             auto.findByText("搜索", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         auto.wait(3000);
         //点击进入详情
         try {
             auto.findByText("关注", true).clickOffsetX(-100);
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
         try {
             auto.findByText("已关注", false).clickOffsetX(-100);
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         auto.wait(3000);
         //点击点击进入粉丝界面
         try {
             auto.findByText("粉丝", true).click();
-        } catch (DocumentException | IOException | InterruptedException e) { }
+        } catch (DocumentException e) { }
 
         auto.wait(3000);
 
         int index = script.getWatchNum();
         for (int i = 0; index > 0; i++) {
-            List<Bound> bounds = new ArrayList<Bound> ();
+            List<Android> bounds = new ArrayList<Android> ();
             //开始关注粉丝
             try {
                 bounds = auto.findByTexts("关注",true);
@@ -148,10 +148,7 @@ public class ComUgcAwemePrivateMsgForAuthor {
 
             boolean isS = true;
             for (int i1 = 0; i1 < bounds.size() && isS; i1++) {
-                try {
-                    bounds.get(i1).click();
-                } catch (IOException | InterruptedException e) {
-                }
+                bounds.get(i1).click();
                 auto.wait(1000);
                 try {
                     auto.findByXpatch("//android.widget.LinearLayout/android.webkit.WebView",true);
