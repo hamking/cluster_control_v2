@@ -14,15 +14,9 @@ public class LayoutXml {
         String path = "/tmp/yunsheng/book/";
         new FileUtil().createDir(path);
 
-        try {
-            new Execute().shell(deviceUUID, "uiautomator runtest LvmamaXmlKit.jar");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().shell(deviceUUID, "uiautomator runtest LvmamaXmlKit.jar");
 
-        try {
-            new Execute().pull(deviceUUID, "/data/local/tmp/local/tmp/uidump.xml", path + deviceUUID + ".xml");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().pull(deviceUUID, "/data/local/tmp/local/tmp/uidump.xml", path + deviceUUID + ".xml");
 
         String xmlFile = path + deviceUUID + ".xml";
 

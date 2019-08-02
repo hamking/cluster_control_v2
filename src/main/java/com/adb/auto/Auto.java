@@ -40,10 +40,7 @@ public class Auto {
     public Auto(String deviceUUID, String packageName){
 
         this.deviceUUID = deviceUUID;
-        try {
-            new Execute().startApp(deviceUUID, packageName);
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().startApp(deviceUUID, packageName);
     }
 
     /**
@@ -280,10 +277,7 @@ public class Auto {
      */
     public void back(){
 
-        try {
-            new Execute().inputKeyevent(deviceUUID, Keyevent.BACK);
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().inputKeyevent(deviceUUID, Keyevent.BACK);
     }
 
     /**
@@ -291,20 +285,15 @@ public class Auto {
      */
     public void home(){
 
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.HOME);
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().inputKeyevent(deviceUUID,Keyevent.HOME);
     }
 
     /**
      * 清空app进程
      */
     public void kill(String packageName){
-        try {
-            new Execute().kill(deviceUUID,packageName);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().kill(deviceUUID,packageName);
     }
 
     /**
@@ -312,10 +301,7 @@ public class Auto {
      */
     public void swipeUp(){
 
-        try {
-            new Execute().inputSwipe(deviceUUID,"500 700 500 100");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().inputSwipe(deviceUUID,"500 700 500 100");
     }
 
     /**
@@ -323,10 +309,7 @@ public class Auto {
      */
     public void swipeDown(){
 
-        try {
-            new Execute().inputSwipe(deviceUUID,"500 300 500 800");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().inputSwipe(deviceUUID,"500 300 500 800");
     }
 
     /**
@@ -334,10 +317,7 @@ public class Auto {
      */
     public void swipeLeft(){
 
-        try {
-            new Execute().shell(deviceUUID,"input swipe 100 500 800 500");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().shell(deviceUUID,"input swipe 100 500 800 500");
     }
 
     /**
@@ -345,10 +325,7 @@ public class Auto {
      */
     public void swipeRight(){
 
-        try {
-            new Execute().inputSwipe(deviceUUID,"100 500 800 500");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().inputSwipe(deviceUUID,"100 500 800 500");
     }
 
     /**
@@ -356,15 +333,9 @@ public class Auto {
      */
     public void inputMediaEventScript(String path, String fileName){
 
-        try {
-            new Execute().push(deviceUUID,path,"/sdcard/DCIM/" + fileName);
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().push(deviceUUID,path,"/sdcard/DCIM/" + fileName);
 
-        try {
-            new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
     }
 
     /**
@@ -372,14 +343,8 @@ public class Auto {
      */
     public void rmFileMediaEventScript(String path){
 
-        try {
-            new Execute().shell(deviceUUID,path);
-        } catch (IOException | InterruptedException ignored) {
-        }
-        try {
-            new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().shell(deviceUUID,path);
+        new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
     }
 
     /**
@@ -387,10 +352,7 @@ public class Auto {
      */
     public void enter(){
 
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.ENTER);
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().inputKeyevent(deviceUUID,Keyevent.ENTER);
     }
 
 
@@ -401,17 +363,11 @@ public class Auto {
         switch (keyboardEnum){
             case SYSTEM_KEYBOARD:
 
-                try {
-                    new Execute().shell(deviceUUID,"ime set com.google.android.inputmethod.pinyin/.PinyinIME");
-                } catch (IOException | InterruptedException ignored) {
-                }
+                new Execute().shell(deviceUUID,"ime set com.google.android.inputmethod.pinyin/.PinyinIME");
                 break;
             case ADB_KEYBOARD:
 
-                try {
-                    new Execute().shell(deviceUUID,"ime set com.android.adbkeyboard/.AdbIME");
-                } catch (IOException | InterruptedException ignored) {
-                }
+                new Execute().shell(deviceUUID,"ime set com.android.adbkeyboard/.AdbIME");
                 break;
         }
     }
@@ -422,10 +378,7 @@ public class Auto {
      */
     public void addressBookImportEvent(String path){
 
-        try {
-            new Execute().push(deviceUUID,path,"/sdcard/contacts.vcf");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().push(deviceUUID,path,"/sdcard/contacts.vcf");
     }
 
     /**
@@ -433,71 +386,56 @@ public class Auto {
      */
     public void addressBookClearEvent(){
 
-        try {
-            new Execute().shell(deviceUUID,"pm clear com.android.providers.contacts");
-        } catch (IOException | InterruptedException ignored) {
-        }
+        new Execute().shell(deviceUUID,"pm clear com.android.providers.contacts");
     }
 
     /**
      * 锁屏
      */
     public void lock(){
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.POWER);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().inputKeyevent(deviceUUID,Keyevent.POWER);
     }
 
     /**
      * 解屏
      */
     public void unLock(){
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.POWER);
-            new Execute().inputSwipe(deviceUUID,"500 600 500 100");
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().inputKeyevent(deviceUUID,Keyevent.POWER);
+        new Execute().inputSwipe(deviceUUID,"500 600 500 100");
     }
 
     /**
      * 音量加
      */
     public void volumeUp(){
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_UP);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_UP);
     }
 
     /**
      * 音量减
      */
     public void volumeDown(){
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_DOWN);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_DOWN);
     }
 
     /**
      * 静音
      */
     public void volumeMute(){
-        try {
-            new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_MUTE);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().inputKeyevent(deviceUUID,Keyevent.VOLUME_MUTE);
     }
 
     /**
      * 重启
      */
     public void reboot(){
-        try {
-            new Execute().reboot(deviceUUID);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().reboot(deviceUUID);
     }
 
     /**
@@ -506,27 +444,21 @@ public class Auto {
      * @param toPath toPath
      */
     public void pushFile(String fromPath, String toPath){
-        try {
-            new Execute().push(deviceUUID,fromPath,toPath);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().push(deviceUUID,fromPath,toPath);
     }
 
     public void mkdir(String path){
-        try {
-            new Execute().mkdir(deviceUUID, path);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().mkdir(deviceUUID, path);
     }
 
     /**
      * 刷新相册
      */
     public void refreshPhotoAlbum(){
-        try {
-            new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().shell(deviceUUID,"am broadcast -a android.intent.action.MEDIA_MOUNTED -d file:///sdcard/DCIM");
     }
 
     /**
@@ -534,10 +466,8 @@ public class Auto {
      * @param apkPath apkPath
      */
     public void install(String apkPath){
-        try {
-            new Execute().install(deviceUUID, apkPath);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().install(deviceUUID, apkPath);
     }
 
     /**
@@ -545,38 +475,26 @@ public class Auto {
      * @param apkName apkName
      */
     public void unInstall(String apkName){
-        try {
-            new Execute().unInstall(deviceUUID, apkName);
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().unInstall(deviceUUID, apkName);
     }
 
     /**
      * 导入助手
      */
     public void inputHelperEventScript(){
-        try {
-            new Execute().shell(deviceUUID, "mkdir -p /data/local/tmp/local/tmp");
-        } catch (IOException | InterruptedException ignored) {
-        }
-        try {
-            new Execute().push(deviceUUID, "/", "/data/local/tmp/LvmamaXmlKit.jar");
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().shell(deviceUUID, "mkdir -p /data/local/tmp/local/tmp");
+        new Execute().push(deviceUUID, "/", "/data/local/tmp/LvmamaXmlKit.jar");
     }
 
     /**
      * 导入刷机包
      */
     public void flashEventScript(String path){
-        try {
-            new Execute().push(deviceUUID, path,"/sdcard/update.zip");
-        } catch (IOException | InterruptedException ignored) {
-        }
-        try {
-            new Execute().shell(deviceUUID,"reboot recovery");
-        } catch (IOException | InterruptedException ignored) {
-        }
+
+        new Execute().push(deviceUUID, path,"/sdcard/update.zip");
+        new Execute().shell(deviceUUID,"reboot recovery");
     }
 
     /**
