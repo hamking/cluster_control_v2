@@ -10,7 +10,6 @@ import com.zciteam.util.Directory;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -102,7 +101,7 @@ public class ComUgcAwemeSendVideo {
         auto.back();
         log.push(uuid,"开始发布");
         try {
-            auto.findByXpatch ("//android.widget.ImageView[@content-desc='拍摄，按钮']", true).click(50,-50);
+            auto.findByXpatch ("//android.widget.ImageView[@content-desc='拍摄，按钮']", true).click(50,50);
         } catch (DocumentException e) {
         }
         auto.wait (3000);
@@ -127,12 +126,17 @@ public class ComUgcAwemeSendVideo {
         auto.wait(2000);
 
         log.push(uuid,"下一步");
+        try {
+            auto.findByText("下一步", true).click();
+        } catch (DocumentException e) {
+            e.printStackTrace ();
+        }
         boolean isOk = true;
         int col = 0;
         while (isOk){
             auto.wait(1000);
             try {
-                auto.findByText("下一步", true).click ();
+                auto.findByText("正在合成中", true).click();
             } catch (DocumentException e) {
                 isOk = false;
             }
@@ -141,6 +145,12 @@ public class ComUgcAwemeSendVideo {
                 isOk = false;
             }
         }
+        try {
+            auto.findByText("下一步", true).click();
+        } catch (DocumentException e) {
+            e.printStackTrace ();
+        }
+        auto.wait(3000);
 
         log.push(uuid,"输入标题");
         //开始输入文字
