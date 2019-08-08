@@ -70,4 +70,9 @@ public interface ConventionService {
     int uploadImage(String scope, String uuid, List<MultipartFile> multipartFiles);
     int uploadJar(String scope, String uuid, List<MultipartFile> multipartFiles);
     int uploadZip(String scope, String uuid, List<MultipartFile> multipartFiles);
+
+    /**
+     * 上传文件到本地
+     */
+    int uploadVideoToLocalHost(List<MultipartFile> multipartFiles);
 }

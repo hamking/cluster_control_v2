@@ -1,0 +1,78 @@
+<html lang="en">
+<body>
+<div class="dou-send_video show-type">
+    <div class="small-title">抖音_发视频：</div>
+    <div class="info">
+        <p>选择视频</p>
+        <input id="dou-send_video_fileMedia" type="file" size="140" name="files" multiple="">
+    </div>
+</div>
+<script>
+    $(function(){
+        var scriptName = "ComUgcAwemeSendVideo";
+        $(this).delegate('.script-zi','click',function(){
+            var suid = $(this).attr("data-id");
+            if(suid == scriptName) {
+                $.ajax({
+                    url: '/script/getScript?suid=' + suid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (datas) {
+                        if (datas.code == 200) {
+                            $(".do-zhi").attr("data-id", datas.data.suid);
+                            $(".do-ting").attr("data-id", datas.data.suid);
+
+                            if (datas.data.isComment == 1) {
+                                $("#guanzhu_label").attr("checked", true);
+                            }
+                            if (datas.data.isDirectMessages == 1) {
+                                $("#sixin_label").attr("checked", true);
+                            }
+                            $("#operationNum_label").val(datas.data.watchNum);
+                            $("#searchStr_label").val(datas.data.commentStr);
+
+                            $("#test").show();
+                            $("#log_window").show();
+                            $(".dou-send_video").show();
+                        } else {
+                            alert("服务器异常");
+                        }
+                    }
+                })
+            }
+        });
+
+        $(this).delegate('.do-zhi','click',function(){
+            var suid = $(this).attr("data-id");
+            $("#test").hide();
+            $("#log_window").hide();
+            $(".dou-send_video").hide();
+            if(suid == scriptName){
+                var files = $('#dou-send_video_fileMedia').prop("files");
+                var formdata = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    formdata.append("files", files[i]);
+                }
+                alert("上传中请稍后...");
+                $.ajax({
+                    type: "POST",
+                    url: "/convention/uploadLocalHostFile",
+                    data: formdata,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    enctype: "multipart/form-data",
+                    success: function(data) {
+                        alert("上传成功！");
+                        jianben.doExecute(suid,"");
+                    },
+                    error: function(data) {
+                        alert("上传失败！");
+                    }
+                });
+            }
+        });
+    })
+</script>
+</body>
+</html>

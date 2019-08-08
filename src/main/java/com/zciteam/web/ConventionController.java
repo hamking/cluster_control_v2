@@ -264,4 +264,35 @@ public class ConventionController {
             return new Result<>(null, CodeEnum.CODE_503,e.getMessage());
         }
     }
+
+    /**
+     * uploadLocalHostFile接口
+     * files     files
+     * String    uuid         设备uuid
+     * int       scope        操作影响设备 -2所有设备 -1当前设备 其他数字为该组的id
+     * @param request Result
+     * @return Result
+     */
+    @RequestMapping(value = "/uploadLocalHostFile",method = RequestMethod.POST)
+    @ResponseBody
+    public Result uploadLocalHostFile(HttpServletRequest request){
+
+        try{
+            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)(request);
+            List<MultipartFile> files = multiRequest.getFiles("files");
+
+            if (files.isEmpty()){
+                return new Result<>(null,CodeEnum.CODE_403);
+            }
+            if (files.get(0).getContentType().contains("video")){
+                //是视频文件
+                conventionService.uploadVideoToLocalHost(files);
+            }else{
+                return new Result<>(null,CodeEnum.CODE_70001);
+            }
+            return new Result<>(null,CodeEnum.CODE_200);
+        }catch (RuntimeException e){
+            return new Result<>(null, CodeEnum.CODE_503,e.getMessage());
+        }
+    }
 }

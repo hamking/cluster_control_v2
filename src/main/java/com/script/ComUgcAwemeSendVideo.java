@@ -1,17 +1,17 @@
 package com.script;
 
 import com.adb.auto.Auto;
-import com.adb.util.ScriptUtils;
-import com.android.ddmlib.AdbCommandRejectedException;
-import com.android.ddmlib.ShellCommandUnresponsiveException;
-import com.android.ddmlib.TimeoutException;
 import com.zciteam.bean.Device;
 import com.zciteam.bean.Script;
+import com.zciteam.enums.DeviceDirEnum;
+import com.zciteam.enums.DirectoryEnum;
 import com.zciteam.enums.KeyboardEnum;
+import com.zciteam.util.Directory;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * 抖音_发视频
@@ -22,20 +22,41 @@ public class ComUgcAwemeSendVideo {
     private Auto auto;
     private Script script;
     private Device device;
+    private Directory directory = new Directory();
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
-    public void script(String uuid, Script script, Device device) {
+    private String filename = "";
+    private String filePath = "";
+
+    public void script(String uuid, Script script, Device device, int index) {
         this.uuid = uuid;
         this.script = script;
         this.device = device;
         auto = new Auto(uuid,script.getPackageName());
         auto.switchKeyboardforSystem(KeyboardEnum.ADB_KEYBOARD);
 
-
         log.push(uuid,"抖音_发视频");
+
+        //获取到视频
+        Map map = directory.getAllFile(DirectoryEnum.VIDEO.getStartInfo(), false);
+        final int[] i1 = {0};
+        map.forEach((k,v)->{
+            if (i1[0] == index){
+                filePath = k.toString();
+                filename = v.toString();
+                return;
+            }
+            i1[0]++;
+        });
+        log.push(uuid,"正在同步视频到手机");
+        auto.rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
+        auto.mkdir(DeviceDirEnum.VIDEO.getStartInfo());
+        auto.pushFile(filePath, DeviceDirEnum.VIDEO.getStartInfo());
+        auto.refreshPhotoAlbum();
+        log.push(uuid,"正在同步完成");
         auto.wait(15000);
         try {
-            new ScriptUtils().onLogin("点击青少年模式");
+            log.push(uuid,"点击青少年模式");
             auto.findByText("我知道了",true).click();
             auto.wait(5000);
         } catch (DocumentException e) {
@@ -56,7 +77,7 @@ public class ComUgcAwemeSendVideo {
 
         //  用户隐私协议
         try {
-            new ScriptUtils().onLogin("点击用户权限");
+            log.push(uuid,"点击用户权限");
             auto.findByText("同意",true).click();
             auto.wait(5000);
             auto.back();
@@ -65,12 +86,13 @@ public class ComUgcAwemeSendVideo {
 
         //版本检测
         try {
-            new ScriptUtils().onLogin("版本检测");
+            log.push(uuid,"版本检测");
             auto.findByText("以后再说",true).click();
             auto.wait(5000);
         } catch (DocumentException e) {
         }
         start();
+        log.push(uuid,"执行完毕");
     }
 
     /**
@@ -78,21 +100,23 @@ public class ComUgcAwemeSendVideo {
      */
     private void start() {
         auto.back();
+        log.push(uuid,"开始发布");
         try {
-            auto.findByXpatch ("//android.widget.ImageView[@content-desc='拍摄，按钮']", true).click ();
+            auto.findByXpatch ("//android.widget.ImageView[@content-desc='拍摄，按钮']", true).click(50,-50);
         } catch (DocumentException e) {
         }
         auto.wait (3000);
         //点击关闭权限
         for (int i = 0; i < 3; i++) {
             try {
-                auto.findByText ("允许", true).click ();
+                auto.findByText ("允许", true).click();
             } catch (DocumentException e) {
             }
         }
         auto.wait(2000);
+        log.push(uuid,"开始上传");
         try {
-            auto.findByText ("上传", true).click ();
+            auto.findByText ("上传", true).click();
         } catch (DocumentException e) {
         }
         auto.wait(2000);
@@ -101,24 +125,32 @@ public class ComUgcAwemeSendVideo {
         } catch (DocumentException e) {
         }
         auto.wait(2000);
-        try {
-            auto.findByText("下一步", true).click ();
-        } catch (DocumentException e) {
-        }
-        auto.wait(100000);
-        try {
-            auto.findByText("下一步", true).click ();
-        } catch (DocumentException e) {
-        }
-        auto.wait(3000);
 
+        log.push(uuid,"下一步");
+        boolean isOk = true;
+        int col = 0;
+        while (isOk){
+            auto.wait(1000);
+            try {
+                auto.findByText("下一步", true).click ();
+            } catch (DocumentException e) {
+                isOk = false;
+            }
+            col ++;
+            if (col > 100){
+                isOk = false;
+            }
+        }
+
+        log.push(uuid,"输入标题");
         //开始输入文字
-        String[] path1 = device.getFunction1().split("\\.");
+        String[] path1 = filename.split("\\.");
         try {
             auto.findByXpatch("//android.widget.EditText", true).sendKeys(path1[0]);
         } catch (DocumentException e) {
         }
         auto.wait(500);
+        log.push(uuid,"确认发布");
         try {
             auto.findByXpatch("//android.widget.FrameLayout[@content-desc='发布']", true).click();
         } catch (DocumentException e) {

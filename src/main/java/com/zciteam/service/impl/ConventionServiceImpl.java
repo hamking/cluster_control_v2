@@ -305,4 +305,18 @@ public class ConventionServiceImpl implements ConventionService {
             return 0;
         }
     }
+
+    @Override
+    public int uploadVideoToLocalHost(List<MultipartFile> multipartFiles) {
+        new Directory().deleteFile(DirectoryEnum.VIDEO);
+        multipartFiles.forEach(multipartFile->{
+            new Directory().saveFile(DirectoryEnum.VIDEO,multipartFile);
+        });
+
+        if (multipartFiles != null && !multipartFiles.isEmpty()) {
+            return 1;
+        }else {
+            return 0;
+        }
+    }
 }
