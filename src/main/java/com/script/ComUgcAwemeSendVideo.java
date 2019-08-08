@@ -10,6 +10,9 @@ import com.zciteam.util.Directory;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,15 +41,23 @@ public class ComUgcAwemeSendVideo {
 
         //获取到视频
         Map map = directory.getAllFile(DirectoryEnum.VIDEO.getStartInfo(), false);
+        List<List> lists = new ArrayList<>();
         final int[] i1 = {0};
         map.forEach((k,v)->{
+            List a = new ArrayList();
+            a.add(k);
+            a.add(v);
+            lists.add(a);
+        });
+        for (int i = 0; i < lists.size(); i++) {
             if (i1[0] == index){
-                filePath = k.toString();
-                filename = v.toString();
+                filePath = lists.get(i).get(0).toString();
+                filename = lists.get(i).get(1).toString();
                 return;
             }
             i1[0]++;
-        });
+        }
+
         log.push(uuid,"正在同步视频到手机");
         auto.rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
         auto.mkdir(DeviceDirEnum.VIDEO.getStartInfo());
