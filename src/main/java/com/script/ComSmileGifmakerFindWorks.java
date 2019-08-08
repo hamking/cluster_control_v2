@@ -22,7 +22,7 @@ public class ComSmileGifmakerFindWorks {
     private Script script;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
-    public void script(String uuid, Script script, Device device, int index) {
+    public void script(String uuid, Script script, Device device, List<Device> devices) {
         this.uuid = uuid;
         this.script = script;
         auto = new Auto(uuid,script.getPackageName());

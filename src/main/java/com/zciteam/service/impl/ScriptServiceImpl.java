@@ -129,7 +129,6 @@ public class ScriptServiceImpl implements ScriptService {
 
         //获取脚本
         if (devices.size() > 0) {
-            final int[] index = {0};
             devices.forEach (device -> {
                 Thread thread = new Thread(new Runnable () {
                     @Override
@@ -164,14 +163,13 @@ public class ScriptServiceImpl implements ScriptService {
                                 for (Method method : methods) {
                                     if (method.getName ().equals ("script")) {
                                         try {
-                                            method.invoke (o, device.getUuid (), script, device, index[0]);
+                                            method.invoke (o, device.getUuid(), script, device, devices);
                                         } catch (Exception e1) { }
                                     }
                                 }
                             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e2) {
                                 e.printStackTrace ();
                             }
-                            index[0]++;
                         }
                     }
                 });

@@ -29,7 +29,7 @@ public class ComUgcAwemeSendVideo {
     private String filename = "";
     private String filePath = "";
 
-    public void script(String uuid, Script script, Device device, int index) {
+    public void script(String uuid, Script script, Device device, List<Device> devices) {
         this.uuid = uuid;
         this.script = script;
         this.device = device;
@@ -41,23 +41,21 @@ public class ComUgcAwemeSendVideo {
         //获取到视频
         Map map = directory.getAllFile(DirectoryEnum.VIDEO.getStartInfo(), false);
         List<List> lists = new ArrayList<>();
-        final int[] i1 = {0};
         map.forEach((k,v)->{
             List a = new ArrayList();
             a.add(k);
             a.add(v);
             lists.add(a);
         });
-        for (int i = 0; i < lists.size(); i++) {
+        for (int i = 0; i < devices.size(); i++) {
 
-            if (i1[0] == index){
+            if (device.getUuid().equals(devices.get(i).getUuid())){
                 filePath = lists.get(i).get(0).toString();
                 filename = lists.get(i).get(1).toString();
                 break;
             }
-            i1[0]++;
         }
-
+        System.out.println("---------------- " + filename);
         log.push(uuid,"正在同步视频到手机");
         auto.rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
         auto.mkdir(DeviceDirEnum.VIDEO.getStartInfo());
@@ -65,6 +63,8 @@ public class ComUgcAwemeSendVideo {
         auto.refreshPhotoAlbum();
         log.push(uuid,"正在同步完成");
         auto.wait(10000);
+        System.out.println("---------------- " + filename);
+
         try {
             log.push(uuid,"点击青少年模式");
             auto.findByText("我知道了",true).click();
@@ -93,6 +93,7 @@ public class ComUgcAwemeSendVideo {
             auto.back();
         } catch (DocumentException e) {
         }
+        System.out.println("---------------- " + filename);
 
         //版本检测
         try {
@@ -101,6 +102,8 @@ public class ComUgcAwemeSendVideo {
             auto.wait(5000);
         } catch (DocumentException e) {
         }
+        System.out.println("---------------- " + filename);
+
         start();
         log.push(uuid,"执行完毕");
     }
@@ -110,7 +113,7 @@ public class ComUgcAwemeSendVideo {
      */
     private void start() {
         auto.back();
-        log.push(uuid,"开始发布");
+        log.push(uuid,"开始发布 " + filename);
         try {
             auto.findByXpatch ("//android.widget.ImageView[@content-desc='拍摄，按钮']", true).click(50,50);
         } catch (DocumentException e) {
@@ -124,7 +127,7 @@ public class ComUgcAwemeSendVideo {
             }
         }
         auto.wait(2000);
-        log.push(uuid,"开始上传");
+        log.push(uuid,"开始上传 " + filename);
         try {
             auto.findByText ("上传", true).click();
         } catch (DocumentException e) {
@@ -163,7 +166,7 @@ public class ComUgcAwemeSendVideo {
         }
         auto.wait(3000);
 
-        log.push(uuid,"输入标题");
+        log.push(uuid,"输入标题 " + filename);
         //开始输入文字
         String[] path1 = filename.split("\\.");
         try {
@@ -171,7 +174,7 @@ public class ComUgcAwemeSendVideo {
         } catch (DocumentException e) {
         }
         auto.wait(500);
-        log.push(uuid,"确认发布");
+        log.push(uuid,"确认发布 " + filename);
         try {
             auto.findByXpatch("//android.widget.FrameLayout[@content-desc='发布']", true).click();
         } catch (DocumentException e) {

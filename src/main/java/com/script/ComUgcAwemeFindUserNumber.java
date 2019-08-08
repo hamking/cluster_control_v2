@@ -12,6 +12,7 @@ import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 抖音_指定抖音号
@@ -23,7 +24,7 @@ public class ComUgcAwemeFindUserNumber {
     private Script script;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
-    public void script(String uuid, Script script, Device device, int index) {
+    public void script(String uuid, Script script, Device device, List<Device> devices) {
         this.uuid = uuid;
         this.script = script;
         auto = new Auto(uuid,script.getPackageName());

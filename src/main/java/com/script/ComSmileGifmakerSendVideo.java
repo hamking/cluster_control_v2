@@ -8,6 +8,7 @@ import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * 快手_发视频
@@ -20,7 +21,7 @@ public class ComSmileGifmakerSendVideo {
     private Device device;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
-    public void script(String uuid, Script script, Device device, int index) {
+    public void script(String uuid, Script script, Device device, List<Device> devices) {
         this.uuid = uuid;
         this.script = script;
         this.device = device;
