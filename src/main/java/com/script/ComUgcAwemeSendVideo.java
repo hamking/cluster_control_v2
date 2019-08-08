@@ -61,8 +61,8 @@ public class ComUgcAwemeSendVideo {
         auto.mkdir(DeviceDirEnum.VIDEO.getStartInfo());
         auto.pushFile(filePath, DeviceDirEnum.VIDEO.getStartInfo());
         auto.refreshPhotoAlbum();
-        log.push(uuid,"正在同步完成");
         auto.wait(10000);
+        log.push(uuid,"正在同步完成");
         System.out.println("---------------- " + filename);
 
         try {
