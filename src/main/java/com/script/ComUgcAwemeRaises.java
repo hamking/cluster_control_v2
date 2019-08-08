@@ -24,7 +24,7 @@ public class ComUgcAwemeRaises {
     private Script script;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
-    public void script(String uuid, Script script, Device device) {
+    public void script(String uuid, Script script, Device device, int index) {
         this.uuid = uuid;
         this.script = script;
         auto = new Auto(uuid,script.getPackageName());

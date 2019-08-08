@@ -20,7 +20,7 @@ public class ComSmileGifmakerSendVideo {
     private Device device;
     private WebSocketDeviceLog log = new WebSocketDeviceLog();
 
-    public void script(String uuid, Script script, Device device) {
+    public void script(String uuid, Script script, Device device, int index) {
         this.uuid = uuid;
         this.script = script;
         this.device = device;

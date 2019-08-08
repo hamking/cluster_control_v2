@@ -68,6 +68,20 @@ public class Directory{
     }
 
     /**
+     * 删除文件
+     * @param type FileType
+     * @return boolean
+     */
+    public void deleteFile(DirectoryEnum type) {
+
+        Map map = getAllFile(type.getStartInfo(),true);
+        map.forEach((k,v) ->{
+            File desFile = new File(k.toString());
+            desFile.delete();
+        });
+    }
+
+    /**
      * 获取路径下的所有文件/文件夹
      * @param directoryPath 需要遍历的文件夹路径
      * @param isAddDirectory 是否将子文件夹的路径也添加到map中
