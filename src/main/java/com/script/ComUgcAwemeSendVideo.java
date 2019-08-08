@@ -10,7 +10,6 @@ import com.zciteam.util.Directory;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,10 +49,11 @@ public class ComUgcAwemeSendVideo {
             lists.add(a);
         });
         for (int i = 0; i < lists.size(); i++) {
+
             if (i1[0] == index){
                 filePath = lists.get(i).get(0).toString();
                 filename = lists.get(i).get(1).toString();
-                return;
+                break;
             }
             i1[0]++;
         }
@@ -64,7 +64,7 @@ public class ComUgcAwemeSendVideo {
         auto.pushFile(filePath, DeviceDirEnum.VIDEO.getStartInfo());
         auto.refreshPhotoAlbum();
         log.push(uuid,"正在同步完成");
-        auto.wait(15000);
+        auto.wait(10000);
         try {
             log.push(uuid,"点击青少年模式");
             auto.findByText("我知道了",true).click();
