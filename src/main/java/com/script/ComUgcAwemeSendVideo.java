@@ -126,7 +126,7 @@ public class ComUgcAwemeSendVideo {
         auto.wait(2000);
         log.push(uuid,"开始上传 " + filename);
         try {
-            auto.findByText ("上传", true).click(20,20);
+            auto.findByText ("上传", true).click(20,-20);
         } catch (DocumentException e) {
         }
         auto.wait(2000);
