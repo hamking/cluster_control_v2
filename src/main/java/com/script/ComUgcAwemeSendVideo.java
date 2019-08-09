@@ -55,7 +55,7 @@ public class ComUgcAwemeSendVideo {
                 break;
             }
         }
-        System.out.println("---------------- " + filename);
+        System.out.println("---------------- " + filePath);
         log.push(uuid,"正在同步视频到手机");
         auto.rmFileMediaEventScript("rm -rf /sdcard/DCIM/*");
         auto.mkdir(DeviceDirEnum.VIDEO.getStartInfo());
@@ -63,7 +63,6 @@ public class ComUgcAwemeSendVideo {
         auto.refreshPhotoAlbum();
         auto.wait(10000);
         log.push(uuid,"正在同步完成");
-        System.out.println("---------------- " + filename);
 
         try {
             log.push(uuid,"点击青少年模式");
@@ -93,7 +92,6 @@ public class ComUgcAwemeSendVideo {
             auto.back();
         } catch (DocumentException e) {
         }
-        System.out.println("---------------- " + filename);
 
         //版本检测
         try {
@@ -102,7 +100,6 @@ public class ComUgcAwemeSendVideo {
             auto.wait(5000);
         } catch (DocumentException e) {
         }
-        System.out.println("---------------- " + filename);
 
         start();
         log.push(uuid,"执行完毕");
@@ -129,7 +126,7 @@ public class ComUgcAwemeSendVideo {
         auto.wait(2000);
         log.push(uuid,"开始上传 " + filename);
         try {
-            auto.findByText ("上传", true).click();
+            auto.findByText ("上传", true).click(20,20);
         } catch (DocumentException e) {
         }
         auto.wait(2000);
