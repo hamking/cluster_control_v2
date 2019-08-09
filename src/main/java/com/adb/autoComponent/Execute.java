@@ -36,7 +36,7 @@ public class Execute {
     public void pull(String uuid, String fromPath, String toPath){
 
         try {
-            Runtime.getRuntime().exec("adb -s " + uuid + " pull " + fromPath + " " + toPath+"").waitFor();
+            Runtime.getRuntime().exec("adb -s " + uuid + " pull \"" + fromPath + "\" " + toPath+"").waitFor();
         } catch (InterruptedException | IOException e) {
             e.printStackTrace ();
         }
@@ -45,7 +45,7 @@ public class Execute {
     public void push(String uuid, String fromPath, String toPath){
 
         try {
-            Runtime.getRuntime().exec("adb -s " + uuid + " push " + fromPath + " " + toPath).waitFor();
+            Runtime.getRuntime().exec("adb -s " + uuid + " push \"" + fromPath + "\" " + toPath).waitFor();
         } catch (InterruptedException | IOException e) {
             e.printStackTrace ();
         }
