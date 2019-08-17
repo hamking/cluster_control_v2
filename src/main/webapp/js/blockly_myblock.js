@@ -454,7 +454,7 @@ $(function () {
     Blockly.JavaScript['element_send_text'] = function(block) {
         var text_sendtext = block.getFieldValue('sendText');
         // TODO: Assemble JavaScript into code variable.
-        var code = '.sendKeys('+ text_sendtext + ')';
+        var code = '.sendKeys("'+ text_sendtext + '")';
         // TODO: Change ORDER_NONE to the correct strength.
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
