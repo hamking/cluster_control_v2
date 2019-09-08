@@ -125,10 +125,10 @@ public class ComUgcAwemePrivateMsg {
                             bounds.get(i).click();
                             break;
                         case 1:
-                            auto.findByXpatch ("//android.widget.RelativeLayout[" + (i+1) + "]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView[@text='已关注']", true).clickOffsetX (-100);
+                            auto.findText("已关注", true).clickOffsetX (-100);
                             break;
                         case 2:
-                            auto.findByXpatch ("//android.widget.RelativeLayout[" + (i+1) + "]/android.widget.RelativeLayout/android.widget.RelativeLayout/android.widget.TextView[@text='互相关注']", true).clickOffsetX (-100);
+                            auto.findText("互相关注", true).clickOffsetX (-100);
                             break;
                     }
                     auto.wait(5000);
@@ -136,7 +136,7 @@ public class ComUgcAwemePrivateMsg {
                     //点击发送消息
                     log.push(uuid,"准备发送消息");
                     try {
-                        auto.findByXpatch ("//android.widget.FrameLayout/android.widget.FrameLayout/android.view.View/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout", true).click();
+                        auto.findByXpatch ("//android.widget.ImageView[@content-desc='私信']", true).click();
                     } catch (DocumentException e) {
                     }
                     //点击多余提示
