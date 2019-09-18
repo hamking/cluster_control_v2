@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="zciteam:war">
-    <output-path>$PROJECT_DIR$/out/artifacts/zciteam_war</output-path>
-    <root id="archive" name="zciteam_war.war">
-      <element id="artifact" artifact-name="cluster_control_v2:war exploded" />
-    </root>
-  </artifact>
-</component>
