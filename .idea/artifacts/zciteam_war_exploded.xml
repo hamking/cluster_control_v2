@@ -1,12 +1,14 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="zciteam:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/zciteam_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/artifacts/zciteam_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="cluster_control_v2" />
+          <element id="module-output" name="zciteam" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: junit:junit:4.12" />
+          <element id="library" level="project" name="Maven: org.hamcrest:hamcrest-core:1.3" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.16" />
           <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.1.17" />
@@ -36,10 +38,9 @@
           <element id="library" level="project" name="Maven: com.android.ddmlib:ddmlib:r16" />
           <element id="library" level="project" name="Maven: jaxen:jaxen:1.1.6" />
           <element id="library" level="project" name="Maven: org.dom4j:dom4j:2.1.1" />
-          <element id="library" level="project" name="Maven: org.luaj:luaj-jse:3.0.1" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="cluster_control_v2/web/Web" />
+      <element id="javaee-facet-resources" facet="zciteam/web/Web" />
     </root>
   </artifact>
 </component>

@@ -125,10 +125,10 @@ public class ComUgcAwemePrivateMsg {
                             bounds.get(i).click();
                             break;
                         case 1:
-                            auto.findText("已关注", true).clickOffsetX (-100);
+                            auto.findByText("已关注", true).clickOffsetX (-100);
                             break;
                         case 2:
-                            auto.findText("互相关注", true).clickOffsetX (-100);
+                            auto.findByText("互相关注", true).clickOffsetX (-100);
                             break;
                     }
                     auto.wait(5000);
