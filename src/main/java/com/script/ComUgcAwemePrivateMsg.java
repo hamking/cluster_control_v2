@@ -9,7 +9,6 @@ import com.zciteam.enums.KeyboardEnum;
 import com.zciteam.web.WebSocketDeviceLog;
 import org.dom4j.DocumentException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -136,7 +135,7 @@ public class ComUgcAwemePrivateMsg {
                     //点击发送消息
                     log.push(uuid,"准备发送消息");
                     try {
-                        auto.findByXpatch ("//android.widget.ImageView[@content-desc='私信']", true).click();
+                        auto.findByText ("发消息", true).click();
                     } catch (DocumentException e) {
                     }
                     //点击多余提示
