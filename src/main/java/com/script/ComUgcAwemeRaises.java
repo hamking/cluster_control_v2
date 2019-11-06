@@ -169,8 +169,12 @@ public class ComUgcAwemeRaises {
                 new ScriptUtils().onLogin("点击发送文本");
                 auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout[2]/android.widget.LinearLayout/android.widget.ImageView[3]",true).click();
             } catch (DocumentException e) {
-                auto.wait(3000);
-                auto.back();
+                try{
+                    auto.findByXpatch("//android.widget.LinearLayout/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.ImageView[3]",true).click();
+                } catch (DocumentException e0) {
+                    auto.wait(3000);
+                    auto.back();
+                }
             }
             auto.wait(1000);
             backToHome();

@@ -135,7 +135,7 @@ public class ComUgcAwemePrivateMsg {
                     //点击发送消息
                     log.push(uuid,"准备发送消息");
                     try {
-                        auto.findByText ("发消息", true).click();
+                        auto.findByXpatch ("//android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout", true).click ();
                     } catch (DocumentException e) {
                     }
                     //点击多余提示

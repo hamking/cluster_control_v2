@@ -43,10 +43,6 @@ public class ScriptInit {
                 "我的",
                 "commyscirpt");
 
-
-        //临时处理清空脚本表
-        scriptDao.deleteAllScript();
-
         //快手
         scriptDao.intertScript(
                 "快手_养号",
