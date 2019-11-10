@@ -39,7 +39,7 @@ public class ComUgcAwemeRaises {
                 "评论: " + (script.getIsComment() == 1 ? "是":"否") + "\n"+
                 "关注评论者: " + (script.getIsFocus() == 1 ? "是":"否") + "\n"+
                 "每个视频关注总量: " + script.getFocusNum() + "\n"+
-                "关注作者: " + (script.getIsFocus() == 1 ? "是":"否") + "\n"+
+                "关注作者: " + (script.getIsFocusAuthor() == 1 ? "是":"否") + "\n"+
                 "每个视频浏览时长: " + script.getWatchTime() + "毫秒" + "\n"+
                 "浏览视频间隔时长: " + script.getWatchTimeInterval() + "毫秒" + "\n"+
                 "观看总量: " + script.getWatchNum() + "个" + "\n"+
@@ -222,7 +222,7 @@ public class ComUgcAwemeRaises {
 
                     auto.wait(3000);
                     try {
-                        auto.findByText("关注",true).click();
+                        auto.findByXpatch ("android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout[1]/android.widget.LinearLayout/android.widget.FrameLayout/android.view.View/android.widget.LinearLayout/android.widget.LinearLayout[1]/android.widget.Button",true).click();
                     } catch (DocumentException e) { }
 
                     auto.wait(3000);
