@@ -340,6 +340,18 @@ $(function () {
         }
     };
 
+    Blockly.Blocks['element_random_send_text'] = {
+        init: function() {
+            this.appendDummyInput()
+                .appendField("发送个数")
+                .appendField(new Blockly.FieldTextInput("1"), "number")
+                .appendField(new Blockly.FieldTextInput("每段已英文符号$分割"), "texts");
+            this.setOutput(true, null);
+            this.setColour(230);
+            this.setTooltip("");
+            this.setHelpUrl("");
+        }
+    };
 
 
 
@@ -451,14 +463,6 @@ $(function () {
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
 
-    Blockly.JavaScript['element_send_text'] = function(block) {
-        var text_sendtext = block.getFieldValue('sendText');
-        // TODO: Assemble JavaScript into code variable.
-        var code = '.sendKeys('+ text_sendtext + ')';
-        // TODO: Change ORDER_NONE to the correct strength.
-        return [code, Blockly.JavaScript.ORDER_NONE];
-    };
-
     Blockly.JavaScript['element_wait'] = function(block) {
         var text_wait = block.getFieldValue('wait');
         // TODO: Assemble JavaScript into code variable.
@@ -520,6 +524,21 @@ $(function () {
         // TODO: Assemble JavaScript into code variable.
         var code = '';
         // TODO: Change ORDER_NONE to the correct strength.
+        return [code, Blockly.JavaScript.ORDER_NONE];
+    };
+
+    Blockly.JavaScript['element_send_text'] = function(block) {
+        var text_sendtext = block.getFieldValue('sendText');
+        // TODO: Assemble JavaScript into code variable.
+        var code = '.sendKeys('+ text_sendtext + ')';
+        // TODO: Change ORDER_NONE to the correct strength.
+        return [code, Blockly.JavaScript.ORDER_NONE];
+    };
+
+    Blockly.JavaScript['element_random_send_text'] = function(block) {
+        var text_number = block.getFieldValue('number');
+        var text_texts = block.getFieldValue('texts');
+        var code = '.randomSendKeys('+ text_number + ',' + text_texts + ')';
         return [code, Blockly.JavaScript.ORDER_NONE];
     };
 });

@@ -1,6 +1,7 @@
 package com.adb.auto;
 
 import com.adb.autoComponent.Execute;
+import com.adb.util.ScriptUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -86,8 +87,22 @@ public class Android {
      * @param str str
      */
     public void sendKeys(String str) {
-
         click();
         new Execute().shell(deviceUUID, "am broadcast -a ADB_INPUT_TEXT --es msg " + str);
+    }
+
+    /**
+     * 随机发送文字
+     * @param str str
+     */
+    public void randomSendKeys(int num, String str) {
+        if (str.contains ("$")) {
+            String[] strings = str.split ("$");
+            //点击文本框并输入文字
+            int s = new ScriptUtils ().random ("随机私信", 0, strings.length);
+            for (int i = 0; i < num; i++) {
+                sendKeys(strings[s]);
+            }
+        }
     }
 }
